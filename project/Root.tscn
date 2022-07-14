@@ -6,7 +6,6 @@
 [node name="Root" type="Node2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 512, 239 )
 scale = Vector2( 10, 10 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
