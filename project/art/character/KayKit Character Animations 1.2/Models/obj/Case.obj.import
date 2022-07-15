@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Case.obj-4da49d4e66c4b315b4f8842972f45efb.mesh"
+
+[deps]
+
+files=[ "res://.import/Case.obj-4da49d4e66c4b315b4f8842972f45efb.mesh" ]
+
+source_file="res://art/character/KayKit Character Animations 1.2/Models/obj/Case.obj"
+dest_files=[ "res://.import/Case.obj-4da49d4e66c4b315b4f8842972f45efb.mesh", "res://.import/Case.obj-4da49d4e66c4b315b4f8842972f45efb.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
