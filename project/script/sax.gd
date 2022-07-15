@@ -4,7 +4,7 @@ onready var note_point = self.get_node("NoteStartPoint")
 onready var audio_player = self.get_node("AudioPlayer")
 
 var is_playing = false
-var note_tex = load("res://music-notes.png")
+var note_tex = load("res://art/music-notes.png")
 
 var bar_note = AtlasTexture.new()
 var eighth_note = AtlasTexture.new()
