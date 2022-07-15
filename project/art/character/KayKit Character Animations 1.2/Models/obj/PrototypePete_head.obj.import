@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/PrototypePete_head.obj-0ad239eda24a89316119053036a2543d.mesh"
+
+[deps]
+
+files=[ "res://.import/PrototypePete_head.obj-0ad239eda24a89316119053036a2543d.mesh" ]
+
+source_file="res://art/character/KayKit Character Animations 1.2/Models/obj/PrototypePete_head.obj"
+dest_files=[ "res://.import/PrototypePete_head.obj-0ad239eda24a89316119053036a2543d.mesh", "res://.import/PrototypePete_head.obj-0ad239eda24a89316119053036a2543d.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
