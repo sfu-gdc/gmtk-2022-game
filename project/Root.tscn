@@ -6,7 +6,7 @@
 [ext_resource path="res://wood-tiles.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 7.82304
+radius = 7.10282
 
 [sub_resource type="TileSet" id=1]
 0/name = "wood-tiles.png 0"
@@ -69,7 +69,7 @@ radius = 7.82304
 [node name="Root" type="Node2D"]
 
 [node name="Sax" type="Sprite" parent="."]
-position = Vector2( 390, 220 )
+position = Vector2( 310, 220 )
 scale = Vector2( 10, 10 )
 z_index = 1
 texture = ExtResource( 1 )
@@ -78,15 +78,17 @@ script = ExtResource( 2 )
 [node name="PlayTrigger" type="Area2D" parent="Sax"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sax/PlayTrigger"]
-position = Vector2( -3.4, -0.0999985 )
+position = Vector2( -2.6, -0.199999 )
 scale = Vector2( 1, 1 )
 shape = SubResource( 2 )
 
 [node name="NoteStartPoint" type="Node2D" parent="Sax"]
 position = Vector2( 6.7, -1.5 )
 
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="Sax"]
+
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 100, 90 )
+position = Vector2( 80, 80 )
 
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2( 10, 10 )
@@ -95,4 +97,7 @@ tile_set = SubResource( 1 )
 cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 64
 format = 1
-tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 65536, 3, 0, 65537, 3, 0, 65538, 3, 0, 65539, 3, 0, 65540, 3, 0, 65541, 3, 0, 65542, 3, 0, 131072, 3, 0, 131073, 3, 0, 131074, 3, 0, 131075, 3, 0, 131076, 3, 0, 131077, 3, 0, 131078, 1, 0, 196608, 0, 0, 196609, 3, 0, 196610, 3, 0, 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 196614, 1, 0 )
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 1, 0, 65536, 3, 0, 65537, 3, 0, 65538, 3, 0, 65539, 3, 0, 65540, 3, 0, 65541, 3, 0, 65542, 1, 0, 131072, 3, 0, 131073, 3, 0, 131074, 3, 0, 131075, 3, 0, 131076, 3, 0, 131077, 3, 0, 131078, 1, 0, 196608, 0, 0, 196609, 3, 0, 196610, 3, 0, 196611, 3, 0, 196612, 0, 0, 196613, 0, 0, 196614, 1, 0 )
+
+[connection signal="body_entered" from="Sax/PlayTrigger" to="Sax" method="_on_PlayTrigger_body_entered"]
+[connection signal="body_exited" from="Sax/PlayTrigger" to="Sax" method="_on_PlayTrigger_body_exited"]

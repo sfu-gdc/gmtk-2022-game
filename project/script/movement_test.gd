@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 var internal_position = Vector2(self.position)
 var velocity = Vector2()
-var speed:int = 250
+var speed:int = 400
 
 func eight_ways_movement(vel, speed):
 	vel.x = 0
