@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/sax.mp3-78cc3f86e1c1022b615ae22c2a546271.mp3str"
+
+[deps]
+
+source_file="res://audio/sax.mp3"
+dest_files=[ "res://.import/sax.mp3-78cc3f86e1c1022b615ae22c2a546271.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

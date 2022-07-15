@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/people.png-c45d223f50d863f933449b6c7c7b835b.stex"
+path="res://.import/music-notes.png-5296c967869e534d65a1900c53a4d3e4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles/people.png"
-dest_files=[ "res://.import/people.png-c45d223f50d863f933449b6c7c7b835b.stex" ]
+source_file="res://music-notes.png"
+dest_files=[ "res://.import/music-notes.png-5296c967869e534d65a1900c53a4d3e4.stex" ]
 
 [params]
 
