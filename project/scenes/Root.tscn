@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://sax-small.png" type="Texture" id=1]
+[ext_resource path="res://art/sax-small.png" type="Texture" id=1]
 [ext_resource path="res://script/sax.gd" type="Script" id=2]
-[ext_resource path="res://people.tscn" type="PackedScene" id=3]
-[ext_resource path="res://wood-tiles.png" type="Texture" id=4]
+[ext_resource path="res://prefabs/people.tscn" type="PackedScene" id=3]
+[ext_resource path="res://art/wood-tiles.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 7.10282
@@ -79,7 +79,6 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sax/PlayTrigger"]
 position = Vector2( -2.6, -0.199999 )
-scale = Vector2( 1, 1 )
 shape = SubResource( 2 )
 
 [node name="NoteStartPoint" type="Node2D" parent="Sax"]

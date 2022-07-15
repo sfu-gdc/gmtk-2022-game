@@ -11,8 +11,8 @@ config_version=4
 [application]
 
 config/name="gmtk-2022-game"
-run/main_scene="res://Root.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://scenes/Root.tscn"
+config/icon="res://art/icon.png"
 
 [input]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sax-small.png-e793baf4c8c5aa94f909c66ab8b52a37.stex"
+path="res://.import/wood-tiles.png-e0aba9cadf3911f1088017aa04e80f79.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sax-small.png"
-dest_files=[ "res://.import/sax-small.png-e793baf4c8c5aa94f909c66ab8b52a37.stex" ]
+source_file="res://art/wood-tiles.png"
+dest_files=[ "res://.import/wood-tiles.png-e0aba9cadf3911f1088017aa04e80f79.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
+flags/repeat=1
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=false
+detect_3d=true
 svg/scale=1.0
