@@ -13,6 +13,7 @@
 [ext_resource path="res://art/interaction_text.png" type="Texture" id=11]
 [ext_resource path="res://scenes/potlabel.gd" type="Script" id=12]
 [ext_resource path="res://scenes/Trash.gd" type="Script" id=14]
+[ext_resource path="res://art/fulldie1.png" type="Texture" id=15]
 
 [sub_resource type="SpatialMaterial" id=2]
 render_priority = 11
@@ -22,6 +23,12 @@ uv1_scale = Vector3( 1.5, 1, 0.5 )
 
 [sub_resource type="CubeMesh" id=1]
 material = SubResource( 2 )
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_texture = ExtResource( 9 )
+
+[sub_resource type="CubeMesh" id=10]
+material = SubResource( 9 )
 
 [sub_resource type="SpatialMaterial" id=7]
 albedo_texture = ExtResource( 6 )
@@ -38,7 +45,7 @@ height = 2.6613
 [node name="Level1" type="Spatial"]
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.605127, 0.796129, 0, -0.796129, 0.605127, 11.7721, 20.6063, 13.4637 )
+transform = Transform( 1, 0, 0, 0, 0.605127, 0.796129, 0, -0.796129, 0.605127, 11.7721, 15.6063, 8.4637 )
 script = ExtResource( 4 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
@@ -125,6 +132,12 @@ mesh = SubResource( 1 )
 skeleton = NodePath("")
 material/0 = null
 
+[node name="Tile5" type="MeshInstance" parent="Level/OuterWalls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, -2 )
+mesh = SubResource( 10 )
+skeleton = NodePath("")
+material/0 = null
+
 [node name="Tile45" type="MeshInstance" parent="Level/OuterWalls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -4 )
 mesh = SubResource( 1 )
@@ -191,6 +204,30 @@ mesh = SubResource( 1 )
 skeleton = NodePath("")
 material/0 = null
 
+[node name="Tile69" type="MeshInstance" parent="Level/OuterWalls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 2 )
+mesh = SubResource( 1 )
+skeleton = NodePath("")
+material/0 = null
+
+[node name="Tile70" type="MeshInstance" parent="Level/OuterWalls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 2 )
+mesh = SubResource( 1 )
+skeleton = NodePath("")
+material/0 = null
+
+[node name="Tile71" type="MeshInstance" parent="Level/OuterWalls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 4 )
+mesh = SubResource( 1 )
+skeleton = NodePath("")
+material/0 = null
+
+[node name="Tile72" type="MeshInstance" parent="Level/OuterWalls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 4 )
+mesh = SubResource( 1 )
+skeleton = NodePath("")
+material/0 = null
+
 [node name="Tile31" type="MeshInstance" parent="Level/OuterWalls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -10 )
 mesh = SubResource( 1 )
@@ -211,6 +248,30 @@ material/0 = null
 
 [node name="Tile34" type="MeshInstance" parent="Level/OuterWalls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -6 )
+mesh = SubResource( 1 )
+skeleton = NodePath("")
+material/0 = null
+
+[node name="Tile65" type="MeshInstance" parent="Level/OuterWalls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -8 )
+mesh = SubResource( 1 )
+skeleton = NodePath("")
+material/0 = null
+
+[node name="Tile66" type="MeshInstance" parent="Level/OuterWalls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -10 )
+mesh = SubResource( 1 )
+skeleton = NodePath("")
+material/0 = null
+
+[node name="Tile67" type="MeshInstance" parent="Level/OuterWalls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -10 )
+mesh = SubResource( 1 )
+skeleton = NodePath("")
+material/0 = null
+
+[node name="Tile68" type="MeshInstance" parent="Level/OuterWalls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -8 )
 mesh = SubResource( 1 )
 skeleton = NodePath("")
 material/0 = null
@@ -762,6 +823,14 @@ visible = false
 [node name="CollisionShape" type="CollisionShape" parent="Level/Floor/StaticBody"]
 shape = SubResource( 5 )
 
+[node name="roof" type="StaticBody" parent="Level"]
+transform = Transform( 30, 0, 0, 0, 1, 0, 0, 0, 30, 4, 5.5, -4 )
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="Level/roof"]
+shape = SubResource( 5 )
+
 [node name="Trash" type="StaticBody" parent="Level"]
 transform = Transform( 0.697215, 0, -0.716862, 0, 1, 0, 0.716862, 0, 0.697215, 0.424277, 0, -7.79825 )
 script = ExtResource( 14 )
@@ -778,7 +847,8 @@ shape = SubResource( 9 )
 [node name="DicePool" type="Spatial" parent="."]
 
 [node name="boringpot" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.06431, 2.83486, 2.07931 )
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.75, 0 )
 
 [node name="Sprite3D" type="Sprite3D" parent="boringpot"]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, -0.245439, 2.9048, 1 )

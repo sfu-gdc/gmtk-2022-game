@@ -13,7 +13,7 @@ func _ready():
 		shape.shape = BoxShape.new()
 		sbody.add_child(shape)
 		
-		# this is so things don't fall out of the world
-		if self.name == "OuterWalls":
-			shape.shape.extents.y += 10
+		# this is so things don't fall out of the world -> do this manually
+		#if self.name == "OuterWalls":
+		#	shape.shape.extents.y += 10
 		
