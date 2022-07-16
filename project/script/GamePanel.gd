@@ -2,7 +2,6 @@ extends Control
 var SettingsPanel = preload("res://prefabs/SettingsPanel.tscn")
 var OrderCardList = preload("res://prefabs/OrderCardList.tscn")
 
-
 var settings_spawned := false
 
 var gold = 1100;
