@@ -50,7 +50,6 @@ func spawn_die():
 
 
 func _process(_delta):
-
 	if (dice_box.translation - translation).length() < interaction_range:
 		dice_box.player_is_near = true
 	else:
@@ -124,4 +123,5 @@ func _physics_process(delta):
 	else:
 		velocity_y -= Vector3(0.0, gravity * delta, 0.0)
 	
+# warning-ignore:return_value_discarded
 	move_and_slide(velocity_xz + velocity_y, Vector3.UP, false, 4, 0.785398, false)
