@@ -17,6 +17,9 @@ onready var animationState = animationTree.get("parameters/playback")
 
 var held_die : Die = null
 
+var picking = false
+var picking_time = 0
+
 func spawn_die():
 	var rbody = Die.new()
 	rbody.can_sleep = false
@@ -44,6 +47,7 @@ func spawn_die():
 
 
 func _process(_delta):
+
 	if (dice_box.translation - translation).length() < interaction_range:
 		dice_box.player_is_near = true
 	else:
@@ -68,9 +72,32 @@ func _process(_delta):
 					close_dice[distance] = die
 			# If there is a closest die
 			if close_dice.size() > 0:
+				
+				#setup picking animation offset
+				picking = true
+				picking_time = 20 * _delta
+				
 				var minimum_distance : float = close_dice.keys().min()
 				# Pick up the closest die
-				held_die = close_dice[minimum_distance].pickup(self)
+				held_die = close_dice[minimum_distance]
+				animationState.travel("PickUp")
+	
+	# pickup delay for animation
+	if picking && picking_time > 0:
+		pickingUpAnimation(held_die, _delta)
+		picking_time -= _delta
+		if picking_time <= 0:
+			held_die = held_die.pickup(self)
+			picking = false
+			
+
+func pickingUpAnimation(object, delta):
+	# the dice will travel a little bit before picked up
+	var direction = transform.origin - object.transform.origin
+	object.translation.x += direction.x * delta
+	object.translation.y += direction.y * 0.5 + 1
+	object.translation.z += direction.z * delta
+				
 
 func _physics_process(delta):
 	
