@@ -14,24 +14,6 @@ var held_die : Die = null
 func spawn_die():
 	var rbody = Die.new()
 	dice_pool.add_child(rbody)
-	rbody.mass = 5
-	rbody.translation = dice_box.translation + Vector3.UP * 2.801
-	# somewhat random
-	rbody.angular_velocity = Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)) * 25
-	rbody.linear_velocity = Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)).normalized() * 4
-	rbody.rotate(Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)).normalized(), rand_range(-PI, PI)) 
-	
-	var mesh = MeshInstance.new()
-	mesh.mesh = CubeMesh.new()
-	mesh.mesh.size = Vector3(1.2,1.2,1.2)
-	mesh.mesh.material = SpatialMaterial.new()
-	mesh.mesh.material.albedo_texture = dice_tex_1
-	rbody.add_child(mesh)
-	
-	var shape = CollisionShape.new()
-	shape.shape = BoxShape.new()
-	shape.shape.extents = Vector3(0.6,0.6,0.6)
-	rbody.add_child(shape)
 	
 # ------------------------------------
 
