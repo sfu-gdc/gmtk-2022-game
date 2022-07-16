@@ -18,7 +18,7 @@
 	- player should glide to stop
 	/ implement garbage can
 	- dice snap to the grid when on tables
-	- limit spawn rate of dice a little bit (not too much ;-;)
+	* limit spawn rate of dice a little bit (not too much ;-;)
 	- add the numbers automatically
 	- highlight outline of the cube you would pick up
 	
