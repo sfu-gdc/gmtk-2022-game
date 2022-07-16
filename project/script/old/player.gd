@@ -9,24 +9,26 @@ var velocity = Vector3(0,0,0)
 var speed = 400
 
 func spawn_die():
-	var sbody = RigidBody.new()
-	dice_pool.add_child(sbody)
-	sbody.translation = dice_box.translation + Vector3.UP * 2.801
+	var rbody = RigidBody.new()
+	dice_pool.add_child(rbody)
+	rbody.mass = 100
+	rbody.translation = dice_box.translation + Vector3.UP * 2.801
 	# somewhat random
-	sbody.angular_velocity = Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)) * 100
-	sbody.rotate(Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)).normalized(), rand_range(-PI, PI)) 
+	rbody.angular_velocity = Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)) * 25
+	rbody.linear_velocity = Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)).normalized() * 4
+	rbody.rotate(Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)).normalized(), rand_range(-PI, PI)) 
 	
 	var mesh = MeshInstance.new()
 	mesh.mesh = CubeMesh.new()
-	mesh.mesh.size = Vector3(1,1,1)
+	mesh.mesh.size = Vector3(1.2,1.2,1.2)
 	mesh.mesh.material = SpatialMaterial.new()
 	mesh.mesh.material.albedo_texture = dice_tex_1
-	sbody.add_child(mesh)
+	rbody.add_child(mesh)
 	
 	var shape = CollisionShape.new()
 	shape.shape = BoxShape.new()
-	shape.shape.extents = Vector3(0.5,0.5,0.5)
-	sbody.add_child(shape)
+	shape.shape.extents = Vector3(0.6,0.6,0.6)
+	rbody.add_child(shape)
 	
 # ------------------------------------
 
@@ -38,8 +40,8 @@ func _process(delta):
 		dice_box.player_is_near = true
 	else:
 		dice_box.player_is_near = false
-	
-	if Input.is_key_pressed(KEY_E):
+		
+	if Input.is_action_just_pressed("activate"):
 		if (dice_box.translation - translation).length() < 2.5:
 			spawn_die()
 
