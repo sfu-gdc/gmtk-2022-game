@@ -7,7 +7,8 @@ onready var dice_pool = get_tree().get_root().get_child(0).find_node("DicePool")
 onready var dice_box = get_tree().get_root().get_child(0).find_node("DiceBox")
 onready var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-export var interaction_range := 2.5
+export var interaction_range := 4.0
+export var pickup_position := Vector3(0.0, 3.0, -0.75)
 
 var velocity_xz := Vector3()
 var velocity_y := Vector3()
@@ -17,7 +18,7 @@ var cur_speed = 0
 onready var animationTree : AnimationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 
-var held_object : Die = null
+var held_object : Spatial = null
 
 func spawn_die():
 	var rbody = Die.new()
@@ -64,16 +65,16 @@ func _process(_delta):
 			held_object = null
 		# Otherwise, find the closest die
 		else:
-			var close_dice := {}
-			for die in dice_pool.get_children():
-				var distance : float = (die.translation - translation).length()
+			var close_objects := {}
+			for object in get_tree().get_nodes_in_group("pickup"):
+				var distance : float = (object.translation - translation).length()
 				if distance < interaction_range:
-					close_dice[distance] = die
-			# If there is a closest die
-			if close_dice.size() > 0:
-				var minimum_distance : float = close_dice.keys().min()
+					close_objects[distance] = object
+			# If there is a closest object
+			if close_objects.size() > 0:
+				var minimum_distance : float = close_objects.keys().min()
 				# Pick up the closest die
-				held_object = close_dice[minimum_distance].pickup(self)
+				held_object = close_objects[minimum_distance].pickup(self)
 
 func _physics_process(delta):
 	

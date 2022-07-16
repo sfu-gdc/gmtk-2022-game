@@ -1,14 +1,16 @@
 extends RigidBody
 class_name Die
 
-export var pickup_position := Vector3(0.0, 3.0, -0.75)
-
 onready var dice_pool := $"/root/Level1/DicePool"
 
 const DIE_LAYER := 1
 
 
 var number : int
+
+
+func _init():
+	add_to_group("pickup")
 
 func pickup(player: KinematicBody) -> Die:
 	# Attach to player and disable collisions
@@ -19,7 +21,7 @@ func pickup(player: KinematicBody) -> Die:
 	collision_mask = 0
 	player.add_child(self)
 	global_transform = save_transform
-	transform.origin = pickup_position
+	transform.origin = player.pickup_position
 	
 	return self
 

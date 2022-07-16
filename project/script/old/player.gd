@@ -5,7 +5,7 @@ onready var dice_pool = get_parent().find_node("DicePool")
 onready var dice_box = get_parent().find_node("DiceBox")
 onready var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-export var interaction_range := 2.5
+export var pickup_range := 4.0
 
 var velocity := Vector3(0,0,0)
 var speed := 400.0
@@ -35,18 +35,15 @@ func spawn_die():
 	
 # ------------------------------------
 
-func _ready():
-	pass
-	
 func _process(_delta):
-	if (dice_box.translation - translation).length() < interaction_range:
+	if (dice_box.translation - translation).length() < pickup_range:
 		dice_box.player_is_near = true
 	else:
 		dice_box.player_is_near = false
 		
 	if Input.is_action_just_pressed("activate"):
 		# If near dice box, spawn a die
-		if (dice_box.translation - translation).length() < interaction_range:
+		if (dice_box.translation - translation).length() < pickup_range:
 			spawn_die()
 	# Try to pick up a die
 	if Input.is_action_just_pressed("pick"):
@@ -59,7 +56,7 @@ func _process(_delta):
 			var close_dice := {}
 			for die in dice_pool.get_children():
 				var distance : float = (die.translation - translation).length()
-				if distance < interaction_range:
+				if distance < pickup_range:
 					close_dice[distance] = die
 			# If there is a closest die
 			if close_dice.size() > 0:
