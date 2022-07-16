@@ -7,7 +7,7 @@ onready var dice_pool = get_tree().get_root().get_child(0).find_node("DicePool")
 onready var dice_box = get_tree().get_root().get_child(0).find_node("DiceBox")
 onready var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-export var interaction_range := 4.0
+export var interaction_range := 3.0
 export var pickup_position := Vector3(0.0, 3.0, -0.75)
 
 var velocity_xz := Vector3()
@@ -24,8 +24,10 @@ var picking = false
 var picking_time = 0
 
 func spawn_die():
-	var rbody = Die.new()
-	rbody.can_sleep = false
+	var rbody = Die.new() # TODO: get arg based on group that diceblock is in
+	rbody.init(0, dice_box.translation)
+	dice_pool.add_child(rbody)
+	"""
 	dice_pool.add_child(rbody)
 	rbody.mass = 5
 	rbody.translation = dice_box.translation + Vector3.UP * 2.801
@@ -45,12 +47,11 @@ func spawn_die():
 	shape.shape = BoxShape.new()
 	shape.shape.extents = Vector3(0.6,0.6,0.6)
 	rbody.add_child(shape)
+	"""
 	
 # ------------------------------------
 
-
 func _process(_delta):
-
 	if (dice_box.translation - translation).length() < interaction_range:
 		dice_box.player_is_near = true
 	else:
@@ -75,12 +76,10 @@ func _process(_delta):
 			var close_objects := {}
 			for object in get_tree().get_nodes_in_group("pickup"):
 				var distance : float = (object.translation - translation).length()
-				if distance < interaction_range:
+				if distance < interaction_range+1.0: # +1 for height
 					close_objects[distance] = object
 			# If there is a closest object
 			if close_objects.size() > 0:
-				
-				
 				# Pick up the closest die
 				var minimum_distance : float = close_objects.keys().min()
 				held_object = close_objects[minimum_distance]
@@ -99,7 +98,6 @@ func _process(_delta):
 			picking = false
 			held_object = held_object.pickup(self)
 			
-			
 func pickingUpAnimation(object, delta):
 	# the dice will travel a little bit before picked up
 	var direction = transform.origin - object.transform.origin
@@ -108,7 +106,6 @@ func pickingUpAnimation(object, delta):
 	object.translation.z += direction.z * delta
 
 func _physics_process(delta):
-	
 	if (Input.is_action_pressed("player_up") or Input.is_action_pressed("player_down") or
 			Input.is_action_pressed("player_left") or Input.is_action_pressed("player_right")):
 		animationState.travel("Run")
@@ -119,7 +116,6 @@ func _physics_process(delta):
 								).normalized()
 		
 		rotation.y = lerp_angle(rotation.y, atan2(-velocity_xz.x, -velocity_xz.z), delta * angular_accleration)
-		
 	else:
 		animationState.travel("Idle")
 		velocity_xz = Vector3()
@@ -129,4 +125,5 @@ func _physics_process(delta):
 	else:
 		velocity_y -= Vector3(0.0, gravity * delta, 0.0)
 	
+# warning-ignore:return_value_discarded
 	move_and_slide(velocity_xz + velocity_y, Vector3.UP, false, 4, 0.785398, false)
