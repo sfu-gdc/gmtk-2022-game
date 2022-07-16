@@ -13,3 +13,5 @@
 	- implement throwing dice
 	- player should glide to stop
 	- implement garbage can
+	
+TODO: do the die.new() thing for multiple bins depending on the name of the bin

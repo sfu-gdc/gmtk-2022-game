@@ -12,7 +12,7 @@ var speed := 400.0
 var held_die : Die = null
 
 func spawn_die():
-	var rbody = Die.new()
+	var rbody = Die.new(1)
 	dice_pool.add_child(rbody)
 	
 # ------------------------------------

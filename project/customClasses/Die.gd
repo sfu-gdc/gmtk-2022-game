@@ -8,7 +8,7 @@ onready var dice_box := $"/root/Level1/Level/InnerWalls/DiceBox"
 
 const DIE_LAYER := 1
 
-var number : int
+var number : int = -1
 var die_type: int = 0
 var number_group: int = 0
 
@@ -26,6 +26,7 @@ func _ready():
 	self.rotate(Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)).normalized(), rand_range(-PI, PI)) 
 	
 	var mesh = MeshInstance.new()
+	mesh.name = "MeshInstance"
 	mesh.mesh = CubeMesh.new()
 	mesh.mesh.size = Vector3(1.2,1.2,1.2)
 	mesh.mesh.material = SpatialMaterial.new()
@@ -45,29 +46,44 @@ func _ready():
 	shape.shape = BoxShape.new()
 	shape.shape.extents = Vector3(0.6,0.6,0.6)
 	self.add_child(shape)
-
-	"""
-	# set timer to finalize value
-	var timer = Timer.new()
-	timer.name = "NotePlayTimer"
-	add_child(timer)
 	
-	timer.connect("timeout", self, "finalize_number")
-	timer.set_wait_time(1)
-	timer.start()
-	"""
-	
+# TODO: INSTANTLY finally the moment a die is picked up.
 func finalize_number():
+	var pillar1 = self.transform.xform(Vector3(0,0,1)).normalized()
+	var pillar2 = self.transform.xform(Vector3(1,0,0)).normalized()
+	var pillar3 = self.transform.xform(Vector3(0,0,-1)).normalized()
+	var pillar4 = self.transform.xform(Vector3(-1,0,0)).normalized()
+	var pillar5 = self.transform.xform(Vector3(0,1,0)).normalized()
+	var pillar6 = self.transform.xform(Vector3(0,-1,0)).normalized()
+	
+	var pillar_list = [pillar1,pillar2,pillar3,pillar4,pillar5,pillar6]
+	var closest_pillar = INF
+	
+	# compare against Vector3.UP
+	for i in pillar_list.size():
+		var dist = acos(Vector3.UP.dot(pillar_list[i]))
+		if (dist < closest_pillar):
+			closest_pillar = dist
+			number = i + 1
+		
 	if die_type == 0:
-		number = randi() % 6
-		$MeshInstance.mesh.material.albedo_texture = load("res://art/dice/die_" + str(number+1) + ".png")		
+		#number = randi() % 6 + 1
+		$MeshInstance.mesh.material.albedo_texture = load("res://art/dice/die_" + str(number) + ".png")
+		$MeshInstance.mesh.material.uv1_scale = Vector3(3, 2, 1)
 	elif die_type == 1:
-		pass
+		#number = randi() % 6 + 1
+		number += 6 + number_group * 6
+		$MeshInstance.mesh.material.albedo_texture = load("res://art/dice/die_" + str(number) + ".png")
+		$MeshInstance.mesh.material.uv1_scale = Vector3(3, 2, 1)
 	else:
 		number = 0 # err
 		print("bad compute, no, stop")
-	print("finalized")
-
+		
+func _process(delta):
+	if linear_velocity.length() < 0.003 && number == -1:
+		finalize_number()
+		# TODO: play oneshot particle effect
+		
 func pickup(player: KinematicBody) -> Die:
 	# Attach to player and disable collisions
 	var save_transform := global_transform
