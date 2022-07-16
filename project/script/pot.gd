@@ -29,7 +29,8 @@ func pickup(player: KinematicBody) -> Spatial:
 	return self
 
 func place():
-	var position : Position3D = get_parent()
+	var player = get_parent()
+	var position = get_parent()
 	var save_transform := global_transform
 	position.remove_child(self)
 	level.add_child(self)
