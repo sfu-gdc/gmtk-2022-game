@@ -1,17 +1,20 @@
 extends KinematicBody
 
 onready var dice_tex_1 = load("res://art/white-die.png")
-
 onready var dice_pool = get_parent().find_node("DicePool")
 onready var dice_box = get_parent().find_node("DiceBox")
+onready var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-var velocity = Vector3(0,0,0)
-var speed = 400
+export var interaction_range := 2.5
+
+var velocity := Vector3(0,0,0)
+var speed := 400.0
+var held_die : Die = null
 
 func spawn_die():
-	var rbody = RigidBody.new()
+	var rbody = Die.new()
 	dice_pool.add_child(rbody)
-	rbody.mass = 100
+	rbody.mass = 5
 	rbody.translation = dice_box.translation + Vector3.UP * 2.801
 	# somewhat random
 	rbody.angular_velocity = Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)) * 25
@@ -35,30 +38,52 @@ func spawn_die():
 func _ready():
 	pass
 	
-func _process(delta):
-	if (dice_box.translation - translation).length() < 2.5:
+func _process(_delta):
+	if (dice_box.translation - translation).length() < interaction_range:
 		dice_box.player_is_near = true
 	else:
 		dice_box.player_is_near = false
 		
 	if Input.is_action_just_pressed("activate"):
-		if (dice_box.translation - translation).length() < 2.5:
+		# If near dice box, spawn a die
+		if (dice_box.translation - translation).length() < interaction_range:
 			spawn_die()
+	# Try to pick up a die
+	if Input.is_action_just_pressed("pick"):
+		# Try to drop held dice
+		if held_die:
+			held_die.place()
+			held_die = null
+		# Otherwise, find the closest die
+		else:
+			var close_dice := {}
+			for die in dice_pool.get_children():
+				var distance : float = (die.translation - translation).length()
+				if distance < interaction_range:
+					close_dice[distance] = die
+			# If there is a closest die
+			if close_dice.size() > 0:
+				var minimum_distance : float = close_dice.keys().min()
+				# Pick up the closest die
+				held_die = close_dice[minimum_distance].pickup(self)
 
 func _physics_process(delta):
 	if Input.is_action_pressed("player_left"):
-		self.velocity.x = -delta * speed
+		velocity.x = -delta * speed
 	elif Input.is_action_pressed("player_right"):
-		self.velocity.x = delta * speed
+		velocity.x = delta * speed
 	else:
-		self.velocity.x = self.velocity.x * 0.6
+		velocity.x = velocity.x * 0.6
 		
 	if Input.is_action_pressed("player_up"):
-		self.velocity.z = -delta * speed
+		velocity.z = -delta * speed
 	elif Input.is_action_pressed("player_down"):
-		self.velocity.z = delta * speed
+		velocity.z = delta * speed
 	else:
-		self.velocity.z = self.velocity.z * 0.6
-		
-	#velocity.y -= 9.81 * delta
-	velocity = self.move_and_slide(self.velocity, Vector3.UP)
+		velocity.z = velocity.z * 0.6
+	
+	if is_on_floor():
+		velocity.y = 0.0
+	else:
+		velocity.y -= gravity * delta
+	velocity = move_and_slide(velocity, Vector3.UP, true, 4, 0.785398, false)
