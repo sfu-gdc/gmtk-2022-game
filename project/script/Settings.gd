@@ -1,6 +1,5 @@
 extends Panel
-#TODO: need to change to user from res before publish
-var settings_filepath = "res://settings.cfg"
+var settings_filepath = "user://settings.cfg"
 var settings_file = ConfigFile.new();
 onready var backdrop_panel = $Backdrop;
 
@@ -41,8 +40,8 @@ var _control_keymapping = {
 func load_settings():
 	var error = settings_file.load(settings_filepath);
 	if error != OK:
-		print("Failed loading settings file. Error code %s" % error)
-		return[]
+		_on_SaveButton_pressed();
+		settings_file.load(settings_filepath);
 		
 	for section in _settings.keys():
 		for key in _settings[section]:
@@ -90,16 +89,13 @@ func sync_key_mapping():
 				if (i.scancode > 0 || i.physical_scancode > 0):
 				#if current_scancode == _settings["controls"][key_listening]:
 					InputMap.action_erase_event( _control_keymapping[key], i )
-					print("Removed old event: "+key);
 		var e = InputEventKey.new();
 		e.set_scancode(_settings['controls'][key])
 		InputMap.action_add_event(_control_keymapping[key], e);
-		print("Add key to event: "+key);
 
 func _on_SaveButton_pressed():
 	for section in _settings.keys():
 		for key in _settings[section]:
-			print("saving: "+str(_settings[section][key]));
 			settings_file.set_value(section, key, _settings[section][key]);
 	settings_file.save(settings_filepath);
 	
