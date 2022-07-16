@@ -15,11 +15,12 @@ onready var panel: Panel = $Panel
 onready var tween: Tween = $Tween
 onready var time_bar: TextureProgress = $Panel/Vertical/Center/Margin/TimeBar
 onready var timer: Timer
-onready var kill_timer: Timer
 
+# emitted when the card is completely gone up
+signal card_complete_up
 
 # init method called by other script
-func __init(timer_time: float, position_x: int):
+func _init_set_timer(timer_time: float) -> void:
 	# create a new timer node
 	timer = Timer.new()
 	# set full time variable
@@ -32,18 +33,15 @@ func __init(timer_time: float, position_x: int):
 	var _never_use_this_var = timer.connect("timeout", self, "_on_Timer_timeout")
 	# timer enter the scene tree as the child of the node
 	add_child(timer)
-	
-	kill_timer = Timer.new();
-	kill_timer.wait_time = 0.5;
-	var _never_use_this_var_2 = kill_timer.connect("timeout", self, "_on_Kill_Timer_timeout")
-	add_child(kill_timer);
+
+func _init_set_x(position_x: int) -> void:
 	# set the order card position x
 	rect_position.x = position_x
 
 func _ready():
 	# the size of the card equals to the size of the panel plus button
 	panel_vsize = panel.get_size().y
-	
+
 	# set the panel position to be offscreen
 	panel.rect_position.y = -panel_vsize
 	# move the panel position from offscreen to onscreen
@@ -56,12 +54,16 @@ func _process(_delta):
 	# set the value for time bar with the current time proportion
 	time_bar.set_value(current_time_proportion)
 
+# when the timer runs out, move the panel up, and deletes the node
 func _on_Timer_timeout():
-	var _action = tween.interpolate_property(panel, "rect_position:y", panel.rect_position.y, panel.rect_position.y - panel_vsize, 0.7, Tween.TRANS_QUINT, Tween.EASE_IN)
-	_action = tween.start()
-	yield(tween, "tween_completed")
-	kill_timer.start()
+	# moves the card up
+	tween.interpolate_property(panel, "rect_position:y", panel.rect_position.y, panel.rect_position.y - panel_vsize, 0.7, Tween.TRANS_QUINT, Tween.EASE_IN)
+	tween.start()
+	# wait for the tween to be finished, and emit signal that card has gone completely up
+	yield(tween, "tween_all_completed")
+	emit_signal("card_complete_up")
 
-# the kill timer is countered for the x movement from order card list
-func _on_Kill_Timer_timeout():
+	# wait for 3 seconds before deleting the current node
+	yield(get_tree().create_timer(3.0), "timeout")
+	# remove node
 	queue_free()
