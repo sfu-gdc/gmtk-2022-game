@@ -416,8 +416,7 @@ shape = SubResource( 21 )
 transform = Transform( -1.5, 0, -2.26494e-07, 0, 1.5, 0, 2.26494e-07, 0, -1.5, 0, -1, -1.49012e-08 )
 
 [node name="Head" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="0"]
-transform = Transform( 1, 2.05786e-17, -8.39333e-19, -2.05715e-17, 0.996022, -0.0891099, -9.97763e-19, 0.0891099, 0.996022, -1.30311e-18, 0.711598, -0.000164324 )
-
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.711598, 0 )
 
 [node name="character_barbarianHead" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/Head" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00788689, 0 )
@@ -445,7 +444,7 @@ material/3 = null
 material/4 = null
 
 [node name="ArmLeft" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="2"]
-transform = Transform( 1.87606e-05, 0.472423, -0.881372, -0.000230715, -0.881372, -0.472423, -1, 0.000212235, 9.23553e-05, 0.14, 0.691598, -0.000159705 )
+transform = Transform( -1.19209e-07, 0.471936, -0.881633, 2.5332e-07, -0.881633, -0.471936, -1, -2.5332e-07, -1.19209e-07, 0.14, 0.691598, -1.3027e-15 )
 
 [node name="character_barbarianArmLeft" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/ArmLeft" index="0"]
 transform = Transform( -1.44517e-08, 2.79594e-07, -0.999999, 0.471936, -0.881633, -2.79594e-07, -0.881633, -0.471936, -1.44517e-08, -1.71536e-08, 0.0813964, -0.0290722 )
@@ -458,8 +457,7 @@ material/3 = null
 material/4 = null
 
 [node name="ArmRight" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="3"]
-transform = Transform( -0.000128031, -0.472222, -0.88148, -0.334695, -0.830622, 0.445026, -0.942327, 0.295083, -0.157944, -0.14, 0.691598, -0.000159705 )
-
+transform = Transform( -1.19209e-07, -0.471936, -0.881633, -2.23518e-07, -0.881633, 0.471936, -1, 2.23517e-07, -1.19209e-07, -0.14, 0.691598, 8.40813e-15 )
 
 [node name="character_barbarianArmRight" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/ArmRight" index="0"]
 transform = Transform( -3.87118e-10, -2.53319e-07, -0.999999, -0.471936, -0.881633, 2.53319e-07, -0.881633, 0.471936, -3.87118e-10, 1.47278e-08, 0.0813965, 0.0290721 )
@@ -472,11 +470,10 @@ material/3 = null
 material/4 = null
 
 [node name="handLeft" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="4"]
-transform = Transform( -1, -1.88507e-05, -0.000553012, -0.000553012, 0.000231086, 1, -1.8857e-05, 1, -0.000231071, 0.400268, 0.206031, -4.27803e-05 )
+transform = Transform( -1, 2.92556e-08, 0, 0, 1.04171e-07, 1, -1.04757e-07, 1, -7.80337e-08, 0.4, 0.205887, -1.3956e-07 )
 
 [node name="handRight" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="5"]
-transform = Transform( -0.975311, 0.208234, -0.0735356, 0.000391394, 0.334616, 0.942355, 0.220836, 0.91906, -0.326436, -0.400158, 0.23399, 0.162408 )
-
+transform = Transform( -1, 1.0808e-07, 0, 0, -1.76167e-07, 1, 3.87132e-10, 1, 2.23518e-07, -0.4, 0.205887, 1.2314e-07 )
 
 [node name="AnimationPlayer" parent="KayKit_AnimatedCharacter_v12" index="1"]
 autoplay = ""
