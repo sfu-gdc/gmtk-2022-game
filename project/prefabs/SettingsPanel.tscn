@@ -22,10 +22,14 @@ animations = [ {
 } ]
 
 [node name="SettingsPanel" type="Panel"]
-margin_left = 262.0
-margin_top = 52.0
-margin_right = 771.0
-margin_bottom = 546.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -254.5
+margin_top = -247.0
+margin_right = 254.5
+margin_bottom = 247.0
 custom_styles/panel = SubResource( 3 )
 script = ExtResource( 2 )
 __meta__ = {

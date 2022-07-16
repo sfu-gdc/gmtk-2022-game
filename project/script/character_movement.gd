@@ -7,7 +7,7 @@ onready var dice_pool = get_tree().get_root().get_child(0).find_node("DicePool")
 onready var dice_box_list = [] 
 onready var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-export var interaction_range := 3.0
+export var interaction_range := 3.5
 export var pickup_position := Vector3(0.0, 3.0, -0.75)
 
 var velocity_xz := Vector3()
