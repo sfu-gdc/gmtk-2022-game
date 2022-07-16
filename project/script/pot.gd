@@ -10,6 +10,7 @@ const POT_LAYER := 1
 
 var numbers := []
 var held := false
+var dumping := false
 
 func _ready():
 # warning-ignore:return_value_discarded
@@ -36,24 +37,33 @@ func pickup(player: KinematicBody) -> Spatial:
 	return self
 
 func place():
-	var player = get_parent()
-	var position = get_parent()
-	var save_transform := global_transform
-	position.remove_child(self)
-	level.add_child(self)
-	global_transform = save_transform
-	global_transform.origin = (global_transform.origin - 1.5 * player.global_transform.basis.z).snapped(Vector3(2.0, 2.0, 2.0)) + 1.25 * Vector3.DOWN
-	held = false
-	mode = RigidBody.MODE_CHARACTER
-	collision_layer = POT_LAYER
-	collision_mask = POT_LAYER
+	if not dumping and held:
+		var player = get_parent()
+		var position = get_parent()
+		var save_transform := global_transform
+		position.remove_child(self)
+		level.add_child(self)
+		global_transform = save_transform
+		global_transform.origin = (global_transform.origin - 1.5 * player.global_transform.basis.z).snapped(Vector3(2.0, 2.0, 2.0)) + 1.25 * Vector3.DOWN
+		held = false
+		mode = RigidBody.MODE_CHARACTER
+		collision_layer = POT_LAYER
+		collision_mask = POT_LAYER
+		
+		return true
+	else:
+		return false
 
 func garbage(player: KinematicBody):
-	player.get_node("PotDump").play("Dump")
+	dumping = true
+	var animation := player.get_node("PotDump")
 	player.get_node("PotSpot").rotate_garbage()
+	animation.play("Dump")
 	numbers.clear()
 	UI.clear_dice()
 	print(numbers)
+	yield(animation, "animation_finished")
+	dumping = false
 
 
 func _on_Area_body_entered(body):

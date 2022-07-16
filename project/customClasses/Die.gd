@@ -136,7 +136,7 @@ func pickup(player: KinematicBody) -> Die:
 
 func place():
 	if not get_parent():
-		return 
+		return false
 	var player = get_parent()
 	var save_transform := global_transform
 	player.remove_child(self)
@@ -146,6 +146,8 @@ func place():
 	mode = RigidBody.MODE_RIGID
 	collision_layer = DIE_LAYER
 	collision_mask = DIE_LAYER
+	
+	return true
 
 func garbage(player: KinematicBody):
 	player.held_object = null
