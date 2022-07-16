@@ -1,8 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://art/boringpot.glb" type="PackedScene" id=1]
 [ext_resource path="res://script/pot.gd" type="Script" id=2]
-[ext_resource path="res://prefabs/smoke.tscn" type="PackedScene" id=2]
+[ext_resource path="res://prefabs/smoke.tscn" type="PackedScene" id=3]
 
 [node name="boringpot" groups=["pickup"] instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80639, 0 )
@@ -20,5 +20,5 @@ transform = Transform( -0.984808, -0.173648, 0, 0.173648, -0.984808, 0, 0, 0, 1,
 [node name="Torus002" parent="." index="3"]
 transform = Transform( 0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0, 0, 1, 1.01, 0.6, 0 )
 
-[node name="Spatial" parent="." index="4" instance=ExtResource( 2 )]
+[node name="Spatial" parent="." index="4" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.126423, 0 )

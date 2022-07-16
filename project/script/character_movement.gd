@@ -88,10 +88,10 @@ func _process(_delta):
 	
 	# pickup delay for animation
 	if picking && picking_time > 0:
-		pickingUpAnimation(held_die, _delta)
+		pickingUpAnimation(held_object, _delta)
 		picking_time -= _delta
 		if picking_time <= 0:
-			held_die = held_die.pickup(self)
+			held_object = held_object.pickup(self)
 			picking = false
 			
 
