@@ -37,8 +37,6 @@ func _on_Button_pressed():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var texture = $Viewport.get_texture()
-	$PlayerSquare.texture = texture;
 	var order_card_list = OrderCardList.instance();
 	self.add_child(order_card_list);
 	return; # Replace with function body.
