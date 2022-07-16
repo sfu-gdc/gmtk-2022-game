@@ -37,6 +37,10 @@ var _control_keymapping = {
 	"player1_activate": "activate"
 }
 
+func queue_free():
+	get_parent().settings_spawned = false
+	.queue_free()
+
 func load_settings():
 	var error = settings_file.load(settings_filepath);
 	if error != OK:
