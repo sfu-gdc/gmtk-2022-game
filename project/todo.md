@@ -8,4 +8,5 @@
 	- enable game to be played
 		- pick up dice
 		- dice can be combined
-		-  
+		- putting them in the output area
+		- 
