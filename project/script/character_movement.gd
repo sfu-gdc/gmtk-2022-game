@@ -1,5 +1,7 @@
 extends KinematicBody
 
+signal interact
+
 onready var dice_tex_1 = load("res://art/white-die.png")
 onready var dice_pool = get_tree().get_root().get_child(0).find_node("DicePool")
 onready var dice_box = get_tree().get_root().get_child(0).find_node("DiceBox")
@@ -50,6 +52,7 @@ func _process(_delta):
 		dice_box.player_is_near = false
 		
 	if Input.is_action_just_pressed("activate"):
+		emit_signal("interact", self, held_die)
 		# If near dice box, spawn a die
 		if (dice_box.translation - translation).length() < interaction_range:
 			spawn_die()
