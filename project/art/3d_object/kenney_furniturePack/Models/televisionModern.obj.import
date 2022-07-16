@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/televisionModern.obj-374257993035ffddf94116cf078045bf.mesh"
+
+[deps]
+
+files=[ "res://.import/televisionModern.obj-374257993035ffddf94116cf078045bf.mesh" ]
+
+source_file="res://art/3d_object/kenney_furniturePack/Models/televisionModern.obj"
+dest_files=[ "res://.import/televisionModern.obj-374257993035ffddf94116cf078045bf.mesh", "res://.import/televisionModern.obj-374257993035ffddf94116cf078045bf.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

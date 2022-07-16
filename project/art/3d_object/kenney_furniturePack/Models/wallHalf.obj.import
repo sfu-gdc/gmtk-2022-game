@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/wallHalf.obj-39bd3439a638ee596c6487ad41401aed.mesh"
+
+[deps]
+
+files=[ "res://.import/wallHalf.obj-39bd3439a638ee596c6487ad41401aed.mesh" ]
+
+source_file="res://art/3d_object/kenney_furniturePack/Models/wallHalf.obj"
+dest_files=[ "res://.import/wallHalf.obj-39bd3439a638ee596c6487ad41401aed.mesh", "res://.import/wallHalf.obj-39bd3439a638ee596c6487ad41401aed.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

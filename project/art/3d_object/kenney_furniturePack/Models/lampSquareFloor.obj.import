@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/lampSquareFloor.obj-abe7de17999bcee5a4172755937f0ebf.mesh"
+
+[deps]
+
+files=[ "res://.import/lampSquareFloor.obj-abe7de17999bcee5a4172755937f0ebf.mesh" ]
+
+source_file="res://art/3d_object/kenney_furniturePack/Models/lampSquareFloor.obj"
+dest_files=[ "res://.import/lampSquareFloor.obj-abe7de17999bcee5a4172755937f0ebf.mesh", "res://.import/lampSquareFloor.obj-abe7de17999bcee5a4172755937f0ebf.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

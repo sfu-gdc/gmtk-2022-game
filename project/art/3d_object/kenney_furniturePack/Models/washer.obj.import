@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/washer.obj-23390d88b3905371127e9a819fa1233f.mesh"
+
+[deps]
+
+files=[ "res://.import/washer.obj-23390d88b3905371127e9a819fa1233f.mesh" ]
+
+source_file="res://art/3d_object/kenney_furniturePack/Models/washer.obj"
+dest_files=[ "res://.import/washer.obj-23390d88b3905371127e9a819fa1233f.mesh", "res://.import/washer.obj-23390d88b3905371127e9a819fa1233f.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/bear.obj-401485d71f62cb9bbb2980242d5eb1fc.mesh"
+
+[deps]
+
+files=[ "res://.import/bear.obj-401485d71f62cb9bbb2980242d5eb1fc.mesh" ]
+
+source_file="res://art/3d_object/kenney_furniturePack/Models/bear.obj"
+dest_files=[ "res://.import/bear.obj-401485d71f62cb9bbb2980242d5eb1fc.mesh", "res://.import/bear.obj-401485d71f62cb9bbb2980242d5eb1fc.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
