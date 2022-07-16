@@ -14,8 +14,6 @@ onready var dice_tex_1 = load("res://art/white-die.png")
 
 func _init():
 	add_to_group("pickup")
-  
-func _init(die_type: int):
 	self.die_type = die_type
 
 func _ready():
@@ -99,7 +97,9 @@ func pickup(player: KinematicBody) -> Die:
 	return self
 
 func place():
-	var player : KinematicBody = get_parent()
+	if not get_parent():
+		return 
+	var player = get_parent()
 	var save_transform := global_transform
 	player.remove_child(self)
 	dice_pool.add_child(self)
