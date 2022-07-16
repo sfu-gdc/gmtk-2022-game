@@ -19,5 +19,6 @@
 	/ implement garbage can
 	- dice snap to the grid when on tables
 	- limit spawn rate of dice a little bit (not too much ;-;)
-
+	- add the numbers automatically
+	
 (for gabe) TODO: do the die.new() thing for multiple bins depending on the name of the bin
