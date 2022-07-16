@@ -13,15 +13,25 @@ var number_group: int = 0
 
 onready var dice_tex_1 = load("res://art/white-die.png")
 
+# for stopping & starting particles
+var t1: Timer = Timer.new()
+var t2: Timer = Timer.new()
+
 func _init():
 	add_to_group("pickup")
+	
+	self.add_child(t1)
+	t1.connect("timeout", self, "stop_particles")
+	t1.set_wait_time(0.5)
+	
+	self.add_child(t2)	
+	t2.connect("timeout", self, "free_particles")
+	t2.set_wait_time(2)
 	
 func init(die_type: int, start_location: Vector3):
 	self.die_type = die_type
 	self.start_location = start_location
 
-	print(start_location)
-	
 	self.can_sleep = false
 	self.mass = 5
 	self.translation = start_location + Vector3.UP * 2.801
@@ -81,11 +91,28 @@ func finalize_number():
 	else:
 		number = 0 # err
 		print("bad compute, no, stop")
-		
+	
+	# play oneshot particle effect	
+	var particles = load("res://prefabs/effects/CompletionEventParticles.tscn").instance()
+	particles.name = "ChildParticles"
+	self.add_child(particles)
+	particles.translation = Vector3.ZERO
+	particles.get_node("CPUParticles").emitting = true
+	
+	t1.start()
+
+func stop_particles():
+	get_node("ChildParticles").get_node("CPUParticles").emitting = false
+	t2.start()
+
+func free_particles():
+	get_node("ChildParticles").queue_free()
+	t1.queue_free()
+	t2.queue_free()
+
 func _process(delta):
 	if linear_velocity.length() < 0.003 && number == -1:
 		finalize_number()
-		# TODO: play oneshot particle effect
 	
 func pickup(player: KinematicBody) -> Die:
 	# Attach to player and disable collisions
