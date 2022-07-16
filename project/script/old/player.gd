@@ -1,62 +1,68 @@
 extends KinematicBody
 
 onready var dice_tex_1 = load("res://art/white-die.png")
-
 onready var dice_pool = get_parent().find_node("DicePool")
 onready var dice_box = get_parent().find_node("DiceBox")
+onready var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-var velocity = Vector3(0,0,0)
-var speed = 400
+export var pickup_range := 4.0
+
+var velocity := Vector3(0,0,0)
+var speed := 400.0
+var held_die : Die = null
 
 func spawn_die():
-	var sbody = RigidBody.new()
-	dice_pool.add_child(sbody)
-	sbody.translation = dice_box.translation + Vector3.UP * 2.801
-	# somewhat random
-	sbody.angular_velocity = Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)) * 100
-	sbody.rotate(Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)).normalized(), rand_range(-PI, PI)) 
-	
-	var mesh = MeshInstance.new()
-	mesh.mesh = CubeMesh.new()
-	mesh.mesh.size = Vector3(1,1,1)
-	mesh.mesh.material = SpatialMaterial.new()
-	mesh.mesh.material.albedo_texture = dice_tex_1
-	sbody.add_child(mesh)
-	
-	var shape = CollisionShape.new()
-	shape.shape = BoxShape.new()
-	shape.shape.extents = Vector3(0.5,0.5,0.5)
-	sbody.add_child(shape)
+	var rbody = Die.new(1)
+	dice_pool.add_child(rbody)
 	
 # ------------------------------------
 
-func _ready():
-	pass
-	
-func _process(delta):
-	if (dice_box.translation - translation).length() < 2.5:
+func _process(_delta):
+	if (dice_box.translation - translation).length() < pickup_range:
 		dice_box.player_is_near = true
 	else:
 		dice_box.player_is_near = false
-	
-	if Input.is_key_pressed(KEY_E):
-		if (dice_box.translation - translation).length() < 2.5:
+		
+	if Input.is_action_just_pressed("activate"):
+		# If near dice box, spawn a die
+		if (dice_box.translation - translation).length() < pickup_range:
 			spawn_die()
+	# Try to pick up a die
+	if Input.is_action_just_pressed("pick"):
+		# Try to drop held dice
+		if held_die:
+			held_die.place()
+			held_die = null
+		# Otherwise, find the closest die
+		else:
+			var close_dice := {}
+			for die in dice_pool.get_children():
+				var distance : float = (die.translation - translation).length()
+				if distance < pickup_range:
+					close_dice[distance] = die
+			# If there is a closest die
+			if close_dice.size() > 0:
+				var minimum_distance : float = close_dice.keys().min()
+				# Pick up the closest die
+				held_die = close_dice[minimum_distance].pickup(self)
 
 func _physics_process(delta):
 	if Input.is_action_pressed("player_left"):
-		self.velocity.x = -delta * speed
+		velocity.x = -delta * speed
 	elif Input.is_action_pressed("player_right"):
-		self.velocity.x = delta * speed
+		velocity.x = delta * speed
 	else:
-		self.velocity.x = self.velocity.x * 0.6
+		velocity.x = velocity.x * 0.6
 		
 	if Input.is_action_pressed("player_up"):
-		self.velocity.z = -delta * speed
+		velocity.z = -delta * speed
 	elif Input.is_action_pressed("player_down"):
-		self.velocity.z = delta * speed
+		velocity.z = delta * speed
 	else:
-		self.velocity.z = self.velocity.z * 0.6
-		
-	#velocity.y -= 9.81 * delta
-	velocity = self.move_and_slide(self.velocity, Vector3.UP)
+		velocity.z = velocity.z * 0.6
+	
+	if is_on_floor():
+		velocity.y = 0.0
+	else:
+		velocity.y -= gravity * delta
+	velocity = move_and_slide(velocity, Vector3.UP, true, 4, 0.785398, false)

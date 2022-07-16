@@ -1,6 +1,6 @@
 extends Node
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_pressed("up"):
 		self.translation.z -= 1
 	if Input.is_action_pressed("down"):

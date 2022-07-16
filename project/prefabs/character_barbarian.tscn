@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://art/character/Character_Base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://script/character_movement.gd" type="Script" id=2]
 [ext_resource path="res://art/character/kaykit/gltf/White.material" type="Material" id=3]
 [ext_resource path="res://art/character/kaykit/gltf/PinkLight.material" type="Material" id=4]
 [ext_resource path="res://art/character/kaykit/gltf/WoodDark.material" type="Material" id=5]
@@ -9,6 +10,117 @@
 [ext_resource path="res://art/character/kaykit/gltf/Black.material" type="Material" id=8]
 [ext_resource path="res://art/character/kaykit/gltf/Metal.material" type="Material" id=9]
 [ext_resource path="res://art/character/kaykit/gltf/BrownDark.material" type="Material" id=10]
+[ext_resource path="res://script/PotSpot.gd" type="Script" id=11]
+
+[sub_resource type="Animation" id=27]
+resource_name = "Dump"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("PotSpot:rotation_degrees:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -90, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("PotSpot:rotation_degrees:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("PotSpot:rotation_degrees:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+
+[sub_resource type="Animation" id=28]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("PotSpot:rotation_degrees:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("PotSpot:rotation_degrees:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("PotSpot:rotation_degrees:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+resource_local_to_scene = true
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=22]
+animation = "PickUp"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+resource_local_to_scene = true
+animation = "Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
+[sub_resource type="AnimationNodeStateMachine" id=11]
+states/Idle/node = SubResource( 13 )
+states/Idle/position = Vector2( 285, 187 )
+states/PickUp/node = SubResource( 22 )
+states/PickUp/position = Vector2( 666, 392 )
+states/Run/node = SubResource( 14 )
+states/Run/position = Vector2( 626, 187 )
+transitions = [ "Idle", "Run", SubResource( 15 ), "Run", "Idle", SubResource( 16 ), "Idle", "PickUp", SubResource( 23 ), "PickUp", "Idle", SubResource( 24 ), "Run", "PickUp", SubResource( 25 ), "PickUp", "Run", SubResource( 26 ) ]
+start_node = "Idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=20]
+resource_local_to_scene = false
+
+[sub_resource type="CapsuleShape" id=21]
+radius = 0.956562
+height = 1.18528
 
 [sub_resource type="ArrayMesh" id=5]
 resource_name = "character_barbarian_Cube014"
@@ -277,28 +389,36 @@ surfaces/4 = {
 "vertex_count": 36
 }
 
-[sub_resource type="BoxShape" id=6]
-extents = Vector3( 0.209426, 0.208948, 0.204564 )
-
-[node name="character_barbarian" type="Spatial"]
-
-[node name="KinematicBody" type="KinematicBody" parent="."]
+[node name="KinematicBody" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.98023e-08 )
+script = ExtResource( 2 )
 
-[node name="RigidBody" type="RigidBody" parent="KinematicBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.49012e-08 )
+[node name="PotDump" type="AnimationPlayer" parent="."]
+anims/Dump = SubResource( 27 )
+anims/RESET = SubResource( 28 )
 
-[node name="KayKit_AnimatedCharacter_v12" parent="KinematicBody/RigidBody" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+[node name="PotSpot" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22482, -0.316008 )
+script = ExtResource( 11 )
 
-[node name="Skeleton" parent="KinematicBody/RigidBody/KayKit_AnimatedCharacter_v12/KayKit Animated Character" index="0"]
-bones/1/bound_children = [ NodePath("Head") ]
-bones/2/bound_children = [ NodePath("ArmLeft") ]
-bones/3/bound_children = [ NodePath("handLeft") ]
-bones/4/bound_children = [ NodePath("ArmRight") ]
-bones/5/bound_children = [ NodePath("handRight") ]
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 11 )
+anim_player = NodePath("../KayKit_AnimatedCharacter_v12/AnimationPlayer")
+active = true
+process_mode = 0
+parameters/playback = SubResource( 20 )
 
-[node name="character_barbarianHead" type="MeshInstance" parent="KinematicBody/RigidBody/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/Head" index="0"]
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.482941, 0 )
+shape = SubResource( 21 )
+
+[node name="KayKit_AnimatedCharacter_v12" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1.5, 0, -2.26494e-07, 0, 1.5, 0, 2.26494e-07, 0, -1.5, 0, -1, -1.49012e-08 )
+
+[node name="Head" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.711598, 0 )
+
+[node name="character_barbarianHead" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/Head" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00788689, 0 )
 mesh = SubResource( 5 )
 skeleton = NodePath("../../Body/character_barbarianBody")
@@ -306,24 +426,27 @@ material/0 = null
 material/1 = null
 material/2 = null
 
-[node name="character_barbarianHat" type="MeshInstance" parent="KinematicBody/RigidBody/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/Head/character_barbarianHead"]
+[node name="character_barbarianHat" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/Head/character_barbarianHead"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.700825, 0 )
 mesh = SubResource( 1 )
-skeleton = NodePath("../../../../../../../..")
+skeleton = NodePath("../../../../../../..")
 material/0 = null
 material/1 = null
 material/2 = null
 
-[node name="character_barbarianBody" type="MeshInstance" parent="KinematicBody/RigidBody/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/Body" index="0"]
+[node name="character_barbarianBody" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/Body" index="0"]
 mesh = SubResource( 2 )
-skeleton = NodePath("../../../../../../..")
+skeleton = NodePath("../../../../../..")
 material/0 = null
 material/1 = null
 material/2 = null
 material/3 = null
 material/4 = null
 
-[node name="character_barbarianArmLeft" type="MeshInstance" parent="KinematicBody/RigidBody/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/ArmLeft" index="0"]
+[node name="ArmLeft" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="2"]
+transform = Transform( -1.19209e-07, 0.471936, -0.881633, 2.5332e-07, -0.881633, -0.471936, -1, -2.5332e-07, -1.19209e-07, 0.14, 0.691598, -1.3027e-15 )
+
+[node name="character_barbarianArmLeft" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/ArmLeft" index="0"]
 transform = Transform( -1.44517e-08, 2.79594e-07, -0.999999, 0.471936, -0.881633, -2.79594e-07, -0.881633, -0.471936, -1.44517e-08, -1.71536e-08, 0.0813964, -0.0290722 )
 mesh = SubResource( 3 )
 skeleton = NodePath("../../Body/character_barbarianBody")
@@ -333,7 +456,10 @@ material/2 = null
 material/3 = null
 material/4 = null
 
-[node name="character_barbarianArmRight" type="MeshInstance" parent="KinematicBody/RigidBody/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/ArmRight" index="0"]
+[node name="ArmRight" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="3"]
+transform = Transform( -1.19209e-07, -0.471936, -0.881633, -2.23518e-07, -0.881633, 0.471936, -1, 2.23517e-07, -1.19209e-07, -0.14, 0.691598, 8.40813e-15 )
+
+[node name="character_barbarianArmRight" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/ArmRight" index="0"]
 transform = Transform( -3.87118e-10, -2.53319e-07, -0.999999, -0.471936, -0.881633, 2.53319e-07, -0.881633, 0.471936, -3.87118e-10, 1.47278e-08, 0.0813965, 0.0290721 )
 mesh = SubResource( 4 )
 skeleton = NodePath("../../Body/character_barbarianBody")
@@ -343,8 +469,15 @@ material/2 = null
 material/3 = null
 material/4 = null
 
-[node name="CollisionShape" type="CollisionShape" parent="KinematicBody/RigidBody"]
-transform = Transform( 2.9, 0, 0, 0, 5.25, 0, 0, 0, 3.12, 0, 0, 0.171324 )
-shape = SubResource( 6 )
+[node name="handLeft" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="4"]
+transform = Transform( -1, 2.92556e-08, 0, 0, 1.04171e-07, 1, -1.04757e-07, 1, -7.80337e-08, 0.4, 0.205887, -1.3956e-07 )
 
-[editable path="KinematicBody/RigidBody/KayKit_AnimatedCharacter_v12"]
+[node name="handRight" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="5"]
+transform = Transform( -1, 1.0808e-07, 0, 0, -1.76167e-07, 1, 3.87132e-10, 1, 2.23518e-07, -0.4, 0.205887, 1.2314e-07 )
+
+[node name="AnimationPlayer" parent="KayKit_AnimatedCharacter_v12" index="1"]
+autoplay = ""
+
+[node name="character_barbarian" type="Spatial" parent="."]
+
+[editable path="KayKit_AnimatedCharacter_v12"]
