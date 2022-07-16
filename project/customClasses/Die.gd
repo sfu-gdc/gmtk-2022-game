@@ -9,24 +9,39 @@ var start_location : Vector3
 const DIE_LAYER := 1
 
 var number : int = -1
+
 var die_type: int = 0
 var number_group: int = 0
 
 onready var dice_tex_1 = load("res://art/white-die.png")
 
+# for stopping & starting particles
+var t1: Timer = Timer.new()
+var t2: Timer = Timer.new()
+
 func _init():
 	add_to_group("pickup")
 	
-func init(die_type: int, start_location: Vector3):
-	self.die_type = die_type
-	self.start_location = start_location
+	self.add_child(t1)
+	t1.connect("timeout", self, "stop_particles")
+	t1.set_wait_time(0.15)
+	
+	self.add_child(t2)	
+	t2.connect("timeout", self, "free_particles")
+	t2.set_wait_time(1.75)
 
-	print(start_location)
+# this is so we can pass 2 params to the function
+func init(die_type_local: int, start_location_local: Vector3):
+	self.die_type = die_type_local
+	self.start_location = start_location_local
+
+	print(start_location_local)
 	
 	self.can_sleep = false
 	self.mass = 5
-	self.translation = start_location + Vector3.UP * 2.801
+	self.translation = start_location_local + Vector3.UP * 2.801
 	# somewhat random
+
 	self.angular_velocity = Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)) * 25
 	self.linear_velocity = Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)).normalized() * 4
 	self.rotate(Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)).normalized(), rand_range(-PI, PI)) 
@@ -36,13 +51,13 @@ func init(die_type: int, start_location: Vector3):
 	mesh.mesh = CubeMesh.new()
 	mesh.mesh.size = Vector3(1.2,1.2,1.2)
 	mesh.mesh.material = SpatialMaterial.new()
-	if die_type == 0:
+	if die_type_local == 0:
 		mesh.mesh.material.albedo_texture = load("res://art/fulldie1.png")
-	elif die_type == 1:
+	elif die_type_local == 1:
 		var choices = [load("res://art/fulldie2.png"), load("res://art/fulldie3.png"), load("res://art/fulldie4.png")]
 		number_group = randi() % choices.size()
 		mesh.mesh.material.albedo_texture = choices[number_group]
-	elif die_type == 2:
+	elif die_type_local == 2:
 		pass
 		
 	mesh.mesh.material.uv1_scale = Vector3(1, 1, 1)
@@ -82,11 +97,28 @@ func finalize_number():
 	else:
 		number = 0 # err
 		print("bad compute, no, stop")
-		
-func _process(delta):
+    
+	# play oneshot particle effect	
+	var particles = load("res://prefabs/effects/CompletionEventParticles.tscn").instance()
+	particles.name = "ChildParticles"
+	self.add_child(particles)
+	
+	particles.translation = Vector3.ZERO
+	particles.get_node("CPUParticles").emitting = true
+	t1.start()
+
+func stop_particles():
+	get_node("ChildParticles").get_node("CPUParticles").emitting = false
+	t2.start()
+
+func free_particles():
+	get_node("ChildParticles").queue_free()
+	t1.queue_free()
+	t2.queue_free()
+
+func _process(_delta):
 	if linear_velocity.length() < 0.003 && number == -1:
 		finalize_number()
-		# TODO: play oneshot particle effect
 	
 func pickup(player: KinematicBody) -> Die:
 	# Attach to player and disable collisions
