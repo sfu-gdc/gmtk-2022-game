@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://art/character/Character_Base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://script/character_movement.gd" type="Script" id=2]
@@ -15,6 +15,9 @@
 resource_local_to_scene = true
 animation = "Idle"
 
+[sub_resource type="AnimationNodeAnimation" id=22]
+animation = "PickUp"
+
 [sub_resource type="AnimationNodeAnimation" id=14]
 resource_local_to_scene = true
 animation = "Run"
@@ -25,16 +28,32 @@ switch_mode = 1
 [sub_resource type="AnimationNodeStateMachineTransition" id=16]
 switch_mode = 1
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
 [sub_resource type="AnimationNodeStateMachine" id=11]
 states/Idle/node = SubResource( 13 )
 states/Idle/position = Vector2( 285, 187 )
+states/PickUp/node = SubResource( 22 )
+states/PickUp/position = Vector2( 666, 392 )
 states/Run/node = SubResource( 14 )
 states/Run/position = Vector2( 626, 187 )
-transitions = [ "Idle", "Run", SubResource( 15 ), "Run", "Idle", SubResource( 16 ) ]
+transitions = [ "Idle", "Run", SubResource( 15 ), "Run", "Idle", SubResource( 16 ), "Idle", "PickUp", SubResource( 23 ), "PickUp", "Idle", SubResource( 24 ), "Run", "PickUp", SubResource( 25 ), "PickUp", "Run", SubResource( 26 ) ]
 start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=20]
 resource_local_to_scene = false
+
+[sub_resource type="CapsuleShape" id=21]
+radius = 0.956562
+height = 1.18528
 
 [sub_resource type="ArrayMesh" id=5]
 resource_name = "character_barbarian_Cube014"
@@ -303,42 +322,28 @@ surfaces/4 = {
 "vertex_count": 36
 }
 
-[sub_resource type="CapsuleShape" id=6]
-radius = 0.205158
-height = 0.002
-
-[node name="character_barbarian" type="Spatial"]
-
-[node name="KinematicBody" type="KinematicBody" parent="."]
+[node name="KinematicBody" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.98023e-08 )
 script = ExtResource( 2 )
 
-[node name="AnimationTree" type="AnimationTree" parent="KinematicBody"]
+[node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 11 )
-anim_player = NodePath("../RigidBody/KayKit_AnimatedCharacter_v12/AnimationPlayer")
+anim_player = NodePath("../KayKit_AnimatedCharacter_v12/AnimationPlayer")
 active = true
 process_mode = 0
 parameters/playback = SubResource( 20 )
 
-[node name="RigidBody" type="RigidBody" parent="KinematicBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.49012e-08 )
-axis_lock_angular_x = true
-axis_lock_angular_z = true
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.482941, 0 )
+shape = SubResource( 21 )
 
-[node name="KayKit_AnimatedCharacter_v12" parent="KinematicBody/RigidBody" instance=ExtResource( 1 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1, 0 )
+[node name="KayKit_AnimatedCharacter_v12" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1.5, 0, -2.26494e-07, 0, 1.5, 0, 2.26494e-07, 0, -1.5, 0, -1, -1.49012e-08 )
 
-[node name="Skeleton" parent="KinematicBody/RigidBody/KayKit_AnimatedCharacter_v12/KayKit Animated Character" index="0"]
-bones/1/bound_children = [ NodePath("Head") ]
-bones/2/bound_children = [ NodePath("ArmLeft") ]
-bones/3/bound_children = [ NodePath("handLeft") ]
-bones/4/bound_children = [ NodePath("ArmRight") ]
-bones/5/bound_children = [ NodePath("handRight") ]
+[node name="Head" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="0"]
+transform = Transform( 1, 2.31424e-17, -8.51043e-19, -2.31201e-17, 0.995584, -0.0938787, -1.32529e-18, 0.0938787, 0.995584, -5.40586e-18, 0.71156, -0.00735065 )
 
-[node name="Head" parent="KinematicBody/RigidBody/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="0"]
-transform = Transform( 1, 2.31445e-17, -7.17509e-19, -2.31156e-17, 0.995967, -0.0897196, -1.3619e-18, 0.0897196, 0.995967, -5.40579e-18, 0.711597, -0.00114387 )
-
-[node name="character_barbarianHead" type="MeshInstance" parent="KinematicBody/RigidBody/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/Head" index="0"]
+[node name="character_barbarianHead" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/Head" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00788689, 0 )
 mesh = SubResource( 5 )
 skeleton = NodePath("../../Body/character_barbarianBody")
@@ -346,27 +351,27 @@ material/0 = null
 material/1 = null
 material/2 = null
 
-[node name="character_barbarianHat" type="MeshInstance" parent="KinematicBody/RigidBody/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/Head/character_barbarianHead"]
+[node name="character_barbarianHat" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/Head/character_barbarianHead"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.700825, 0 )
 mesh = SubResource( 1 )
-skeleton = NodePath("../../../../../../../..")
+skeleton = NodePath("../../../../../../..")
 material/0 = null
 material/1 = null
 material/2 = null
 
-[node name="character_barbarianBody" type="MeshInstance" parent="KinematicBody/RigidBody/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/Body" index="0"]
+[node name="character_barbarianBody" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/Body" index="0"]
 mesh = SubResource( 2 )
-skeleton = NodePath("../../../../../../..")
+skeleton = NodePath("../../../../../..")
 material/0 = null
 material/1 = null
 material/2 = null
 material/3 = null
 material/4 = null
 
-[node name="ArmLeft" parent="KinematicBody/RigidBody/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="2"]
-transform = Transform( 0.000131416, 0.475326, -0.87981, -0.00160707, -0.879809, -0.475325, -0.999999, 0.00147641, 0.000648155, 0.14, 0.691597, -0.00111172 )
+[node name="ArmLeft" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="2"]
+transform = Transform( 0.000862977, 0.494022, -0.869449, -0.0103187, -0.869399, -0.494004, -0.999946, 0.00939795, 0.00434731, 0.14, 0.691561, -0.00714405 )
 
-[node name="character_barbarianArmLeft" type="MeshInstance" parent="KinematicBody/RigidBody/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/ArmLeft" index="0"]
+[node name="character_barbarianArmLeft" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/ArmLeft" index="0"]
 transform = Transform( -1.44517e-08, 2.79594e-07, -0.999999, 0.471936, -0.881633, -2.79594e-07, -0.881633, -0.471936, -1.44517e-08, -1.71536e-08, 0.0813964, -0.0290722 )
 mesh = SubResource( 3 )
 skeleton = NodePath("../../Body/character_barbarianBody")
@@ -376,10 +381,10 @@ material/2 = null
 material/3 = null
 material/4 = null
 
-[node name="ArmRight" parent="KinematicBody/RigidBody/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="3"]
-transform = Transform( -0.000891656, -0.473931, -0.880562, -0.33599, -0.829229, 0.446643, -0.941865, 0.296258, -0.158497, -0.14, 0.691597, -0.00111172 )
+[node name="ArmRight" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="3"]
+transform = Transform( -0.00584614, -0.48496, -0.874517, -0.344148, -0.820134, 0.457103, -0.938897, 0.303635, -0.162103, -0.14, 0.691561, -0.00714405 )
 
-[node name="character_barbarianArmRight" type="MeshInstance" parent="KinematicBody/RigidBody/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/ArmRight" index="0"]
+[node name="character_barbarianArmRight" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/ArmRight" index="0"]
 transform = Transform( -3.87118e-10, -2.53319e-07, -0.999999, -0.471936, -0.881633, 2.53319e-07, -0.881633, 0.471936, -3.87118e-10, 1.47278e-08, 0.0813965, 0.0290721 )
 mesh = SubResource( 4 )
 skeleton = NodePath("../../Body/character_barbarianBody")
@@ -389,21 +394,15 @@ material/2 = null
 material/3 = null
 material/4 = null
 
-[node name="handLeft" parent="KinematicBody/RigidBody/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="4"]
-transform = Transform( -0.999993, -0.000131507, -0.00384861, -0.00384882, 0.00160744, 0.999992, -0.000125454, 0.999999, -0.00160791, 0.401867, 0.206891, -0.000298337 )
+[node name="handLeft" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="4"]
+transform = Transform( -0.999682, -0.000863077, -0.0252221, -0.0252297, 0.0103191, 0.999629, -0.000602621, 0.999946, -0.0103376, 0.412168, 0.21259, -0.00196651 )
 
-[node name="handRight" parent="KinematicBody/RigidBody/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="5"]
-transform = Transform( -0.975293, 0.208995, -0.0715955, 0.00272691, 0.335446, 0.942056, 0.220901, 0.918584, -0.327728, -0.401099, 0.234757, 0.162103 )
+[node name="handRight" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="5"]
+transform = Transform( -0.975069, 0.213913, -0.059006, 0.0178326, 0.340588, 0.940044, 0.221184, 0.915555, -0.335912, -0.407175, 0.239731, 0.160135 )
 
-[node name="AnimationPlayer" parent="KinematicBody/RigidBody/KayKit_AnimatedCharacter_v12" index="1"]
+[node name="AnimationPlayer" parent="KayKit_AnimatedCharacter_v12" index="1"]
 autoplay = ""
 
-[node name="CollisionShape" type="CollisionShape" parent="KinematicBody/RigidBody"]
-transform = Transform( 2, 0, 0, 0, 4, 0, 0, 0, 2, 0, 0, 0.171324 )
-shape = SubResource( 6 )
+[node name="character_barbarian" type="Spatial" parent="."]
 
-[node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
-transform = Transform( 2.9, 0, 0, 0, 5.25, 0, 0, 0, 3.12, 0, 0, 0.171324 )
-shape = SubResource( 6 )
-
-[editable path="KinematicBody/RigidBody/KayKit_AnimatedCharacter_v12"]
+[editable path="KayKit_AnimatedCharacter_v12"]

@@ -1,8 +1,6 @@
 extends RigidBody
 class_name Die
 
-export var pickup_height := 1.5
-
 onready var dice_pool := $"/root/Level1/DicePool"
 onready var dice_box := $"/root/Level1/Level/InnerWalls/DiceBox"
 
@@ -14,6 +12,9 @@ var number_group: int = 0
 
 onready var dice_tex_1 = load("res://art/white-die.png")
 
+func _init():
+	add_to_group("pickup")
+  
 func _init(die_type: int):
 	self.die_type = die_type
 
@@ -83,7 +84,7 @@ func _process(delta):
 	if linear_velocity.length() < 0.003 && number == -1:
 		finalize_number()
 		# TODO: play oneshot particle effect
-		
+	
 func pickup(player: KinematicBody) -> Die:
 	# Attach to player and disable collisions
 	var save_transform := global_transform
@@ -93,7 +94,7 @@ func pickup(player: KinematicBody) -> Die:
 	collision_mask = 0
 	player.add_child(self)
 	global_transform = save_transform
-	global_transform.origin.y = pickup_height
+	transform.origin = player.pickup_position
 	
 	return self
 
@@ -106,3 +107,7 @@ func place():
 	mode = RigidBody.MODE_RIGID
 	collision_layer = DIE_LAYER
 	collision_mask = DIE_LAYER
+
+func garbage(player: KinematicBody):
+	player.held_object = null
+	queue_free()
