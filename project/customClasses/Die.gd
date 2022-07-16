@@ -38,7 +38,8 @@ func init(die_type_local: int, start_location_local: Vector3):
 	print(start_location_local)
 	
 	self.can_sleep = false
-	self.mass = 5
+	self.mass = 1
+	#self.friction
 	self.translation = start_location_local + Vector3.UP * 2.801
 	# somewhat random
 

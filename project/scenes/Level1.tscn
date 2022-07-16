@@ -365,12 +365,6 @@ mesh = SubResource( 1 )
 skeleton = NodePath("")
 material/0 = null
 
-[node name="Tile57" type="MeshInstance" parent="Level/OuterWalls"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 2 )
-mesh = SubResource( 1 )
-skeleton = NodePath("")
-material/0 = null
-
 [node name="Tile36" type="MeshInstance" parent="Level/OuterWalls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -6 )
 mesh = SubResource( 1 )
@@ -534,8 +528,22 @@ mesh = SubResource( 1 )
 skeleton = NodePath("")
 material/0 = null
 
-[node name="DiceBox" type="MeshInstance" parent="Level/InnerWalls"]
+[node name="DiceBox0" type="MeshInstance" parent="Level/InnerWalls"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 22, 0, -4 )
+mesh = SubResource( 8 )
+skeleton = NodePath("")
+material/0 = null
+script = ExtResource( 7 )
+
+[node name="DiceBox1" type="MeshInstance" parent="Level/InnerWalls"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 24, 0, 2 )
+mesh = SubResource( 8 )
+skeleton = NodePath("")
+material/0 = null
+script = ExtResource( 7 )
+
+[node name="DiceBox2" type="MeshInstance" parent="Level/InnerWalls"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 16, 0, 2 )
 mesh = SubResource( 8 )
 skeleton = NodePath("")
 material/0 = null
