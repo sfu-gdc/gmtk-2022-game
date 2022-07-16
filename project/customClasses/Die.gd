@@ -142,6 +142,7 @@ func place():
 	player.remove_child(self)
 	dice_pool.add_child(self)
 	global_transform = save_transform
+	global_transform.origin = (global_transform.origin - 1.0 * player.global_transform.basis.z)
 	mode = RigidBody.MODE_RIGID
 	collision_layer = DIE_LAYER
 	collision_mask = DIE_LAYER
