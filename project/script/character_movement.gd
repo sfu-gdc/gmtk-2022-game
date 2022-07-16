@@ -65,6 +65,9 @@ func _process(_delta):
 	if Input.is_action_just_pressed("pick"):
 		# Try to drop held dice
 		if held_object:
+			picking_time = -1
+			picking = false
+			
 			held_object.place()
 			held_object = null
 		# Otherwise, find the closest die
@@ -77,13 +80,15 @@ func _process(_delta):
 			# If there is a closest object
 			if close_objects.size() > 0:
 				
+				
+				# Pick up the closest die
+				var minimum_distance : float = close_objects.keys().min()
+				held_object = close_objects[minimum_distance]
+				
 				#setup picking animation offset
 				picking = true
 				picking_time = 20 * _delta
 				
-				var minimum_distance : float = close_objects.keys().min()
-				# Pick up the closest die
-				held_object = close_objects[minimum_distance]
 				animationState.travel("PickUp")
 	
 	# pickup delay for animation
@@ -91,10 +96,10 @@ func _process(_delta):
 		pickingUpAnimation(held_object, _delta)
 		picking_time -= _delta
 		if picking_time <= 0:
-			held_object = held_object.pickup(self)
 			picking = false
+			held_object = held_object.pickup(self)
 			
-
+			
 func pickingUpAnimation(object, delta):
 	# the dice will travel a little bit before picked up
 	var direction = transform.origin - object.transform.origin

@@ -18,14 +18,16 @@ material = SubResource( 1 )
 
 [node name="smoke" type="CPUParticles" parent="."]
 lod_max_distance = 2.0
+amount = 10
 speed_scale = 0.6
-explosiveness = 0.3
+explosiveness = 0.2
 randomness = 0.4
 mesh = SubResource( 2 )
 direction = Vector3( 0, 1, 0 )
-spread = 30.0
+spread = 25.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 2.0
-initial_velocity_random = 0.5
+initial_velocity = 3.0
+initial_velocity_random = 0.1
 angular_velocity_random = 1.0
+scale_amount = 1.5
 scale_amount_random = 0.5

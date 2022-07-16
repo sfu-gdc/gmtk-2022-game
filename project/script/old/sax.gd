@@ -60,7 +60,7 @@ func _ready():
 	var timer = Timer.new()
 	timer.name = "NotePlayTimer"
 	add_child(timer)
-	timer.connect("timeout", self, "start_notes")		
+	timer.connect("timeout", self, "start_notes")
 	
 	bar_note.set_atlas(note_tex)
 	eighth_note.set_atlas(note_tex)
