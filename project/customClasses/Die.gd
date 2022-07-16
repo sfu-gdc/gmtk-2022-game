@@ -22,12 +22,13 @@ func _init():
 	
 	self.add_child(t1)
 	t1.connect("timeout", self, "stop_particles")
-	t1.set_wait_time(0.5)
+	t1.set_wait_time(0.15)
 	
 	self.add_child(t2)	
 	t2.connect("timeout", self, "free_particles")
-	t2.set_wait_time(2)
-	
+	t2.set_wait_time(1.75)
+
+# this is so we can pass 2 params to the function
 func init(die_type: int, start_location: Vector3):
 	self.die_type = die_type
 	self.start_location = start_location
@@ -35,7 +36,6 @@ func init(die_type: int, start_location: Vector3):
 	self.can_sleep = false
 	self.mass = 5
 	self.translation = start_location + Vector3.UP * 2.801
-	# somewhat random
 	self.angular_velocity = Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)) * 25
 	self.linear_velocity = Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)).normalized() * 4
 	self.rotate(Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)).normalized(), rand_range(-PI, PI)) 
@@ -96,9 +96,9 @@ func finalize_number():
 	var particles = load("res://prefabs/effects/CompletionEventParticles.tscn").instance()
 	particles.name = "ChildParticles"
 	self.add_child(particles)
+	
 	particles.translation = Vector3.ZERO
 	particles.get_node("CPUParticles").emitting = true
-	
 	t1.start()
 
 func stop_particles():

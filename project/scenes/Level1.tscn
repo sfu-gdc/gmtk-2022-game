@@ -47,6 +47,7 @@ material = SubResource( 12 )
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.605127, 0.796129, 0, -0.796129, 0.605127, 11.7721, 15.6063, 8.4637 )
 environment = ExtResource( 15 )
+far = 143.4
 script = ExtResource( 4 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
