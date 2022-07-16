@@ -1,11 +1,14 @@
 extends KinematicBody
 
+signal interact
+
 onready var dice_tex_1 = load("res://art/white-die.png")
 onready var dice_pool = get_tree().get_root().get_child(0).find_node("DicePool")
 onready var dice_box = get_tree().get_root().get_child(0).find_node("DiceBox")
 onready var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-export var interaction_range := 2.5
+export var interaction_range := 4.0
+export var pickup_position := Vector3(0.0, 3.0, -0.75)
 
 var velocity_xz := Vector3()
 var velocity_y := Vector3()
@@ -15,7 +18,7 @@ var cur_speed = 0
 onready var animationTree : AnimationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 
-var held_die : Die = null
+var held_object : Spatial = null
 
 var picking = false
 var picking_time = 0
@@ -54,40 +57,41 @@ func _process(_delta):
 		dice_box.player_is_near = false
 		
 	if Input.is_action_just_pressed("activate"):
+		emit_signal("interact", self, held_object)
 		# If near dice box, spawn a die
 		if (dice_box.translation - translation).length() < interaction_range:
 			spawn_die()
 	# Try to pick up a die
 	if Input.is_action_just_pressed("pick"):
 		# Try to drop held dice
-		if held_die:
-			held_die.place()
-			held_die = null
+		if held_object:
+			held_object.place()
+			held_object = null
 		# Otherwise, find the closest die
 		else:
-			var close_dice := {}
-			for die in dice_pool.get_children():
-				var distance : float = (die.translation - translation).length()
+			var close_objects := {}
+			for object in get_tree().get_nodes_in_group("pickup"):
+				var distance : float = (object.translation - translation).length()
 				if distance < interaction_range:
-					close_dice[distance] = die
-			# If there is a closest die
-			if close_dice.size() > 0:
+					close_objects[distance] = object
+			# If there is a closest object
+			if close_objects.size() > 0:
 				
 				#setup picking animation offset
 				picking = true
 				picking_time = 20 * _delta
 				
-				var minimum_distance : float = close_dice.keys().min()
+				var minimum_distance : float = close_objects.keys().min()
 				# Pick up the closest die
-				held_die = close_dice[minimum_distance]
+				held_object = close_objects[minimum_distance]
 				animationState.travel("PickUp")
 	
 	# pickup delay for animation
 	if picking && picking_time > 0:
-		pickingUpAnimation(held_die, _delta)
+		pickingUpAnimation(held_object, _delta)
 		picking_time -= _delta
 		if picking_time <= 0:
-			held_die = held_die.pickup(self)
+			held_object = held_object.pickup(self)
 			picking = false
 			
 
@@ -97,7 +101,6 @@ func pickingUpAnimation(object, delta):
 	object.translation.x += direction.x * delta
 	object.translation.y += direction.y * 0.5 + 1
 	object.translation.z += direction.z * delta
-				
 
 func _physics_process(delta):
 	
