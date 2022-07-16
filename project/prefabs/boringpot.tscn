@@ -24,4 +24,4 @@ transform = Transform( 0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0, 0, 1, 1
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.126423, 0 )
 
 [node name="UIPosition" type="Spatial" parent="." index="5"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.44012, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.903216, 0 )
