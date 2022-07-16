@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Control",
+"class": "OrderCard",
+"language": "GDScript",
+"path": "res://UI/OrderCardList/OrderCard/OrderCard.gd"
+} ]
+_global_script_class_icons={
+"OrderCard": ""
+}
+
 [application]
 
 config/name="gmtk-2022-game"
