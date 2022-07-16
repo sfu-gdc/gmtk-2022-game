@@ -4,7 +4,7 @@
 	/ half done
 
 # TODO:
-	- make the levels look nice w/ details outside the world & tables & stuff
+	/ make the levels look nice w/ details outside the world & tables & stuff
 	/ make more dice blocks
 	- add 2+ player support
 	/ add a menu -> enable adding other players
@@ -18,6 +18,8 @@
 	- player should glide to stop
 	/ implement garbage can
 	- dice snap to the grid when on tables
-	- limit spawn rate of dice a little bit (not too much ;-;)
-
+	* limit spawn rate of dice a little bit (not too much ;-;)
+	- add the numbers automatically
+	- highlight outline of the cube you would pick up
+	
 (for gabe) TODO: do the die.new() thing for multiple bins depending on the name of the bin

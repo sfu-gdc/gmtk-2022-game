@@ -30,6 +30,11 @@ config/name="gmtk-2022-game"
 run/main_scene="res://scenes/MainMenu.tscn"
 config/icon="res://art/icon.png"
 
+[display]
+
+window/size/width=1280
+window/size/height=720
+
 [importer_defaults]
 
 texture={

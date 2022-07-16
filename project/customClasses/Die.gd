@@ -24,7 +24,7 @@ func _init():
 	
 	self.add_child(t1)
 	t1.connect("timeout", self, "stop_particles")
-	t1.set_wait_time(0.15)
+	t1.set_wait_time(0.25)
 	
 	self.add_child(t2)	
 	t2.connect("timeout", self, "free_particles")
@@ -38,7 +38,8 @@ func init(die_type_local: int, start_location_local: Vector3):
 	print(start_location_local)
 	
 	self.can_sleep = false
-	self.mass = 5
+	self.mass = 1
+	#self.friction
 	self.translation = start_location_local + Vector3.UP * 2.801
 	# somewhat random
 
