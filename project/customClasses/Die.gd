@@ -24,7 +24,7 @@ func _init():
 	
 	self.add_child(t1)
 	t1.connect("timeout", self, "stop_particles")
-	t1.set_wait_time(0.15)
+	t1.set_wait_time(0.25)
 	
 	self.add_child(t2)	
 	t2.connect("timeout", self, "free_particles")
