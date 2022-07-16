@@ -51,7 +51,7 @@ func add_card_child():
 		
 
 # create a new order card
-func create_order_card(timer_time):
+func create_order_card(timer_time, food_number: int):
 	# create a new order card, and add it to the current node
 	var order_card_instance : Control = OrderCard.instance()
 	# the position x of the order card is determined by 
@@ -59,7 +59,7 @@ func create_order_card(timer_time):
 	var x = hoffset + (hmargin + card_size) * order_card_list.size()
 	
 	# initialize the order
-	order_card_instance.__init(timer_time, x)
+	order_card_instance.__init(timer_time, x, food_number) # TODO: this
 	
 	# if card is existing from tree, reorder the card list
 	var _v1 = order_card_instance.connect("tree_exiting", self, "reorder_order_card_list", [order_card_instance])

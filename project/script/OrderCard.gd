@@ -17,9 +17,10 @@ onready var time_bar: TextureProgress = $Panel/Vertical/Center/Margin/TimeBar
 onready var timer: Timer
 onready var kill_timer: Timer
 
+var food_number = 50
 
 # init method called by other script
-func __init(timer_time: float, position_x: int):
+func __init(timer_time: float, position_x: int, food_number: int):
 	# create a new timer node
 	timer = Timer.new()
 	# set full time variable

@@ -21,5 +21,6 @@
 	* limit spawn rate of dice a little bit (not too much ;-;)
 	- add the numbers automatically
 	- highlight outline of the cube you would pick up
+	- infinite pot rotation bug
 	
 (for gabe) TODO: do the die.new() thing for multiple bins depending on the name of the bin
