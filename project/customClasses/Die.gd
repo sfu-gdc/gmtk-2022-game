@@ -9,6 +9,7 @@ var start_location : Vector3
 const DIE_LAYER := 1
 
 var number : int = -1
+
 var die_type: int = 0
 var number_group: int = 0
 
@@ -17,15 +18,15 @@ onready var dice_tex_1 = load("res://art/white-die.png")
 func _init():
 	add_to_group("pickup")
 	
-func init(die_type: int, start_location: Vector3):
-	self.die_type = die_type
-	self.start_location = start_location
+func init(die_type_local: int, start_location_local: Vector3):
+	self.die_type = die_type_local
+	self.start_location = start_location_local
 
-	print(start_location)
+	print(start_location_local)
 	
 	self.can_sleep = false
 	self.mass = 5
-	self.translation = start_location + Vector3.UP * 2.801
+	self.translation = start_location_local + Vector3.UP * 2.801
 	# somewhat random
 	self.angular_velocity = Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)) * 25
 	self.linear_velocity = Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)).normalized() * 4
@@ -36,13 +37,13 @@ func init(die_type: int, start_location: Vector3):
 	mesh.mesh = CubeMesh.new()
 	mesh.mesh.size = Vector3(1.2,1.2,1.2)
 	mesh.mesh.material = SpatialMaterial.new()
-	if die_type == 0:
+	if die_type_local == 0:
 		mesh.mesh.material.albedo_texture = load("res://art/fulldie1.png")
-	elif die_type == 1:
+	elif die_type_local == 1:
 		var choices = [load("res://art/fulldie2.png"), load("res://art/fulldie3.png"), load("res://art/fulldie4.png")]
 		number_group = randi() % choices.size()
 		mesh.mesh.material.albedo_texture = choices[number_group]
-	elif die_type == 2:
+	elif die_type_local == 2:
 		pass
 		
 	mesh.mesh.material.uv1_scale = Vector3(1, 1, 1)
@@ -83,7 +84,7 @@ func finalize_number():
 		number = 0 # err
 		print("bad compute, no, stop")
 		
-func _process(delta):
+func _process(_delta):
 	if linear_velocity.length() < 0.003 && number == -1:
 		finalize_number()
 		# TODO: play oneshot particle effect
