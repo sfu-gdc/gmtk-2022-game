@@ -1425,25 +1425,25 @@ bones/5/enabled = true
 bones/5/bound_children = [  ]
 
 [node name="Head" type="BoneAttachment" parent="KayKit Animated Character/Skeleton"]
-transform = Transform( 0.99904, -0.00915544, 0.0428514, 0.0147182, 0.991226, -0.131359, -0.0412727, 0.131864, 0.990408, 0.00205683, 0.674867, 0.0569891 )
+transform = Transform( 1, 1.97468e-17, -1.22166e-18, -1.97703e-17, 0.995031, -0.0995668, -7.50532e-19, 0.0995668, 0.995031, 0, 0.711396, -0.0169652 )
 bone_name = "Head"
 
 [node name="Body" type="BoneAttachment" parent="KayKit Animated Character/Skeleton"]
 
 [node name="ArmLeft" type="BoneAttachment" parent="KayKit Animated Character/Skeleton"]
-transform = Transform( -0.189324, 0.494933, -0.848056, 0.0546451, -0.857026, -0.512367, -0.980393, -0.143345, 0.13521, 0.141434, 0.655478, 0.0429117 )
+transform = Transform( 0.00195272, 0.521471, -0.853267, -0.0237851, -0.853003, -0.521364, -0.999715, 0.0213131, 0.0107374, 0.14, 0.691401, -0.0164884 )
 bone_name = "armLeft"
 
 [node name="ArmRight" type="BoneAttachment" parent="KayKit Animated Character/Skeleton"]
-transform = Transform( -0.0530451, -0.367896, -0.928353, -0.267918, -0.890334, 0.368138, -0.96198, 0.268251, -0.0513381, -0.147897, 0.620933, 0.11146 )
+transform = Transform( -0.01334, -0.501479, -0.865067, -0.356607, -0.805868, 0.472661, -0.934159, 0.314794, -0.168081, -0.14, 0.691401, -0.0164884 )
 bone_name = "armRight"
 
 [node name="handLeft" type="BoneAttachment" parent="KayKit Animated Character/Skeleton"]
-transform = Transform( -0.98125, 0.189324, -0.0361211, -0.0472582, -0.0546448, 0.997387, 0.186855, 0.980393, 0.0625674, 0.414103, 0.183324, -0.0360604 )
+transform = Transform( -0.998369, -0.00195283, -0.0570584, -0.0570887, 0.0237854, 0.998086, -0.000592069, 0.999715, -0.0238581, 0.42729, 0.221463, -0.00474653 )
 bone_name = "handSlotLeft"
 
 [node name="handRight" type="BoneAttachment" parent="KayKit Animated Character/Skeleton"]
-transform = Transform( -0.991385, 0.0557057, -0.118551, -0.10087, 0.252716, 0.962269, 0.0835635, 0.965936, -0.244919, -0.350579, 0.130429, 0.259245 )
+transform = Transform( -0.974393, 0.221279, -0.0399371, 0.0407562, 0.348478, 0.936431, 0.221129, 0.910823, -0.348573, -0.416276, 0.247431, 0.156939 )
 bone_name = "handSlotRight"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
