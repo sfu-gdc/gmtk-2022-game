@@ -4,10 +4,10 @@ signal interact
 
 onready var dice_tex_1 = load("res://art/white-die.png")
 onready var dice_pool = get_tree().get_root().get_child(0).find_node("DicePool")
-onready var dice_box = get_tree().get_root().get_child(0).find_node("DiceBox")
+onready var dice_box_list = [] 
 onready var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-export var interaction_range := 3.0
+export var interaction_range := 3.5
 export var pickup_position := Vector3(0.0, 3.0, -0.75)
 
 var velocity_xz := Vector3()
@@ -18,50 +18,50 @@ var cur_speed = 0
 onready var animationTree : AnimationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 
+var die_spawn_timer = 0
+
 var held_object : Spatial = null
 
 var picking = false
 var picking_time = 0
 
-func spawn_die():
+func spawn_die(location: Vector3):
 	var rbody = Die.new() # TODO: get arg based on group that diceblock is in
-	rbody.init(0, dice_box.translation)
+	rbody.init(0, location)
 	dice_pool.add_child(rbody)
-	"""
-	dice_pool.add_child(rbody)
-	rbody.mass = 5
-	rbody.translation = dice_box.translation + Vector3.UP * 2.801
-	# somewhat random
-	rbody.angular_velocity = Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)) * 25
-	rbody.linear_velocity = Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)).normalized() * 4
-	rbody.rotate(Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)).normalized(), rand_range(-PI, PI)) 
-	
-	var mesh = MeshInstance.new()
-	mesh.mesh = CubeMesh.new()
-	mesh.mesh.size = Vector3(1.2,1.2,1.2)
-	mesh.mesh.material = SpatialMaterial.new()
-	mesh.mesh.material.albedo_texture = dice_tex_1
-	rbody.add_child(mesh)
-	
-	var shape = CollisionShape.new()
-	shape.shape = BoxShape.new()
-	shape.shape.extents = Vector3(0.6,0.6,0.6)
-	rbody.add_child(shape)
-	"""
 	
 # ------------------------------------
 
+func _ready():
+	for i in 10:
+		var ref = get_tree().get_root().get_child(0).find_node("DiceBox"+str(i))
+		if ref == null:
+			break
+		dice_box_list.append(ref)
+
 func _process(_delta):
-	if (dice_box.translation - translation).length() < interaction_range:
-		dice_box.player_is_near = true
-	else:
-		dice_box.player_is_near = false
+	# update timer value
+	die_spawn_timer -= _delta
+	die_spawn_timer = max(0, die_spawn_timer)
+	
+	# inform dice_box to move up / down
+	for dice_box in dice_box_list:
+		if (dice_box.translation - translation).length() < interaction_range:
+			dice_box.player_is_near = true
+		else:
+			dice_box.player_is_near = false
 		
 	if Input.is_action_just_pressed("activate"):
 		emit_signal("interact", self, held_object)
+		
 		# If near dice box, spawn a die
-		if (dice_box.translation - translation).length() < interaction_range:
-			spawn_die()
+		if die_spawn_timer == 0:
+			for dice_box in dice_box_list:
+				if (dice_box.translation - translation).length() < interaction_range:
+					spawn_die(dice_box.translation)
+					die_spawn_timer = 0.4
+					break
+	
 	# Try to pick up a die
 	if Input.is_action_just_pressed("pick"):
 		# Try to drop held dice
@@ -125,5 +125,5 @@ func _physics_process(delta):
 	else:
 		velocity_y -= Vector3(0.0, gravity * delta, 0.0)
 	
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	move_and_slide(velocity_xz + velocity_y, Vector3.UP, false, 4, 0.785398, false)
