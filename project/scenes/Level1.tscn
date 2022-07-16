@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://art/wood-tiles.png" type="Texture" id=1]
 [ext_resource path="res://art/trashbin.tscn" type="PackedScene" id=2]
@@ -13,10 +13,8 @@
 [ext_resource path="res://art/interaction_text.png" type="Texture" id=11]
 [ext_resource path="res://scenes/potlabel.gd" type="Script" id=12]
 [ext_resource path="res://art/icon_settings.png" type="Texture" id=13]
-[ext_resource path="res://scenes/Trash.gd" type="Script" id=14]
 [ext_resource path="res://script/GamePanel.gd" type="Script" id=15]
 [ext_resource path="res://art/Empty-Gold-Coin-PNG-Image.png" type="Texture" id=16]
-[ext_resource path="res://fonts/CollegiateBlackFLF.ttf" type="DynamicFontData" id=17]
 [ext_resource path="res://PostProcessing/PostProcessingEnv2.tres" type="Environment" id=18]
 [ext_resource path="res://art/wood_maybe.png" type="Texture" id=19]
 [ext_resource path="res://scenes/Trash.gd" type="Script" id=20]
@@ -46,13 +44,6 @@ material = SubResource( 12 )
 [sub_resource type="BoxShape" id=5]
 
 [sub_resource type="CylinderShape" id=11]
-
-[sub_resource type="StyleBoxFlat" id=12]
-bg_color = Color( 0.6, 0.6, 0.6, 0 )
-
-[sub_resource type="DynamicFont" id=13]
-size = 25
-font_data = ExtResource( 17 )
 
 [node name="Level1" type="Spatial"]
 
@@ -459,211 +450,176 @@ script = ExtResource( 7 )
 [node name="Tile43" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -2, 2 )
 mesh = SubResource( 1 )
-skeleton = NodePath("")
 material/0 = null
 
 [node name="Tile44" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -2, 2 )
 mesh = SubResource( 1 )
-skeleton = NodePath("")
 material/0 = null
 
 [node name="Tile45" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -2, 2 )
 mesh = SubResource( 1 )
-skeleton = NodePath("")
 material/0 = null
 
 [node name="Tile46" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -2, 2 )
 mesh = SubResource( 1 )
-skeleton = NodePath("")
 material/0 = null
 
 [node name="Tile51" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -8 )
 mesh = SubResource( 1 )
-skeleton = NodePath("")
 material/0 = null
 
 [node name="Tile52" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -2 )
 mesh = SubResource( 1 )
-skeleton = NodePath("")
 material/0 = null
 
 [node name="Tile54" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -6 )
 mesh = SubResource( 1 )
-skeleton = NodePath("")
 material/0 = null
 
 [node name="Tile55" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
 mesh = SubResource( 1 )
-skeleton = NodePath("")
 material/0 = null
 
 [node name="Tile56" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 2 )
 mesh = SubResource( 1 )
-skeleton = NodePath("")
 material/0 = null
 
 [node name="Tile53" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -4 )
 mesh = SubResource( 1 )
-skeleton = NodePath("")
 material/0 = null
 
 [node name="Tile69" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -2, -4 )
-mesh = SubResource( 19 )
-skeleton = NodePath("")
+mesh = SubResource( 13 )
 material/0 = null
 
 [node name="Tile70" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -2, -2 )
-mesh = SubResource( 19 )
-skeleton = NodePath("")
+mesh = SubResource( 13 )
 material/0 = null
 
 [node name="Tile71" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -2, 0 )
-mesh = SubResource( 19 )
-skeleton = NodePath("")
+mesh = SubResource( 13 )
 material/0 = null
 
 [node name="Tile72" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -2, 0 )
-mesh = SubResource( 19 )
-skeleton = NodePath("")
+mesh = SubResource( 13 )
 material/0 = null
 
 [node name="Tile73" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -2, 0 )
-mesh = SubResource( 19 )
-skeleton = NodePath("")
+mesh = SubResource( 13 )
 material/0 = null
 
 [node name="Tile76" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 11, -2, -3 )
-mesh = SubResource( 19 )
-skeleton = NodePath("")
+mesh = SubResource( 13 )
 material/0 = null
 
 [node name="Tile79" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 7, -2, -3 )
-mesh = SubResource( 19 )
-skeleton = NodePath("")
+mesh = SubResource( 13 )
 material/0 = null
 
 [node name="Tile80" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 7, -2, -7 )
-mesh = SubResource( 19 )
-skeleton = NodePath("")
+mesh = SubResource( 13 )
 material/0 = null
 
 [node name="Tile81" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 3, -2, -7 )
-mesh = SubResource( 19 )
-skeleton = NodePath("")
+mesh = SubResource( 13 )
 material/0 = null
 
 [node name="Tile77" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 15, -2, -3 )
-mesh = SubResource( 19 )
-skeleton = NodePath("")
+mesh = SubResource( 13 )
 material/0 = null
 
 [node name="Tile82" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 23, -2, 1 )
-mesh = SubResource( 19 )
-skeleton = NodePath("")
+mesh = SubResource( 13 )
 material/0 = null
 
 [node name="Tile83" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 19, -2, 1 )
-mesh = SubResource( 19 )
-skeleton = NodePath("")
+mesh = SubResource( 13 )
 material/0 = null
 
 [node name="Tile84" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 19, -2, -7 )
-mesh = SubResource( 19 )
-skeleton = NodePath("")
+mesh = SubResource( 13 )
 material/0 = null
 
 [node name="Tile85" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 2, 23, -2, -7 )
-mesh = SubResource( 19 )
-skeleton = NodePath("")
+mesh = SubResource( 13 )
 material/0 = null
 
 [node name="Tile78" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -2, 0 )
-mesh = SubResource( 19 )
-skeleton = NodePath("")
+mesh = SubResource( 13 )
 material/0 = null
 
 [node name="Tile66" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -2, -4 )
-mesh = SubResource( 19 )
-skeleton = NodePath("")
+mesh = SubResource( 13 )
 material/0 = null
 
 [node name="Tile67" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -2, -2 )
-mesh = SubResource( 19 )
-skeleton = NodePath("")
+mesh = SubResource( 13 )
 material/0 = null
 
 [node name="Tile27" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -2, -2 )
 mesh = SubResource( 1 )
-skeleton = NodePath("")
 material/0 = null
 
 [node name="Tile28" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -2, -4 )
 mesh = SubResource( 1 )
-skeleton = NodePath("")
 material/0 = null
 
 [node name="Tile29" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -2, -2 )
 mesh = SubResource( 1 )
-skeleton = NodePath("")
 material/0 = null
 
 [node name="Tile30" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -2, -4 )
 mesh = SubResource( 1 )
-skeleton = NodePath("")
 material/0 = null
 
 [node name="Tile31" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, -2, -2 )
 mesh = SubResource( 1 )
-skeleton = NodePath("")
 material/0 = null
 
 [node name="Tile32" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22, -2, -4 )
 mesh = SubResource( 1 )
-skeleton = NodePath("")
 material/0 = null
 
 [node name="Tile39" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, -2, -2 )
 mesh = SubResource( 1 )
-skeleton = NodePath("")
 material/0 = null
 
 [node name="Tile40" type="MeshInstance" parent="Level/Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, -2, -4 )
 mesh = SubResource( 1 )
-skeleton = NodePath("")
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Level/Floor"]
@@ -683,7 +639,7 @@ shape = SubResource( 5 )
 
 [node name="Trash" type="StaticBody" parent="Level"]
 transform = Transform( 0.697215, 0, -0.716862, 0, 1, 0, 0.716862, 0, 0.697215, 0.424277, 0, -7.79825 )
-script = ExtResource( 14 )
+script = ExtResource( 20 )
 
 [node name="trashbin" parent="Level/Trash" instance=ExtResource( 2 )]
 
@@ -734,11 +690,10 @@ Press \"]\" to decrease gold"
 [node name="GamePanel" type="Panel" parent="."]
 margin_left = 2.0
 margin_top = 1.0
-margin_right = 807.0
+margin_right = 2.0
 margin_bottom = 601.0
 rect_pivot_offset = Vector2( -619, 261 )
 mouse_filter = 2
-custom_styles/panel = SubResource( 12 )
 script = ExtResource( 15 )
 
 [node name="MoneyPanel" type="Panel" parent="GamePanel"]
@@ -759,7 +714,6 @@ margin_left = 83.0
 margin_top = 36.0
 margin_right = 189.0
 margin_bottom = 65.0
-custom_fonts/normal_font = SubResource( 13 )
 bbcode_enabled = true
 bbcode_text = "[center]1100[/center]"
 text = "1100"
