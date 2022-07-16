@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Die",
 "language": "GDScript",
 "path": "res://customClasses/Die.gd"
+}, {
+"base": "Control",
+"class": "OrderCard",
+"language": "GDScript",
+"path": "res://UI/OrderCardList/OrderCard/OrderCard.gd"
 } ]
 _global_script_class_icons={
-"Die": ""
+"Die": "",
+"OrderCard": ""
 }
 
 [application]

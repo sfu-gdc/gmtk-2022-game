@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://fonts/CollegiateBlackFLF.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://script/Settings.gd" type="Script" id=2]
@@ -6,8 +6,20 @@
 [sub_resource type="StyleBoxFlat" id=3]
 
 [sub_resource type="DynamicFont" id=2]
-size = 23
+size = 43
 font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 22
+font_data = ExtResource( 1 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="SettingsPanel" type="Panel"]
 margin_left = 262.0
@@ -16,6 +28,9 @@ margin_right = 771.0
 margin_bottom = 546.0
 custom_styles/panel = SubResource( 3 )
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 220.0, 240.0 ]
+}
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 margin_left = 121.0
@@ -39,7 +54,7 @@ margin_top = 9.0
 margin_right = 151.0
 margin_bottom = 37.0
 mouse_filter = 1
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 4 )
 bbcode_enabled = true
 bbcode_text = "[center]save[/center]"
 text = "save"
@@ -56,9 +71,237 @@ margin_top = 9.0
 margin_right = 151.0
 margin_bottom = 37.0
 mouse_filter = 1
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 4 )
 bbcode_enabled = true
 bbcode_text = "[center]cancel[/center]"
 text = "cancel"
 
+[node name="TabContainer" type="TabContainer" parent="."]
+margin_left = 70.0
+margin_top = 76.0
+margin_right = 433.0
+margin_bottom = 399.0
+tab_align = 0
+
+[node name="Audio" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="MusicLabel" type="Label" parent="TabContainer/Audio"]
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 121.0
+margin_bottom = 38.0
+text = "Music"
+
+[node name="CheckBox" type="CheckBox" parent="TabContainer/Audio/MusicLabel"]
+margin_left = 264.0
+margin_top = -6.0
+margin_right = 288.0
+margin_bottom = 18.0
+
+[node name="SFXLabel" type="Label" parent="TabContainer/Audio"]
+margin_left = 24.0
+margin_top = 56.0
+margin_right = 121.0
+margin_bottom = 70.0
+text = "SFX"
+
+[node name="CheckBox" type="CheckBox" parent="TabContainer/Audio/SFXLabel"]
+margin_left = 264.0
+margin_top = -6.0
+margin_right = 288.0
+margin_bottom = 18.0
+
+[node name="Controls" type="Tabs" parent="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Player1Label" type="Label" parent="TabContainer/Controls"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 96.0
+margin_bottom = 32.0
+text = "Player 1"
+
+[node name="MoveForward" type="Label" parent="TabContainer/Controls/Player1Label"]
+margin_left = 8.0
+margin_top = 24.0
+margin_right = 97.0
+margin_bottom = 44.0
+text = "Move Forward"
+valign = 1
+
+[node name="KeyButton" type="Button" parent="TabContainer/Controls/Player1Label/MoveForward"]
+margin_left = 192.0
+margin_right = 296.0
+margin_bottom = 20.0
+
+[node name="Label" type="Label" parent="TabContainer/Controls/Player1Label/MoveForward/KeyButton"]
+margin_left = 32.0
+margin_right = 72.0
+margin_bottom = 20.0
+mouse_filter = 1
+text = "W"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="MoveLeft" type="Label" parent="TabContainer/Controls/Player1Label"]
+margin_left = 8.0
+margin_top = 48.0
+margin_right = 88.0
+margin_bottom = 68.0
+text = "Move Left"
+valign = 1
+
+[node name="KeyButton" type="Button" parent="TabContainer/Controls/Player1Label/MoveLeft"]
+margin_left = 192.0
+margin_right = 296.0
+margin_bottom = 20.0
+
+[node name="Label" type="Label" parent="TabContainer/Controls/Player1Label/MoveLeft/KeyButton"]
+margin_left = 32.0
+margin_right = 72.0
+margin_bottom = 20.0
+mouse_filter = 1
+text = "a"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="MoveDownward" type="Label" parent="TabContainer/Controls/Player1Label"]
+margin_left = 8.0
+margin_top = 72.0
+margin_right = 107.0
+margin_bottom = 92.0
+text = "Move Backward"
+valign = 1
+
+[node name="KeyButton" type="Button" parent="TabContainer/Controls/Player1Label/MoveDownward"]
+margin_left = 192.0
+margin_right = 296.0
+margin_bottom = 20.0
+
+[node name="Label" type="Label" parent="TabContainer/Controls/Player1Label/MoveDownward/KeyButton"]
+margin_left = 32.0
+margin_right = 72.0
+margin_bottom = 20.0
+mouse_filter = 1
+text = "s"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="MoveRight" type="Label" parent="TabContainer/Controls/Player1Label"]
+margin_left = 8.0
+margin_top = 96.0
+margin_right = 90.0
+margin_bottom = 116.0
+text = "Move Right"
+valign = 1
+
+[node name="KeyButton" type="Button" parent="TabContainer/Controls/Player1Label/MoveRight"]
+margin_left = 192.0
+margin_right = 296.0
+margin_bottom = 20.0
+
+[node name="Label" type="Label" parent="TabContainer/Controls/Player1Label/MoveRight/KeyButton"]
+margin_left = 32.0
+margin_right = 72.0
+margin_bottom = 20.0
+mouse_filter = 1
+text = "d"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="Interact" type="Label" parent="TabContainer/Controls/Player1Label"]
+margin_left = 8.0
+margin_top = 120.0
+margin_right = 88.0
+margin_bottom = 140.0
+text = "Activate"
+valign = 1
+
+[node name="KeyButton" type="Button" parent="TabContainer/Controls/Player1Label/Interact"]
+margin_left = 192.0
+margin_right = 296.0
+margin_bottom = 20.0
+
+[node name="Label" type="Label" parent="TabContainer/Controls/Player1Label/Interact/KeyButton"]
+margin_left = 32.0
+margin_right = 72.0
+margin_bottom = 20.0
+mouse_filter = 1
+text = "e"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="PickupDrop" type="Label" parent="TabContainer/Controls/Player1Label"]
+margin_left = 8.0
+margin_top = 144.0
+margin_right = 90.0
+margin_bottom = 164.0
+text = "Pickup/Drop"
+valign = 1
+
+[node name="KeyButton" type="Button" parent="TabContainer/Controls/Player1Label/PickupDrop"]
+margin_left = 192.0
+margin_right = 296.0
+margin_bottom = 20.0
+
+[node name="Label" type="Label" parent="TabContainer/Controls/Player1Label/PickupDrop/KeyButton"]
+margin_left = 32.0
+margin_right = 72.0
+margin_bottom = 20.0
+mouse_filter = 1
+text = "q"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="Backdrop" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 5 )
+
+[node name="ColorRect" type="ColorRect" parent="Backdrop"]
+margin_left = -262.0
+margin_top = -52.0
+margin_right = 762.0
+margin_bottom = 556.0
+color = Color( 0, 0, 0, 0.882353 )
+
+[node name="Panel" type="Panel" parent="Backdrop/ColorRect"]
+margin_left = 376.0
+margin_top = 240.0
+margin_right = 664.0
+margin_bottom = 344.0
+
+[node name="Label" type="Label" parent="Backdrop/ColorRect/Panel"]
+margin_left = 32.0
+margin_top = 40.0
+margin_right = 248.0
+margin_bottom = 72.0
+text = "Please enter your key:"
+align = 1
+valign = 1
+
+[connection signal="pressed" from="SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="pressed" from="CancelButton" to="." method="_on_CancelButton_pressed"]
+[connection signal="pressed" from="TabContainer/Controls/Player1Label/MoveForward/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_up", "player_up", "MoveForward" ]]
+[connection signal="pressed" from="TabContainer/Controls/Player1Label/MoveLeft/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_left", "player_left", "MoveLeft" ]]
+[connection signal="pressed" from="TabContainer/Controls/Player1Label/MoveDownward/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_down", "player_down", "MoveDownward" ]]
+[connection signal="pressed" from="TabContainer/Controls/Player1Label/MoveRight/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_right", "player_right", "MoveRight" ]]
+[connection signal="pressed" from="TabContainer/Controls/Player1Label/Interact/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_activate", "activate", "Interact" ]]
+[connection signal="pressed" from="TabContainer/Controls/Player1Label/PickupDrop/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_pick", "pick", "PickupDrop" ]]
