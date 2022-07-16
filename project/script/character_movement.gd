@@ -17,7 +17,7 @@ var cur_speed = 0
 onready var animationTree : AnimationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 
-var held_die : Die = null
+var held_object : Die = null
 
 func spawn_die():
 	var rbody = Die.new()
@@ -52,16 +52,16 @@ func _process(_delta):
 		dice_box.player_is_near = false
 		
 	if Input.is_action_just_pressed("activate"):
-		emit_signal("interact", self, held_die)
+		emit_signal("interact", self, held_object)
 		# If near dice box, spawn a die
 		if (dice_box.translation - translation).length() < interaction_range:
 			spawn_die()
 	# Try to pick up a die
 	if Input.is_action_just_pressed("pick"):
 		# Try to drop held dice
-		if held_die:
-			held_die.place()
-			held_die = null
+		if held_object:
+			held_object.place()
+			held_object = null
 		# Otherwise, find the closest die
 		else:
 			var close_dice := {}
@@ -73,7 +73,7 @@ func _process(_delta):
 			if close_dice.size() > 0:
 				var minimum_distance : float = close_dice.keys().min()
 				# Pick up the closest die
-				held_die = close_dice[minimum_distance].pickup(self)
+				held_object = close_dice[minimum_distance].pickup(self)
 
 func _physics_process(delta):
 	

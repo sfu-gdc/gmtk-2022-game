@@ -32,3 +32,7 @@ func place():
 	mode = RigidBody.MODE_RIGID
 	collision_layer = DIE_LAYER
 	collision_mask = DIE_LAYER
+
+func garbage(player: KinematicBody):
+	player.held_object = null
+	queue_free()
