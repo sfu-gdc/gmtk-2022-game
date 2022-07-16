@@ -1,7 +1,7 @@
 extends RigidBody
 class_name Die
 
-export var pickup_height := 1.5
+export var pickup_position := Vector3(0.0, 3.0, -0.75)
 
 onready var dice_pool := $"/root/Level1/DicePool"
 
@@ -19,7 +19,7 @@ func pickup(player: KinematicBody) -> Die:
 	collision_mask = 0
 	player.add_child(self)
 	global_transform = save_transform
-	global_transform.origin.y = pickup_height
+	transform.origin = pickup_position
 	
 	return self
 
