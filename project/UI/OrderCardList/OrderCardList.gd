@@ -23,6 +23,7 @@ onready var tween : Tween = $Tween
 signal move_state_changes
 
 func change_in_movement(moves: bool):
+	print("changing movement to :"+str(moves));
 	is_moving = moves
 	emit_signal("move_state_changes")
 
@@ -36,6 +37,8 @@ func _ready():
 	connect("move_state_changes", self, "add_card_child")
 		
 func _unhandled_input(event: InputEvent):
+	if event.is_pressed() and event.scancode == KEY_ENTER:
+		print("status: "+str(is_moving));
 	if event.is_pressed() and event.scancode == KEY_SPACE:
 		create_order_card(1)
 
@@ -89,10 +92,13 @@ func reorder_order_card_list(order_card_instance):
 				
 				# for each of the card in the back, move them to front for one 
 				for card in order_card_list.slice(index, -1):
+					print("i am the last one");
 					tween.interpolate_property(card, "rect_position:x", card.rect_position.x, 
 							card.rect_position.x- move_left_amount, 1, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 				tween.start()
-				self.is_moving = true
-				yield(tween, "tween_completed")
+				print("starting the tween");
+				self.is_moving = true;
+				
+				yield(tween, "tween_completed");
 				self.is_moving = false
 			break

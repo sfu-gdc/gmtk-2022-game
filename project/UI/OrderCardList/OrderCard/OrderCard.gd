@@ -15,6 +15,8 @@ onready var panel: Panel = $Panel
 onready var tween: Tween = $Tween
 onready var time_bar: TextureProgress = $Panel/Vertical/Center/Margin/TimeBar
 onready var timer: Timer
+onready var kill_timer: Timer
+
 
 # init method called by other script
 func __init(timer_time: float, position_x: int):
@@ -31,6 +33,10 @@ func __init(timer_time: float, position_x: int):
 	# timer enter the scene tree as the child of the node
 	add_child(timer)
 	
+	kill_timer = Timer.new();
+	kill_timer.wait_time = 0.5;
+	kill_timer.connect("timeout", self, "_on_Kill_Timer_timeout")
+	add_child(kill_timer);
 	# set the order card position x
 	rect_position.x = position_x
 
@@ -53,5 +59,9 @@ func _process(_delta):
 func _on_Timer_timeout():
 	tween.interpolate_property(panel, "rect_position:y", panel.rect_position.y, panel.rect_position.y - panel_vsize, 0.7, Tween.TRANS_QUINT, Tween.EASE_IN)
 	tween.start()
-	yield(tween, "tween_all_completed")
+	yield(tween, "tween_completed")
+	kill_timer.start()
+
+# the kill timer is countered for the x movement from order card list
+func _on_Kill_Timer_timeout():
 	queue_free()
