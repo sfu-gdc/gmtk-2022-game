@@ -2,12 +2,14 @@ extends RigidBody
 class_name Die
 
 onready var dice_pool := $"/root/Level1/DicePool"
+onready var trash := $"/root".get_child(0).find_node("Trash")
 
 var start_location : Vector3
 
 const DIE_LAYER := 1
 
 var number : int = -1
+
 var die_type: int = 0
 var number_group: int = 0
 
@@ -29,13 +31,17 @@ func _init():
 	t2.set_wait_time(1.75)
 
 # this is so we can pass 2 params to the function
-func init(die_type: int, start_location: Vector3):
-	self.die_type = die_type
-	self.start_location = start_location
+func init(die_type_local: int, start_location_local: Vector3):
+	self.die_type = die_type_local
+	self.start_location = start_location_local
 
+	print(start_location_local)
+	
 	self.can_sleep = false
 	self.mass = 5
-	self.translation = start_location + Vector3.UP * 2.801
+	self.translation = start_location_local + Vector3.UP * 2.801
+	# somewhat random
+
 	self.angular_velocity = Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)) * 25
 	self.linear_velocity = Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)).normalized() * 4
 	self.rotate(Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)).normalized(), rand_range(-PI, PI)) 
@@ -45,13 +51,13 @@ func init(die_type: int, start_location: Vector3):
 	mesh.mesh = CubeMesh.new()
 	mesh.mesh.size = Vector3(1.2,1.2,1.2)
 	mesh.mesh.material = SpatialMaterial.new()
-	if die_type == 0:
+	if die_type_local == 0:
 		mesh.mesh.material.albedo_texture = load("res://art/fulldie1.png")
-	elif die_type == 1:
+	elif die_type_local == 1:
 		var choices = [load("res://art/fulldie2.png"), load("res://art/fulldie3.png"), load("res://art/fulldie4.png")]
 		number_group = randi() % choices.size()
 		mesh.mesh.material.albedo_texture = choices[number_group]
-	elif die_type == 2:
+	elif die_type_local == 2:
 		pass
 		
 	mesh.mesh.material.uv1_scale = Vector3(1, 1, 1)
@@ -91,7 +97,7 @@ func finalize_number():
 	else:
 		number = 0 # err
 		print("bad compute, no, stop")
-	
+    
 	# play oneshot particle effect	
 	var particles = load("res://prefabs/effects/CompletionEventParticles.tscn").instance()
 	particles.name = "ChildParticles"
@@ -110,7 +116,7 @@ func free_particles():
 	t1.queue_free()
 	t2.queue_free()
 
-func _process(delta):
+func _process(_delta):
 	if linear_velocity.length() < 0.003 && number == -1:
 		finalize_number()
 	
@@ -141,4 +147,34 @@ func place():
 
 func garbage(player: KinematicBody):
 	player.held_object = null
+	remove_from_group("pickup")
+	var save_transform := global_transform
+	player.remove_child(self)
+	dice_pool.add_child(self)
+	global_transform = save_transform
+	
+	var yeet := Tween.new()
+	add_child(yeet)
+# warning-ignore:return_value_discarded
+	yeet.interpolate_property(self, "global_transform:origin", null, trash.global_transform.origin, 0.2, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
+# warning-ignore:return_value_discarded
+	yeet.start()
+	yield(yeet, "tween_completed")
+	queue_free()
+
+func pot(player: KinematicBody, dump_pot: Spatial):
+	player.held_object = null
+	remove_from_group("pickup")
+	var save_transform := global_transform
+	player.remove_child(self)
+	dice_pool.add_child(self)
+	global_transform = save_transform
+	
+	var yeet := Tween.new()
+	add_child(yeet)
+# warning-ignore:return_value_discarded
+	yeet.interpolate_property(self, "global_transform:origin", null, dump_pot.global_transform.origin, 0.2, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
+# warning-ignore:return_value_discarded
+	yeet.start()
+	yield(yeet, "tween_completed")
 	queue_free()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://art/character/Character_Base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://script/character_movement.gd" type="Script" id=2]
@@ -10,6 +10,73 @@
 [ext_resource path="res://art/character/kaykit/gltf/Black.material" type="Material" id=8]
 [ext_resource path="res://art/character/kaykit/gltf/Metal.material" type="Material" id=9]
 [ext_resource path="res://art/character/kaykit/gltf/BrownDark.material" type="Material" id=10]
+[ext_resource path="res://script/PotSpot.gd" type="Script" id=11]
+
+[sub_resource type="Animation" id=27]
+resource_name = "Dump"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("PotSpot:rotation_degrees:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -90, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("PotSpot:rotation_degrees:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("PotSpot:rotation_degrees:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1 )
+}
+
+[sub_resource type="Animation" id=28]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("PotSpot:rotation_degrees:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("PotSpot:rotation_degrees:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("PotSpot:rotation_degrees:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="AnimationNodeAnimation" id=13]
 resource_local_to_scene = true
@@ -47,6 +114,7 @@ states/Run/node = SubResource( 14 )
 states/Run/position = Vector2( 626, 187 )
 transitions = [ "Idle", "Run", SubResource( 15 ), "Run", "Idle", SubResource( 16 ), "Idle", "PickUp", SubResource( 23 ), "PickUp", "Idle", SubResource( 24 ), "Run", "PickUp", SubResource( 25 ), "PickUp", "Run", SubResource( 26 ) ]
 start_node = "Idle"
+graph_offset = Vector2( 0, 78.876 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=20]
 resource_local_to_scene = false
@@ -326,6 +394,14 @@ surfaces/4 = {
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.98023e-08 )
 script = ExtResource( 2 )
 
+[node name="PotDump" type="AnimationPlayer" parent="."]
+anims/Dump = SubResource( 27 )
+anims/RESET = SubResource( 28 )
+
+[node name="PotSpot" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22482, -0.316008 )
+script = ExtResource( 11 )
+
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 11 )
 anim_player = NodePath("../KayKit_AnimatedCharacter_v12/AnimationPlayer")
@@ -341,7 +417,7 @@ shape = SubResource( 21 )
 transform = Transform( -1.5, 0, -2.26494e-07, 0, 1.5, 0, 2.26494e-07, 0, -1.5, 0, -1, -1.49012e-08 )
 
 [node name="Head" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="0"]
-transform = Transform( 1, 2.31424e-17, -8.51043e-19, -2.31201e-17, 0.995584, -0.0938787, -1.32529e-18, 0.0938787, 0.995584, -5.40586e-18, 0.71156, -0.00735065 )
+transform = Transform( 1, 1.97411e-17, -1.30224e-18, -1.97709e-17, 0.994777, -0.102068, -7.19499e-19, 0.102068, 0.994777, 0, 0.711288, -0.0209853 )
 
 [node name="character_barbarianHead" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/Head" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00788689, 0 )
@@ -369,7 +445,7 @@ material/3 = null
 material/4 = null
 
 [node name="ArmLeft" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="2"]
-transform = Transform( 0.000862977, 0.494022, -0.869449, -0.0103187, -0.869399, -0.494004, -0.999946, 0.00939795, 0.00434731, 0.14, 0.691561, -0.00714405 )
+transform = Transform( 0.00241487, 0.532969, -0.846132, -0.0294049, -0.84573, -0.5328, -0.999565, 0.0261671, 0.0136294, 0.14, 0.691297, -0.0203955 )
 
 [node name="character_barbarianArmLeft" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/ArmLeft" index="0"]
 transform = Transform( -1.44517e-08, 2.79594e-07, -0.999999, 0.471936, -0.881633, -2.79594e-07, -0.881633, -0.471936, -1.44517e-08, -1.71536e-08, 0.0813964, -0.0290722 )
@@ -382,7 +458,7 @@ material/3 = null
 material/4 = null
 
 [node name="ArmRight" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="3"]
-transform = Transform( -0.00584614, -0.48496, -0.874517, -0.344148, -0.820134, 0.457103, -0.938897, 0.303635, -0.162103, -0.14, 0.691561, -0.00714405 )
+transform = Transform( -0.0163814, -0.508127, -0.861126, -0.361757, -0.799884, 0.478871, -0.932128, 0.319363, -0.170715, -0.14, 0.691297, -0.0203955 )
 
 [node name="character_barbarianArmRight" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/ArmRight" index="0"]
 transform = Transform( -3.87118e-10, -2.53319e-07, -0.999999, -0.471936, -0.881633, 2.53319e-07, -0.881633, 0.471936, -3.87118e-10, 1.47278e-08, 0.0813965, 0.0290721 )
@@ -395,10 +471,10 @@ material/3 = null
 material/4 = null
 
 [node name="handLeft" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="4"]
-transform = Transform( -0.999682, -0.000863077, -0.0252221, -0.0252297, 0.0103191, 0.999629, -0.000602621, 0.999946, -0.0103376, 0.412168, 0.21259, -0.00196651 )
+transform = Transform( -0.997505, -0.00241499, -0.0705626, -0.0706032, 0.0294052, 0.997071, -0.000333137, 0.999565, -0.0295023, 0.433624, 0.225366, -0.00597947 )
 
 [node name="handRight" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="5"]
-transform = Transform( -0.975069, 0.213913, -0.059006, 0.0178326, 0.340588, 0.940044, 0.221184, 0.915555, -0.335912, -0.407175, 0.239731, 0.160135 )
+transform = Transform( -0.974002, 0.224244, -0.0321889, 0.0500961, 0.35177, 0.934745, 0.220934, 0.90883, -0.353858, -0.419939, 0.250624, 0.155549 )
 
 [node name="AnimationPlayer" parent="KayKit_AnimatedCharacter_v12" index="1"]
 autoplay = ""

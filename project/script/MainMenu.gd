@@ -7,5 +7,5 @@ func _on_SettingsButton_pressed():
 	pass # Replace with function body.
 
 func _on_StartButton_pressed():
-	get_tree().change_scene("res://scenes/Level1.tscn")
-	pass # Replace with function body.
+	return get_tree().change_scene("res://scenes/Level1.tscn")
+	 # Replace with function body.
