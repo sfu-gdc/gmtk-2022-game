@@ -2,7 +2,8 @@ extends RigidBody
 class_name Die
 
 onready var dice_pool := $"/root/Level1/DicePool"
-onready var dice_box := $"/root/Level1/Level/InnerWalls/DiceBox"
+
+var start_location : Vector3
 
 const DIE_LAYER := 1
 
@@ -14,11 +15,16 @@ onready var dice_tex_1 = load("res://art/white-die.png")
 
 func _init():
 	add_to_group("pickup")
+	
+func init(die_type: int, start_location: Vector3):
 	self.die_type = die_type
+	self.start_location = start_location
 
-func _ready():
+	print(start_location)
+	
+	self.can_sleep = false
 	self.mass = 5
-	self.translation = dice_box.translation + Vector3.UP * 2.801
+	self.translation = start_location + Vector3.UP * 2.801
 	# somewhat random
 	self.angular_velocity = Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)) * 25
 	self.linear_velocity = Vector3(rand_range(-1, 1), rand_range(-1, 1), rand_range(-1, 1)).normalized() * 4
@@ -46,7 +52,7 @@ func _ready():
 	shape.shape.extents = Vector3(0.6,0.6,0.6)
 	self.add_child(shape)
 	
-# TODO: INSTANTLY finally the moment a die is picked up.
+# TODO: INSTANTLY finalize the moment a die is picked up.
 func finalize_number():
 	var pillar1 = self.transform.xform(Vector3(0,0,1)).normalized()
 	var pillar2 = self.transform.xform(Vector3(1,0,0)).normalized()
@@ -66,11 +72,9 @@ func finalize_number():
 			number = i + 1
 		
 	if die_type == 0:
-		#number = randi() % 6 + 1
 		$MeshInstance.mesh.material.albedo_texture = load("res://art/dice/die_" + str(number) + ".png")
 		$MeshInstance.mesh.material.uv1_scale = Vector3(3, 2, 1)
 	elif die_type == 1:
-		#number = randi() % 6 + 1
 		number += 6 + number_group * 6
 		$MeshInstance.mesh.material.albedo_texture = load("res://art/dice/die_" + str(number) + ".png")
 		$MeshInstance.mesh.material.uv1_scale = Vector3(3, 2, 1)
