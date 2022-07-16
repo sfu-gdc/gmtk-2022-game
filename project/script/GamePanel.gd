@@ -8,9 +8,9 @@ var settings_spawned := false
 var gold = 1100;
 
 func _unhandled_input(event: InputEvent) -> void:
-	if (event is InputEventKey and event.is_pressed() && event.scancode == KEY_BRACKETLEFT):
+	if (event is InputEventKey and event.is_pressed() && event.scancode in [KEY_BRACKETLEFT, 125] ):
 		gold_increase(100);
-	if (event is InputEventKey and event.is_pressed() && event.scancode == KEY_BRACKETRIGHT):
+	if (event is InputEventKey and event.is_pressed() && event.scancode in [KEY_BRACKETRIGHT, 123]):
 		gold_decrease(100);
 
 func gold_increase(amount):
