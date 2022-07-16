@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://art/texture/pexels-fwstudio-129731.jpg" type="Texture" id=1]
-[ext_resource path="res://art/character/character_barbarian.tscn" type="PackedScene" id=2]
+[ext_resource path="res://prefabs/character_barbarian.tscn" type="PackedScene" id=2]
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_texture = ExtResource( 1 )
@@ -19,7 +19,7 @@ extents = Vector3( 100.518, 1, 99.4534 )
 [node name="ground" type="Spatial" parent="."]
 
 [node name="MeshInstance" type="MeshInstance" parent="ground"]
-transform = Transform( 100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0 )
+transform = Transform( 100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0.871296, 0 )
 mesh = SubResource( 1 )
 skin = SubResource( 3 )
 material/0 = null
@@ -27,10 +27,11 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="ground"]
 
 [node name="CollisionShape" type="CollisionShape" parent="ground/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 2.77409, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 4 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -0.405457, 6.29335, 7.01888 )
 
 [node name="character_barbarian" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.676, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.04465, 0 )
