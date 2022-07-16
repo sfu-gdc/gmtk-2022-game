@@ -1,8 +1,9 @@
-extends Panel
+extends Control
 var SettingsPanel = preload("res://prefabs/SettingsPanel.tscn")
 var OrderCardList = preload("res://prefabs/OrderCardList.tscn")
 
-onready var player_square = $PlayerSquare;
+
+var settings_spawned := false
 
 var gold = 1100;
 
@@ -30,9 +31,11 @@ func set_gold(new_gold):
 	$MoneyPanel/money_text.append_bbcode("[center]"+str(int(new_gold))+"[/center]")
 
 func _on_Button_pressed():
-	var panel = SettingsPanel.instance();
-	self.add_child(panel);
-	return; # Replace with function body.
+	if not settings_spawned:
+		var panel = SettingsPanel.instance();
+		self.add_child(panel);
+		settings_spawned = true
+		return; # Replace with function body.
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
