@@ -10,5 +10,12 @@ func _ready():
 
 func _on_player_interact(player: KinematicBody, held_object: Spatial):
 	if held_object and to_local(player.global_transform.origin).length_squared() < interaction_range:
+		
+		# Make sure I'm the closest that can eat dice
+		var player_position := player.global_transform.origin
+		for node in get_tree().get_nodes_in_group("can_take_dice"):
+			if node.global_transform.origin.distance_squared_to(player_position) < global_transform.origin.distance_squared_to(player_position):
+				return
+		
 		assert(held_object.has_method("garbage"), "held object needs a 'garbage' method")
 		held_object.garbage(player)

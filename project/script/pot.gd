@@ -27,6 +27,13 @@ func _ready():
 
 func _on_player_interact(player: KinematicBody, held_object: Spatial):
 	if not held and held_object is Die and to_local(player.global_transform.origin).length_squared() < interaction_range:
+		
+		# Make sure I'm the closest that can eat a die
+		var player_position := player.global_transform.origin
+		for node in get_tree().get_nodes_in_group("can_take_dice"):
+			if node.global_transform.origin.distance_squared_to(player_position) < global_transform.origin.distance_squared_to(player_position):
+				return
+		
 		numbers.append(held_object.number)
 		held_object.pot(player, self)
 		UI.add_die(held_object.number)
