@@ -87,12 +87,15 @@ func _process(_delta):
 					break
 					
 		# If near output area & have food in hand place it in.
-		if food_in_hand_matches():
+		if food_in_hand_matches() && game_runner.out_going_recipes_number.size() != 0:
 			for serve_area in serve_area_list:
 				if (serve_area.translation - translation).length() < interaction_range:
 					place_food()
-					game_runner.completed_recipe(game_runner.out_going_recipes_number[0]) # will crash if empty?
-					# TODO: test this
+					print(game_runner.out_going_recipes_number.size())
+					print(game_runner.out_going_recipes_number[0])
+					game_runner.completed_recipe(game_runner.out_going_recipes_number[0])
+					#game_runner.completed_recipe(game_runner.out_going_recipes_number[0]) # will crash if empty?
+					break
 	
 	# Try to pick up a die
 	if Input.is_action_just_pressed("pick"):

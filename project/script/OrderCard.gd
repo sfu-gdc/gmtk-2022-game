@@ -71,18 +71,25 @@ func _on_Timer_timeout():
 	# removes the card when timer reaches 0
 	delete_card()
 
+# NOTE: don't call this function until the card is removed from it's buffer
 # delete the current node card
-func delete_card():
+func delete_card() -> bool:
+	if panel == null:
+		return false
+		
 	# moves the card up
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	tween.interpolate_property(panel, "rect_position:y", panel.rect_position.y, panel.rect_position.y - panel_vsize, 0.7, Tween.TRANS_QUINT, Tween.EASE_IN)
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	tween.start()
 	# wait for the tween to be finished, and emit signal that card has gone completely up
 	yield(tween, "tween_all_completed")
-	emit_signal("card_complete_up")
 
+	emit_signal("card_complete_up")
+	
 	# wait for 3 seconds before deleting the current node
 	yield(get_tree().create_timer(3.0), "timeout")
 	# remove node
 	queue_free()
+	
+	return true

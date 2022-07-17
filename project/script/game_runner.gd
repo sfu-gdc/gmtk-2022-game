@@ -26,7 +26,7 @@ func _process(delta):
 	if new_order_timer < 0:
 		new_order_timer = SMALL_ORDER_TIME
 		var num = random_small_number()
-		var oc: Control = order_card_list.add(30, num)
+		var oc: Control = order_card_list.add(50, num)d
 		out_going_recipes.append(oc)
 		out_going_recipes_number.append(num)
 		oc.connect("card_complete_up", self, "remove_recipe", [oc, false])
@@ -43,9 +43,13 @@ func _process(delta):
 
 # public function
 func completed_recipe(number: int):
-	var i = out_going_recipes_number.find(number)
-	out_going_recipes[i].delete_card()
-	remove_recipe(out_going_recipes[i], true)
+	var i: int = out_going_recipes_number.find(number)
+	var oc: Control = out_going_recipes[i]
+	if !oc.delete_card():
+		return
+	else:
+		oc.disconnect("card_complete_up", self, "remove_recipe")
+		remove_recipe(oc, true)
 
 func remove_recipe(card, was_successful):
 	var i = out_going_recipes.find(card)
