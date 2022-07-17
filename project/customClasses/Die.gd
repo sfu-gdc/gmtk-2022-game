@@ -13,13 +13,16 @@ var number : int = -1
 var die_type: int = 0
 var number_group: int = 0
 
+# is this object throwable or not
+var throwable = true
+
 onready var dice_tex_1 = load("res://art/white-die.png")
 
 # for stopping & starting particles
 var t1: Timer = Timer.new()
 var t2: Timer = Timer.new()
 
-func _init():
+func _init(arg):
 	add_to_group("pickup")
 	
 	self.add_child(t1)

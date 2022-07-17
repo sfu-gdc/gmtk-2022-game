@@ -31,7 +31,7 @@ func _process(_delta):
 	if Input.is_action_just_pressed("pick"):
 		# Try to drop held dice
 		if held_die:
-			held_die.place()
+			held_die.place(self)
 			held_die = null
 		# Otherwise, find the closest die
 		else:
