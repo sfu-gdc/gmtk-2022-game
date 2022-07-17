@@ -49,14 +49,14 @@ surfaces/0 = {
 }
 
 [sub_resource type="CylinderShape" id=5]
-radius = 0.887616
+radius = 1.07919
 height = 2.77512
 
 [sub_resource type="CylinderShape" id=6]
 radius = 0.230803
 height = 0.808175
 
-[node name="boringpot" type="RigidBody" groups=["pickup"]]
+[node name="boringpot" type="RigidBody" groups=["can_take_dice", "pickup"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80639, 0 )
 mode = 2
 can_sleep = false

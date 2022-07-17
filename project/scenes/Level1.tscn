@@ -677,7 +677,7 @@ collision_mask = 0
 [node name="CollisionShape" type="CollisionShape" parent="Level/roof"]
 shape = SubResource( 5 )
 
-[node name="Trash" type="StaticBody" parent="Level"]
+[node name="Trash" type="StaticBody" parent="Level" groups=["can_take_dice"]]
 transform = Transform( 0.697215, 0, -0.716862, 0, 1, 0, 0.716862, 0, 0.697215, 0.424277, 0, -7.79825 )
 script = ExtResource( 20 )
 

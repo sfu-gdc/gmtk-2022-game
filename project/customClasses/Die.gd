@@ -136,10 +136,9 @@ func pickup(player: KinematicBody) -> Die:
 	
 	return self
 
-func place():
+func place(player: KinematicBody):
 	if not get_parent():
 		return false
-	var player = get_parent()
 	var save_transform := global_transform
 	player.remove_child(self)
 	dice_pool.add_child(self)
