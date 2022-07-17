@@ -16,7 +16,7 @@ onready var tween: Tween = $Tween
 onready var time_bar: TextureProgress = $Panel/Vertical/Center/Margin/TimeBar
 onready var timer: Timer
 onready var label: Label = $Panel/Vertical/Center2/Horizontal/Margin2/Label
-
+onready var picture: TextureRect = $Panel/Vertical/Center2/Horizontal/Margin/Picture
 
 # emitted when the card is completely gone up
 signal card_complete_up
@@ -42,6 +42,9 @@ func _init_set_x(position_x: int) -> void:
 
 func _init_set_text(text: String) -> void:
 	self.text = text
+
+func _init_set_picture(link: String):
+	picture.set_texture(load(link))
 
 func _ready():
 	# the size of the card equals to the size of the panel plus button
