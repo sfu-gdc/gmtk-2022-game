@@ -128,8 +128,7 @@ func load_settings():
 			get_node("TabContainer/P"+i+" Controls/Player"+i+"Label/Throw/KeyButton/Label").text = Input.get_joy_button_string(_settings["controls"]["player"+i+"_throw"])
 
 func _ready():
-	print("parent: "+str(get_parent()));
-	#get_tree().paused = true;
+	get_tree().paused = true;
 	load_settings();
 	#pass;
 	
