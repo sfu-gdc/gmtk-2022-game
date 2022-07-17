@@ -2,6 +2,8 @@ extends KinematicBody
 
 signal interact
 
+var player_number: int
+
 onready var game_runner = get_node("/root/Level1/GameRunner")
 
 onready var dice_tex_1 = load("res://art/white-die.png")
@@ -46,6 +48,13 @@ func place_food() -> void:
 	#TODO: implement
 	
 func _ready():
+	if self.name == "Player1":
+		player_number = 1
+	elif self.name == "Player2":
+		player_number = 2
+	else:
+		print("please rename the char")
+	
 	for i in 10:
 		var ref = get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1).find_node("DiceBox"+str(i))
 		if ref == null:
@@ -54,7 +63,6 @@ func _ready():
 		
 	for i in 10:
 		var ref = get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1).find_node("ServeArea"+str(i))
-		print("here")
 		if ref == null:
 			break
 		serve_area_list.append(ref)
@@ -67,17 +75,17 @@ func _process(_delta):
 	# inform dice_box to move up / down
 	for dice_box in dice_box_list:
 		if (dice_box.translation - translation).length() < interaction_range:
-			dice_box.player_is_near = true
+			dice_box.player_is_near[player_number-1] = true
 		else:
-			dice_box.player_is_near = false
+			dice_box.player_is_near[player_number-1] = false
 	  
 	for serve_area in serve_area_list:
 		if (serve_area.translation - translation).length() < interaction_range:
-			serve_area.player_is_near = true
+			serve_area.player_is_near[player_number-1] = true
 		else:
-			serve_area.player_is_near = false
+			serve_area.player_is_near[player_number-1] = false
 
-	if Input.is_action_just_pressed("activate"):
+	if (player_number == 1 && Input.is_action_just_pressed("activate")) || (player_number == 2 && Input.is_action_just_pressed("player2_activate")):
 		emit_signal("interact", self, held_object)
 
 		# If near dice box, spawn a die
@@ -101,7 +109,7 @@ func _process(_delta):
 					break
 		  
 	# Try to pick up a die
-	if Input.is_action_just_pressed("pick"):
+	if (player_number == 1 && Input.is_action_just_pressed("pick")) || (player_number == 2 && Input.is_action_just_pressed("player2_pick")):
 		# Try to drop held dice
 		if held_object:
 			picking_time = -1
@@ -136,7 +144,7 @@ func _process(_delta):
 			held_object = held_object.pickup(self)
 
 func pickingUpAnimation(object, delta):
-	if object == null:
+	if !is_instance_valid( object ) || object == null:
 		return
 		
 	# the dice will travel a little bit before picked up
@@ -146,12 +154,12 @@ func pickingUpAnimation(object, delta):
 	object.translation.z += direction.z * delta
 
 func throwObject(delta, direction, hor_Force, vect_force):
-	if Input.is_action_pressed("throw") && held_object:
+	if ((player_number == 1 && Input.is_action_pressed("throw")) || (player_number == 2 && Input.is_action_pressed("player2_throw"))) && held_object:
 		arrow_effect.visible = true
 	else:
 		arrow_effect.visible = false
 
-	if Input.is_action_just_released("throw") && held_object:
+	if ((player_number == 1 && Input.is_action_just_released("throw")) || (player_number == 2 &&Input.is_action_just_released("player2_throw"))) && held_object:
 		if held_object.throwable:
 			animationState.travel("Throw")
 			picking_time = -1
@@ -166,25 +174,46 @@ func throwObject(delta, direction, hor_Force, vect_force):
 var elapsed: float
 func _physics_process(delta):
 	elapsed += delta
-	#Input.is_action_pressed("player_up"))
-	if (Input.is_action_pressed("player_up") or Input.is_action_pressed("player_down") or
-			Input.is_action_pressed("player_left") or Input.is_action_pressed("player_right")):
-		animationState.travel("Run")
-		velocity_xz = speed * Vector3(
-								(Input.get_action_strength("player_right") - Input.get_action_strength("player_left")),
-								 0,
-								(Input.get_action_strength("player_down") - Input.get_action_strength("player_up"))
-								).normalized()
+	
+	# copy pasted b/c faster
+	if player_number == 1:
+		if (Input.is_action_pressed("player_up") or Input.is_action_pressed("player_down") or
+				Input.is_action_pressed("player_left") or Input.is_action_pressed("player_right")):
+			animationState.travel("Run")
+			velocity_xz = speed * Vector3(
+									(Input.get_action_strength("player_right") - Input.get_action_strength("player_left")),
+									 0,
+									(Input.get_action_strength("player_down") - Input.get_action_strength("player_up"))
+									).normalized()
 
-		rotation.y = lerp_angle(rotation.y, atan2(-velocity_xz.x, -velocity_xz.z), delta * angular_accleration)
+			rotation.y = lerp_angle(rotation.y, atan2(-velocity_xz.x, -velocity_xz.z), delta * angular_accleration)
 
-		if elapsed > 0.2:
-			if not walk_sound.playing:
-				walk_sound.play()
-			elapsed = 0
-	else:
-		animationState.travel("Idle")
-		velocity_xz = Vector3()
+			if elapsed > 0.2:
+				if not walk_sound.playing:
+					walk_sound.play()
+				elapsed = 0
+		else:
+			animationState.travel("Idle")
+			velocity_xz = Vector3()
+	elif player_number == 2:
+		if (Input.is_action_pressed("player2_up") or Input.is_action_pressed("player2_down") or
+				Input.is_action_pressed("player2_left") or Input.is_action_pressed("player2_right")):
+			animationState.travel("Run")
+			velocity_xz = speed * Vector3(
+									(Input.get_action_strength("player2_right") - Input.get_action_strength("player2_left")),
+									 0,
+									(Input.get_action_strength("player2_down") - Input.get_action_strength("player2_up"))
+									).normalized()
+
+			rotation.y = lerp_angle(rotation.y, atan2(-velocity_xz.x, -velocity_xz.z), delta * angular_accleration)
+
+			if elapsed > 0.2:
+				if not walk_sound.playing:
+					walk_sound.play()
+				elapsed = 0
+		else:
+			animationState.travel("Idle")
+			velocity_xz = Vector3()
 
 	if is_on_floor():
 		velocity_y = Vector3()
