@@ -94,7 +94,7 @@ func _on_throwable_interact(held_object: Spatial):
 		smoke.emitting = cooking and numbers.size() > 0
 		cooking_progress.max_value = numbers.size() * DIE_COOK_TIME
 		print(numbers)
-    $PutInPot.play()
+		$PutInPot.play()
 		countdown.stop()
 
 func pickup(player: KinematicBody) -> Spatial:

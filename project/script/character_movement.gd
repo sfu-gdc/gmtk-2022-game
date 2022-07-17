@@ -10,8 +10,6 @@ onready var walk_sound = $WalkingSound
 onready var dice_pool = get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1).find_node("DicePool")
 var dice_box_list = [] 
 var serve_area_list = [] 
-
-onready var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 export var interaction_range := 3.5
 export var pickup_position := Vector3(0.0, 3.0, -0.75)
 
@@ -72,7 +70,7 @@ func _process(_delta):
 			dice_box.player_is_near = true
 		else:
 			dice_box.player_is_near = false
-      
+	  
 	for serve_area in serve_area_list:
 		if (serve_area.translation - translation).length() < interaction_range:
 			serve_area.player_is_near = true
@@ -90,7 +88,7 @@ func _process(_delta):
 					spawn_die(dice_box.translation)
 					die_spawn_timer = 0.4
 					break
-          
+		  
 		# If near output area & have food in hand place it in.
 		if food_in_hand_matches() && game_runner.out_going_recipes_number.size() != 0:
 			for serve_area in serve_area_list:
@@ -101,7 +99,7 @@ func _process(_delta):
 					game_runner.completed_recipe(game_runner.out_going_recipes_number[0])
 					#game_runner.completed_recipe(game_runner.out_going_recipes_number[0]) # will crash if empty?
 					break
-          
+		  
 	# Try to pick up a die
 	if Input.is_action_just_pressed("pick"):
 		# Try to drop held dice
