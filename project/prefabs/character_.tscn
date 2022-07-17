@@ -179,7 +179,7 @@ surfaces/1 = {
 [node name="KinematicBody2" parent="." instance=ExtResource( 1 )]
 
 [node name="Head" parent="KinematicBody2/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="0"]
-transform = Transform( 1, 1.97601e-17, -9.77571e-19, -1.9766e-17, 0.995731, -0.0922999, -8.50453e-19, 0.0922999, 0.995731, 0, 0.711583, -0.00457702 )
+transform = Transform( 1, 1.9754e-17, -1.1031e-18, -1.97687e-17, 0.995392, -0.0958875, -7.96141e-19, 0.0958875, 0.995392, 0, 0.711512, -0.0110529 )
 
 [node name="character_skeleton_minion_head" type="MeshInstance" parent="KinematicBody2/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/Head" index="0"]
 transform = Transform( -0.666667, 2.23572e-18, 1.00664e-07, -9.42106e-09, 0.663741, -0.0623928, -1.00222e-07, -0.0623928, -0.663741, -1.5635e-15, -0.0907211, 0.015894 )
@@ -210,7 +210,7 @@ material/2 = null
 material/3 = null
 
 [node name="ArmLeft" parent="KinematicBody2/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="2"]
-transform = Transform( 0.00055206, 0.486101, -0.873903, -0.00642739, -0.873883, -0.486094, -0.999979, 0.0058853, 0.00264182, 0.14, 0.691584, -0.00444838 )
+transform = Transform( 0.00127251, 0.50439, -0.863475, -0.0155086, -0.863362, -0.504347, -0.999879, 0.0140331, 0.00672365, 0.14, 0.691515, -0.0107422 )
 
 [node name="character_skeleton_minion_armLeft" type="MeshInstance" parent="KinematicBody2/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/ArmLeft" index="0"]
 transform = Transform( -0.000484036, -0.00569841, 0.666642, -0.327025, -0.580923, -0.00520312, 0.580947, -0.327017, -0.00237357, -0.00381619, 0.0992206, 0.372611 )
@@ -220,7 +220,7 @@ material/0 = null
 material/1 = null
 
 [node name="ArmRight" parent="KinematicBody2/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="3"]
-transform = Transform( -0.00385426, -0.480535, -0.876967, -0.340512, -0.823934, 0.452973, -0.940232, 0.300363, -0.160452, -0.14, 0.691584, -0.00444838 )
+transform = Transform( -0.00886601, -0.49164, -0.870753, -0.348967, -0.81452, 0.463443, -0.937093, 0.307973, -0.164345, -0.14, 0.691515, -0.0107422 )
 
 [node name="character_skeleton_minion_armRight" type="MeshInstance" parent="KinematicBody2/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/ArmRight" index="0"]
 transform = Transform( 0.00604891, -0.232918, 0.624626, 0.328065, -0.542736, -0.205559, 0.580328, 0.309242, 0.109694, 0.0811749, 0.0866789, -0.366945 )
@@ -230,10 +230,10 @@ material/0 = null
 material/1 = null
 
 [node name="handLeft" parent="KinematicBody2/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="4"]
-transform = Transform( -0.99987, -0.000552156, -0.0161363, -0.0161396, 0.00642776, 0.999849, -0.000448486, 0.999979, -0.00643581, 0.407804, 0.210142, -0.00120604 )
+transform = Transform( -0.999308, -0.00127262, -0.0371824, -0.0371976, 0.015509, 0.999188, -0.000695058, 0.999879, -0.0155456, 0.41788, 0.21587, -0.00301107 )
 
 [node name="handRight" parent="KinematicBody2/KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="5"]
-transform = Transform( -0.97518, 0.21194, -0.0640698, 0.0116719, 0.338174, 0.941011, 0.221105, 0.916908, -0.332255, -0.404738, 0.23766, 0.161028 )
+transform = Transform( -0.974846, 0.216892, -0.0513256, 0.0270164, 0.343573, 0.938738, 0.221238, 0.913737, -0.34079, -0.410856, 0.242778, 0.158927 )
 
 [node name="SubmitDish" type="AudioStreamPlayer" parent="KinematicBody2"]
 stream = ExtResource( 8 )
