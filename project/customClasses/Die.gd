@@ -136,7 +136,8 @@ func pickup(player: KinematicBody) -> Die:
 	
 	return self
 
-func place():
+# NOTE: don't remove this arg
+func place(arg):
 	if not get_parent():
 		return false
 	var player = get_parent()
