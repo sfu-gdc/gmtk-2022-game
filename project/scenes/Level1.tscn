@@ -527,6 +527,9 @@ script = ExtResource( 22 )
 [node name="Fire1" parent="Level/OuterWalls/Burner1" instance=ExtResource( 26 )]
 transform = Transform( -4.37114e-08, 3.59989e-21, -1, -1, -4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1.91069e-15, 4.15697, 0.130658, 1.22672 )
 
+[node name="OmniLight" type="OmniLight" parent="Level/OuterWalls/Burner1/Fire1"]
+light_color = Color( 0.992157, 0.886275, 0.521569, 1 )
+
 [node name="Burner2" type="MeshInstance" parent="Level/OuterWalls" groups=["burner"]]
 transform = Transform( -4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -2, 0, -4 )
 mesh = SubResource( 15 )
@@ -535,8 +538,12 @@ material/0 = null
 script = ExtResource( 22 )
 
 [node name="Fire2" parent="Level/OuterWalls/Burner2" instance=ExtResource( 26 )]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4, 0, -10 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -4.057, 0.131, 1.46227 )
 script = ExtResource( 21 )
+
+[node name="OmniLight2" type="OmniLight" parent="Level/OuterWalls/Burner2/Fire2"]
+transform = Transform( -4.37114e-08, 3.81165e-21, -1, 8.74228e-08, -1, -3.82137e-15, -1, -8.74228e-08, 4.37114e-08, 4.21397, 0.235546, -0.000341654 )
+light_color = Color( 0.992157, 0.886275, 0.521569, 1 )
 
 [node name="ServeArea0" type="MeshInstance" parent="Level/OuterWalls" groups=["serve"]]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4, 0, -10 )
