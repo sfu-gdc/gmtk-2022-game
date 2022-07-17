@@ -464,7 +464,6 @@ material/4 = null
 [node name="ArmLeft" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="2"]
 transform = Transform( 0.00214914, 0.526368, -0.850254, -0.0261738, -0.849935, -0.526237, -0.999655, 0.0233854, 0.0119503, 0.14, 0.69136, -0.0181486 )
 
-
 [node name="character_barbarianArmLeft" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/ArmLeft" index="0"]
 transform = Transform( -1.44517e-08, 2.79594e-07, -0.999999, 0.471936, -0.881633, -2.79594e-07, -0.881633, -0.471936, -1.44517e-08, -1.71536e-08, 0.0813964, -0.0290722 )
 mesh = SubResource( 3 )

@@ -9,7 +9,8 @@ const DISH := preload("res://prefabs/Dish.tscn")
 const DIE_COOK_TIME := 8.0
 const BURN_TIME := 10.0
 
-onready var player1 : KinematicBody = $"/root".get_child(get_tree().get_root().get_child_count() - 1).find_node("Player1")
+onready var player1 : KinematicBody = $"/root".get_child(get_tree().get_root().get_child_count() - 1).find_node("Player1").find_node("KinematicBody1")
+onready var player2 : KinematicBody = $"/root".get_child(get_tree().get_root().get_child_count() - 1).find_node("Player2").find_node("KinematicBody2")
 onready var level : Spatial = $"/root".get_child(get_tree().get_root().get_child_count() - 1)
 onready var UI : GridContainer = $DiceInPot
 onready var cooking_progress : ProgressBar = $CookProgress
@@ -42,6 +43,7 @@ func _ready():
 
 # warning-ignore:return_value_discarded
 	player1.connect("interact", self, "_on_player_interact")
+	player2.connect("interact", self, "_on_player_interact")
 
 func _process(delta):
 	if cooking_time >= numbers.size() * DIE_COOK_TIME + BURN_TIME and not burnt:

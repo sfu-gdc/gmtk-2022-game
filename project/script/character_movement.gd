@@ -8,7 +8,7 @@ onready var game_runner = get_node("/root/Level1/GameRunner")
 
 onready var dice_tex_1 = load("res://art/white-die.png")
 onready var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
-onready var walk_sound = $WalkingSound
+onready var walk_sound 
 onready var level := get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1)
 onready var dice_pool = level.find_node("DicePool")
 var dice_box_list = [] 
@@ -21,10 +21,10 @@ var velocity_y := Vector3()
 var angular_accleration = 15
 var speed = 10
 var cur_speed = 0
-onready var animationTree : AnimationTree = $AnimationTree
-onready var animationState = animationTree.get("parameters/playback")
+onready var animationTree : AnimationTree
+onready var animationState 
 
-onready var arrow_effect = $arrow
+onready var arrow_effect
 
 var die_spawn_timer = 0
 
@@ -61,8 +61,8 @@ func place_food(serve_area: MeshInstance) -> void:
 	yeet.start()
 	yield(yeet, "tween_completed")
 	held_object.get_node("CPUParticles").emitting = true
-	$SubmitDish.stream.loop = false;
-	$SubmitDish.play();
+	get_node("/root/Level1/Player"+str(player_number)+"/KinematicBody"+str(player_number)+"/SubmitDish").stream.loop = false;
+	get_node("/root/Level1/Player"+str(player_number)+"/KinematicBody"+str(player_number)+"/SubmitDish").play();
 	var t = Timer.new()
 	t.set_wait_time(1.5)
 	t.set_one_shot(true)
@@ -71,12 +71,11 @@ func place_food(serve_area: MeshInstance) -> void:
 	yield(t, "timeout")
 	held_object.queue_free()
 	held_object = null
-	#TODO: implement
 	
 func _ready():
-	if self.name == "Player1":
+	if self.name == "KinematicBody1":
 		player_number = 1
-	elif self.name == "Player2":
+	elif self.name == "KinematicBody2":
 		player_number = 2
 	else:
 		print("please rename the char")
@@ -93,6 +92,11 @@ func _ready():
 			break
 		serve_area_list.append(ref)
 
+	animationTree = get_node("/root/Level1/Player"+str(player_number)+"/KinematicBody"+str(player_number)+"/AnimationTree")
+	animationState = animationTree.get("parameters/playback")
+	arrow_effect = get_node("/root/Level1/Player"+str(player_number)+"/KinematicBody"+str(player_number)+"/arrow")
+	walk_sound = get_node("/root/Level1/Player"+str(player_number)+"/KinematicBody"+str(player_number)+"/WalkingSound")
+	
 func _process(_delta):
 	# update timer value
 	die_spawn_timer -= _delta
@@ -118,7 +122,7 @@ func _process(_delta):
 		if die_spawn_timer == 0:
 			for dice_box in dice_box_list:
 				if (dice_box.translation - translation).length() < interaction_range:
-					$ActivateDieBox.play()
+					get_node("/root/Level1/Player"+str(player_number)+"/KinematicBody"+str(player_number)+"/ActivateDieBox").play()
 					spawn_die(dice_box.translation)
 					die_spawn_timer = 0.4
 					break
@@ -159,7 +163,7 @@ func _process(_delta):
 				#setup picking animation offset
 				picking = true
 				picking_time = 20 * _delta
-				$GrabObject.play()
+				get_node("/root/Level1/Player"+str(player_number)+"/KinematicBody"+str(player_number)+"/GrabObject").play()
 				animationState.travel("PickUp")
 	
 	if !is_instance_valid( held_object ) || held_object == null:

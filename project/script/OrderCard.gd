@@ -15,8 +15,8 @@ onready var panel: TextureRect = $Panel
 onready var tween: Tween = $Tween
 onready var time_bar: TextureProgress = $Panel/Vertical/Center/Margin/TimeBar
 onready var timer: Timer
-onready var label: Label = $Panel/Vertical/Center2/Horizontal/Margin2/Label
-onready var picture: TextureRect = $Panel/Vertical/Center2/Horizontal/Margin/Picture
+onready var label: RichTextLabel = $Panel/Label
+onready var picture: TextureRect = $Panel/Picture
 
 # emitted when the card is completely gone up
 signal card_complete_up
