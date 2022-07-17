@@ -109,6 +109,8 @@ func _process(_delta):
 			picking = false
 
 			if held_object.place(self):
+				if "throwing" in held_object:
+					held_object.throwing = true
 				held_object = null
 		# Otherwise, find the closest die
 		else:
