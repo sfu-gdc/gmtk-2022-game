@@ -26,7 +26,7 @@ func _process(delta):
 	if new_order_timer < 0:
 		new_order_timer = SMALL_ORDER_TIME
 		var num = random_small_number()
-		var oc: Control = order_card_list.add(50, num)d
+		var oc: Control = order_card_list.add(50, num)
 		out_going_recipes.append(oc)
 		out_going_recipes_number.append(num)
 		oc.connect("card_complete_up", self, "remove_recipe", [oc, false])
