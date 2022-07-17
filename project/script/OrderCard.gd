@@ -11,7 +11,7 @@ var number: int = 50
 onready var panel_oposition: int = 0
 
 # get the children: panel, tween, timebar, dropdown button
-onready var panel: Panel = $Panel
+onready var panel: TextureRect = $Panel
 onready var tween: Tween = $Tween
 onready var time_bar: TextureProgress = $Panel/Vertical/Center/Margin/TimeBar
 onready var timer: Timer
