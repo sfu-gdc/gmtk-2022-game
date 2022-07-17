@@ -7,7 +7,8 @@ onready var game_runner = get_node("/root/Level1/GameRunner")
 onready var dice_tex_1 = load("res://art/white-die.png")
 onready var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 onready var walk_sound = $WalkingSound
-onready var dice_pool = get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1).find_node("DicePool")
+onready var level := get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1)
+onready var dice_pool = level.find_node("DicePool")
 var dice_box_list = [] 
 var serve_area_list = [] 
 export var interaction_range := 3.5
@@ -38,11 +39,34 @@ func spawn_die(location: Vector3):
 # ------------------------------------
 
 func food_in_hand_matches() -> bool:
-	return true
-	#TODO: implement
-	
-func place_food() -> void:
-	pass
+	return held_object and held_object.get_filename() == "res://prefabs/Dish.tscn" and held_object.number in game_runner.out_going_recipes_number
+
+func place_food(serve_area: MeshInstance) -> void:
+	var yeet := Tween.new()
+	held_object.place(self)
+	held_object.mode = RigidBody.MODE_STATIC
+	held_object.collision_layer = 0
+	held_object.collision_mask = 0
+#	var save_transform := global_transform.origin
+#	visible = false
+#	remove_child(held_object)
+#	translation = level.to_local(save_transform)
+#	level.add_child(held_object)
+#	visible = true
+#	global_transform.origin = save_transform
+	held_object.add_child(yeet)
+	yeet.interpolate_property(held_object, "global_transform:origin", null, serve_area.global_transform.origin + 1.5 * Vector3.UP, 0.3)
+	yeet.start()
+	yield(yeet, "tween_completed")
+	held_object.get_node("CPUParticles").emitting = true
+	var t = Timer.new()
+	t.set_wait_time(1.5)
+	t.set_one_shot(true)
+	held_object.add_child(t)
+	t.start()
+	yield(t, "timeout")
+	held_object.queue_free()
+	held_object = null
 	#TODO: implement
 	
 
@@ -55,7 +79,6 @@ func _ready():
 		
 	for i in 10:
 		var ref = get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1).find_node("ServeArea"+str(i))
-		print("here")
 		if ref == null:
 			break
 		serve_area_list.append(ref)
@@ -91,14 +114,13 @@ func _process(_delta):
 					break
 		  
 		# If near output area & have food in hand place it in.
-		if food_in_hand_matches() && game_runner.out_going_recipes_number.size() != 0:
+		if food_in_hand_matches():
 			for serve_area in serve_area_list:
 				if (serve_area.translation - translation).length() < interaction_range:
-					place_food()
+					game_runner.completed_recipe(held_object.number)
+					place_food(serve_area)
 					print(game_runner.out_going_recipes_number.size())
 					print(game_runner.out_going_recipes_number[0])
-					game_runner.completed_recipe(game_runner.out_going_recipes_number[0])
-					#game_runner.completed_recipe(game_runner.out_going_recipes_number[0]) # will crash if empty?
 					break
 		  
 	# Try to pick up a die
