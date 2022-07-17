@@ -18,10 +18,6 @@ our game for the gtmk 2022 game jam
 	- design 2nd level & boss level
 	/ make music & sfx (gabe can do music)
 	- draw tutorial graphic
-	- enable game to be played
-		* pick up dice
-		/ dice can be combined
-		- putting them in the output area
 	- implement throwing dice
 	- player should glide to stop
 	* implement garbage can
