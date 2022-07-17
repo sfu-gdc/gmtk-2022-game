@@ -118,8 +118,10 @@ func throwObject(delta, direction, hor_Force, vect_force):
 
 	if Input.is_action_just_released("throw") && held_object:
 		if held_object.throwable:
+			animationState.travel("Throw")
 			picking_time = -1
 			picking = false
+			held_object.throwing = true
 			held_object.global_transform.origin.y = held_object.global_transform.origin.y - 1.2
 			held_object.add_central_force(Vector3(-direction.x * hor_Force, vect_force , -direction.z * hor_Force))
 

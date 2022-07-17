@@ -27,6 +27,8 @@ var burnt := false
 
 # is this object throwable or not
 var throwable = false
+# can catch a object and attach into it
+var attachable = true
 
 func _ready():
 	var smoke_scene := SMOKE_SCENE.instance()
@@ -75,6 +77,15 @@ func _on_player_interact(player: KinematicBody, held_object: Spatial):
 		cooking_progress.max_value = numbers.size() * DIE_COOK_TIME
 		print(numbers)
 		$PutInPot.play()
+		
+func _on_throwable_interact(held_object: Spatial):
+		numbers.append(held_object.number)
+		held_object.remove_from_group("pickup")
+	
+		UI.add_die(held_object.number)
+		smoke.emitting = cooking and numbers.size() > 0
+		cooking_progress.max_value = numbers.size() * DIE_COOK_TIME
+		print(numbers)
 
 func pickup(player: KinematicBody) -> Spatial:
 	# Attach to player and disable collisions

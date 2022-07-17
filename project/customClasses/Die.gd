@@ -15,6 +15,8 @@ var number_group: int = 0
 
 # is this object throwable or not
 var throwable = true
+# throwing status will keep releasing signal
+var throwing = false
 
 onready var dice_tex_1 = load("res://art/white-die.png")
 
@@ -24,6 +26,7 @@ var t2: Timer = Timer.new()
 
 func _init(arg):
 	add_to_group("pickup")
+	self.contact_monitor = true
 	
 	self.add_child(t1)
 # warning-ignore:return_value_discarded
@@ -34,9 +37,18 @@ func _init(arg):
 # warning-ignore:return_value_discarded
 	t2.connect("timeout", self, "free_particles")
 	t2.set_wait_time(1.75)
+	
+	#collision checker
+
 
 # this is so we can pass 2 params to the function
 func init(die_type_local: int, start_location_local: Vector3):
+	#collision checker
+	self.contact_monitor = true
+	self.contacts_reported = 5
+	
+	self.connect("body_entered", self, "_on_body_entered")
+	
 	self.die_type = die_type_local
 	self.start_location = start_location_local
 
@@ -125,6 +137,13 @@ func free_particles():
 func _process(_delta):
 	if linear_velocity.length() < 0.003 && number == -1:
 		finalize_number()
+
+func _on_body_entered(body:Node):
+	#if die collised to "attachable" object
+	if not "attachable" in body:
+		return
+	body._on_throwable_interact(self)
+	queue_free()
 	
 func pickup(player: KinematicBody) -> Die:
 	# Attach to player and disable collisions
