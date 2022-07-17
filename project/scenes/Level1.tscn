@@ -841,11 +841,9 @@ margin_right = 36.0
 margin_bottom = 112.0
 rect_scale = Vector2( 0.5, 0.5 )
 texture_normal = ExtResource( 13 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="."]
+visible = false
 anchor_left = 0.823
 anchor_top = 0.13
 anchor_right = 0.987
@@ -877,6 +875,7 @@ autoplay = true
 stream = ExtResource( 30 )
 volume_db = -15.0
 autoplay = true
+mix_target = 1
 bus = "SFX"
 
 [connection signal="pressed" from="Button" to="GamePanel" method="_on_Button_pressed"]

@@ -137,6 +137,9 @@ func _process(_delta):
 			held_object = held_object.pickup(self)
 
 func pickingUpAnimation(object, delta):
+	if object == null:
+		return
+		
 	# the dice will travel a little bit before picked up
 	var direction = transform.origin - object.transform.origin
 	object.translation.x += direction.x * delta

@@ -23,7 +23,8 @@ var _settings = {
 		"player1_left": KEY_A,
 		"player1_right": KEY_D,
 		"player1_pick": KEY_Q,
-		"player1_activate": KEY_E
+		"player1_activate": KEY_E,
+		"player1_throw": KEY_F
 	}
 };
 
@@ -34,7 +35,8 @@ var _control_keymapping = {
 	"player1_left": "player_left",
 	"player1_right": "player_right",
 	"player1_pick": "pick",
-	"player1_activate": "activate"
+	"player1_activate": "activate",
+	"player1_throw": "throw"
 }
 
 func remove_itself():
@@ -55,12 +57,12 @@ func load_settings():
 	$TabContainer/Audio/MusicLabel/CheckBox.pressed = _settings["audio"]["background_music"]
 	$TabContainer/Audio/SFXLabel/CheckBox.pressed = _settings["audio"]["sfx"]
 
-	$TabContainer/Controls/Player1Label/MoveForward/KeyButton/Label.text = OS.get_scancode_string(_settings["controls"]["player1_up"])
-	$TabContainer/Controls/Player1Label/MoveDownward/KeyButton/Label.text = OS.get_scancode_string(_settings["controls"]["player1_down"])
-	$TabContainer/Controls/Player1Label/MoveLeft/KeyButton/Label.text = OS.get_scancode_string(_settings["controls"]["player1_left"])
-	$TabContainer/Controls/Player1Label/MoveRight/KeyButton/Label.text = OS.get_scancode_string(_settings["controls"]["player1_right"])
-	$TabContainer/Controls/Player1Label/Interact/KeyButton/Label.text = OS.get_scancode_string(_settings["controls"]["player1_activate"])
-	$TabContainer/Controls/Player1Label/PickupDrop/KeyButton/Label.text = OS.get_scancode_string(_settings["controls"]["player1_pick"])
+	$"TabContainer/P1 Controls/Player1Label/MoveForward/KeyButton/Label".text = OS.get_scancode_string(_settings["controls"]["player1_up"])
+	$"TabContainer/P1 Controls/Player1Label/MoveDownward/KeyButton/Label".text = OS.get_scancode_string(_settings["controls"]["player1_down"])
+	$"TabContainer/P1 Controls/Player1Label/MoveLeft/KeyButton/Label".text = OS.get_scancode_string(_settings["controls"]["player1_left"])
+	$"TabContainer/P1 Controls/Player1Label/MoveRight/KeyButton/Label".text = OS.get_scancode_string(_settings["controls"]["player1_right"])
+	$"TabContainer/P1 Controls/Player1Label/Interact/KeyButton/Label".text = OS.get_scancode_string(_settings["controls"]["player1_activate"])
+	$"TabContainer/P1 Controls/Player1Label/PickupDrop/KeyButton/Label".text = OS.get_scancode_string(_settings["controls"]["player1_pick"])
 
 func _ready():
 	get_tree().paused = true;
@@ -93,18 +95,15 @@ func _on_SaveButton_pressed():
 	SettingsLoader.sync_music();
 	SettingsLoader.sync_key_mapping();
 	remove_itself();
-	pass # Replace with function body.;
 
 
 func _on_KeyButton_pressed(settingkeyword:String, keymapname:String, origin:String):
 	key_listening = settingkeyword;
 	keymap_listening = keymapname;
-	var target = "TabContainer/Controls/Player1Label/"+origin+"/KeyButton/Label"
+	var target = "TabContainer/P1 Controls/Player1Label/"+origin+"/KeyButton/Label"
 	text_to_update = get_node(target);
 	backdrop_panel.show();
-	pass # Replace with function body.
 
 
 func _on_CheckBox_toggled(button_pressed, _origin_label, target_settings):
 	_settings["audio"][target_settings] = button_pressed;
-	pass # Replace with function body.

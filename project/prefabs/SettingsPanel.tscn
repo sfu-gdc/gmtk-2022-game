@@ -89,6 +89,7 @@ margin_bottom = 399.0
 tab_align = 0
 
 [node name="Audio" type="Tabs" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -122,8 +123,7 @@ margin_top = -6.0
 margin_right = 288.0
 margin_bottom = 18.0
 
-[node name="Controls" type="Tabs" parent="TabContainer"]
-visible = false
+[node name="P1 Controls" type="Tabs" parent="TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -131,14 +131,14 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="Player1Label" type="Label" parent="TabContainer/Controls"]
+[node name="Player1Label" type="Label" parent="TabContainer/P1 Controls"]
 margin_left = 16.0
 margin_top = 16.0
 margin_right = 96.0
 margin_bottom = 32.0
 text = "Player 1"
 
-[node name="MoveForward" type="Label" parent="TabContainer/Controls/Player1Label"]
+[node name="MoveForward" type="Label" parent="TabContainer/P1 Controls/Player1Label"]
 margin_left = 8.0
 margin_top = 24.0
 margin_right = 97.0
@@ -146,12 +146,12 @@ margin_bottom = 44.0
 text = "Move Forward"
 valign = 1
 
-[node name="KeyButton" type="Button" parent="TabContainer/Controls/Player1Label/MoveForward"]
+[node name="KeyButton" type="Button" parent="TabContainer/P1 Controls/Player1Label/MoveForward"]
 margin_left = 192.0
 margin_right = 296.0
 margin_bottom = 20.0
 
-[node name="Label" type="Label" parent="TabContainer/Controls/Player1Label/MoveForward/KeyButton"]
+[node name="Label" type="Label" parent="TabContainer/P1 Controls/Player1Label/MoveForward/KeyButton"]
 margin_left = 32.0
 margin_right = 72.0
 margin_bottom = 20.0
@@ -161,7 +161,7 @@ align = 1
 valign = 1
 uppercase = true
 
-[node name="MoveLeft" type="Label" parent="TabContainer/Controls/Player1Label"]
+[node name="MoveLeft" type="Label" parent="TabContainer/P1 Controls/Player1Label"]
 margin_left = 8.0
 margin_top = 48.0
 margin_right = 88.0
@@ -169,12 +169,12 @@ margin_bottom = 68.0
 text = "Move Left"
 valign = 1
 
-[node name="KeyButton" type="Button" parent="TabContainer/Controls/Player1Label/MoveLeft"]
+[node name="KeyButton" type="Button" parent="TabContainer/P1 Controls/Player1Label/MoveLeft"]
 margin_left = 192.0
 margin_right = 296.0
 margin_bottom = 20.0
 
-[node name="Label" type="Label" parent="TabContainer/Controls/Player1Label/MoveLeft/KeyButton"]
+[node name="Label" type="Label" parent="TabContainer/P1 Controls/Player1Label/MoveLeft/KeyButton"]
 margin_left = 32.0
 margin_right = 72.0
 margin_bottom = 20.0
@@ -184,7 +184,7 @@ align = 1
 valign = 1
 uppercase = true
 
-[node name="MoveDownward" type="Label" parent="TabContainer/Controls/Player1Label"]
+[node name="MoveDownward" type="Label" parent="TabContainer/P1 Controls/Player1Label"]
 margin_left = 8.0
 margin_top = 72.0
 margin_right = 107.0
@@ -192,12 +192,12 @@ margin_bottom = 92.0
 text = "Move Backward"
 valign = 1
 
-[node name="KeyButton" type="Button" parent="TabContainer/Controls/Player1Label/MoveDownward"]
+[node name="KeyButton" type="Button" parent="TabContainer/P1 Controls/Player1Label/MoveDownward"]
 margin_left = 192.0
 margin_right = 296.0
 margin_bottom = 20.0
 
-[node name="Label" type="Label" parent="TabContainer/Controls/Player1Label/MoveDownward/KeyButton"]
+[node name="Label" type="Label" parent="TabContainer/P1 Controls/Player1Label/MoveDownward/KeyButton"]
 margin_left = 32.0
 margin_right = 72.0
 margin_bottom = 20.0
@@ -207,7 +207,7 @@ align = 1
 valign = 1
 uppercase = true
 
-[node name="MoveRight" type="Label" parent="TabContainer/Controls/Player1Label"]
+[node name="MoveRight" type="Label" parent="TabContainer/P1 Controls/Player1Label"]
 margin_left = 8.0
 margin_top = 96.0
 margin_right = 90.0
@@ -215,12 +215,12 @@ margin_bottom = 116.0
 text = "Move Right"
 valign = 1
 
-[node name="KeyButton" type="Button" parent="TabContainer/Controls/Player1Label/MoveRight"]
+[node name="KeyButton" type="Button" parent="TabContainer/P1 Controls/Player1Label/MoveRight"]
 margin_left = 192.0
 margin_right = 296.0
 margin_bottom = 20.0
 
-[node name="Label" type="Label" parent="TabContainer/Controls/Player1Label/MoveRight/KeyButton"]
+[node name="Label" type="Label" parent="TabContainer/P1 Controls/Player1Label/MoveRight/KeyButton"]
 margin_left = 32.0
 margin_right = 72.0
 margin_bottom = 20.0
@@ -230,7 +230,7 @@ align = 1
 valign = 1
 uppercase = true
 
-[node name="Interact" type="Label" parent="TabContainer/Controls/Player1Label"]
+[node name="Interact" type="Label" parent="TabContainer/P1 Controls/Player1Label"]
 margin_left = 8.0
 margin_top = 120.0
 margin_right = 88.0
@@ -238,12 +238,12 @@ margin_bottom = 140.0
 text = "Activate"
 valign = 1
 
-[node name="KeyButton" type="Button" parent="TabContainer/Controls/Player1Label/Interact"]
+[node name="KeyButton" type="Button" parent="TabContainer/P1 Controls/Player1Label/Interact"]
 margin_left = 192.0
 margin_right = 296.0
 margin_bottom = 20.0
 
-[node name="Label" type="Label" parent="TabContainer/Controls/Player1Label/Interact/KeyButton"]
+[node name="Label" type="Label" parent="TabContainer/P1 Controls/Player1Label/Interact/KeyButton"]
 margin_left = 32.0
 margin_right = 72.0
 margin_bottom = 20.0
@@ -253,7 +253,7 @@ align = 1
 valign = 1
 uppercase = true
 
-[node name="PickupDrop" type="Label" parent="TabContainer/Controls/Player1Label"]
+[node name="PickupDrop" type="Label" parent="TabContainer/P1 Controls/Player1Label"]
 margin_left = 8.0
 margin_top = 144.0
 margin_right = 90.0
@@ -261,17 +261,40 @@ margin_bottom = 164.0
 text = "Pickup/Drop"
 valign = 1
 
-[node name="KeyButton" type="Button" parent="TabContainer/Controls/Player1Label/PickupDrop"]
+[node name="KeyButton" type="Button" parent="TabContainer/P1 Controls/Player1Label/PickupDrop"]
 margin_left = 192.0
 margin_right = 296.0
 margin_bottom = 20.0
 
-[node name="Label" type="Label" parent="TabContainer/Controls/Player1Label/PickupDrop/KeyButton"]
+[node name="Label" type="Label" parent="TabContainer/P1 Controls/Player1Label/PickupDrop/KeyButton"]
 margin_left = 32.0
 margin_right = 72.0
 margin_bottom = 20.0
 mouse_filter = 1
 text = "q"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="Throw" type="Label" parent="TabContainer/P1 Controls/Player1Label"]
+margin_left = 8.0
+margin_top = 168.0
+margin_right = 90.0
+margin_bottom = 164.0
+text = "Throw"
+valign = 1
+
+[node name="KeyButton" type="Button" parent="TabContainer/P1 Controls/Player1Label/Throw"]
+margin_left = 192.0
+margin_right = 296.0
+margin_bottom = 20.0
+
+[node name="Label" type="Label" parent="TabContainer/P1 Controls/Player1Label/Throw/KeyButton"]
+margin_left = 32.0
+margin_right = 72.0
+margin_bottom = 20.0
+mouse_filter = 1
+text = "F"
 align = 1
 valign = 1
 uppercase = true
@@ -306,9 +329,10 @@ valign = 1
 [connection signal="pressed" from="CancelButton" to="." method="_on_CancelButton_pressed"]
 [connection signal="toggled" from="TabContainer/Audio/MusicLabel/CheckBox" to="." method="_on_CheckBox_toggled" binds= [ "Music", "background_music" ]]
 [connection signal="toggled" from="TabContainer/Audio/SFXLabel/CheckBox" to="." method="_on_CheckBox_toggled" binds= [ "SFX", "sfx" ]]
-[connection signal="pressed" from="TabContainer/Controls/Player1Label/MoveForward/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_up", "player_up", "MoveForward" ]]
-[connection signal="pressed" from="TabContainer/Controls/Player1Label/MoveLeft/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_left", "player_left", "MoveLeft" ]]
-[connection signal="pressed" from="TabContainer/Controls/Player1Label/MoveDownward/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_down", "player_down", "MoveDownward" ]]
-[connection signal="pressed" from="TabContainer/Controls/Player1Label/MoveRight/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_right", "player_right", "MoveRight" ]]
-[connection signal="pressed" from="TabContainer/Controls/Player1Label/Interact/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_activate", "activate", "Interact" ]]
-[connection signal="pressed" from="TabContainer/Controls/Player1Label/PickupDrop/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_pick", "pick", "PickupDrop" ]]
+[connection signal="pressed" from="TabContainer/P1 Controls/Player1Label/MoveForward/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_up", "player_up", "MoveForward" ]]
+[connection signal="pressed" from="TabContainer/P1 Controls/Player1Label/MoveLeft/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_left", "player_left", "MoveLeft" ]]
+[connection signal="pressed" from="TabContainer/P1 Controls/Player1Label/MoveDownward/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_down", "player_down", "MoveDownward" ]]
+[connection signal="pressed" from="TabContainer/P1 Controls/Player1Label/MoveRight/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_right", "player_right", "MoveRight" ]]
+[connection signal="pressed" from="TabContainer/P1 Controls/Player1Label/Interact/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_activate", "activate", "Interact" ]]
+[connection signal="pressed" from="TabContainer/P1 Controls/Player1Label/PickupDrop/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_pick", "pick", "PickupDrop" ]]
+[connection signal="pressed" from="TabContainer/P1 Controls/Player1Label/Throw/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_throw", "throw", "Throw" ]]

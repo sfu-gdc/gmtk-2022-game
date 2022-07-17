@@ -22,7 +22,8 @@ var _settings = {
 		"player1_left": KEY_A,
 		"player1_right": KEY_D,
 		"player1_pick": KEY_Q,
-		"player1_activate": KEY_E
+		"player1_activate": KEY_E,
+		"player1_throw": KEY_F
 	}
 };
 
@@ -33,7 +34,8 @@ var _control_keymapping = {
 	"player1_left": "player_left",
 	"player1_right": "player_right",
 	"player1_pick": "pick",
-	"player1_activate": "activate"
+	"player1_activate": "activate",
+	"player1_throw": "throw"
 }
 
 func remove_itself():
@@ -49,10 +51,10 @@ func load_settings():
 		
 	for section in _settings.keys():
 		for key in _settings[section]:
-			_settings[section][key] = settings_file.get_value(section, key, null);
+			var val = settings_file.get_value(section, key, null);
+			if val != null:
+				_settings[section][key] = val; 
 			
-	
-
 func _ready():
 	load_settings();
 	sync_music();
@@ -73,6 +75,7 @@ func sync_music():
 func sync_key_mapping():
 	#update the keymapping right here
 	load_settings();
+	print(_settings)
 	for key in _settings['controls'].keys():
 		#_settings['controls'][key] = settings_file.get_value('controls', key, null);
 		var list = InputMap.get_action_list( _control_keymapping[key] );
@@ -94,4 +97,4 @@ func _on_SaveButton_pressed():
 	
 	sync_music();
 	sync_key_mapping();
-	pass # Replace with function body.;
+	
