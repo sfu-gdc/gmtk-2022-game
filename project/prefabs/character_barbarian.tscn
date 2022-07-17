@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://art/character/Character_Base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://script/character_movement.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://art/character/kaykit/gltf/Metal.material" type="Material" id=9]
 [ext_resource path="res://art/character/kaykit/gltf/BrownDark.material" type="Material" id=10]
 [ext_resource path="res://script/PotSpot.gd" type="Script" id=11]
+[ext_resource path="res://prefabs/effects/arrow.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Animation" id=27]
 resource_name = "Dump"
@@ -417,7 +418,7 @@ shape = SubResource( 21 )
 transform = Transform( -1.5, 0, -2.26494e-07, 0, 1.5, 0, 2.26494e-07, 0, -1.5, 0, -1, -1.49012e-08 )
 
 [node name="Head" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="0"]
-transform = Transform( 1, 1.9752e-17, -1.13851e-18, -1.97693e-17, 0.995286, -0.0969861, -7.82528e-19, 0.0969861, 0.995286, 0, 0.711483, -0.0128181 )
+transform = Transform( 1, 2.31432e-17, -8.13701e-19, -2.31189e-17, 0.995694, -0.0926977, -1.33512e-18, 0.0926977, 0.995694, -5.40586e-18, 0.711576, -0.00562342 )
 
 [node name="character_barbarianHead" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/Head" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00788689, 0 )
@@ -445,7 +446,7 @@ material/3 = null
 material/4 = null
 
 [node name="ArmLeft" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="2"]
-transform = Transform( 0.00147566, 0.509511, -0.860463, -0.0179811, -0.860311, -0.509452, -0.999837, 0.0162239, 0.00789194, 0.14, 0.691486, -0.0124578 )
+transform = Transform( 0.000658055, 0.488807, -0.872392, -0.00789603, -0.872362, -0.488796, -0.999969, 0.00721012, 0.00328547, 0.14, 0.691576, -0.00546537 )
 
 [node name="character_barbarianArmLeft" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/ArmLeft" index="0"]
 transform = Transform( -1.44517e-08, 2.79594e-07, -0.999999, 0.471936, -0.881633, -2.79594e-07, -0.881633, -0.471936, -1.44517e-08, -1.71536e-08, 0.0813964, -0.0290722 )
@@ -458,7 +459,7 @@ material/3 = null
 material/4 = null
 
 [node name="ArmRight" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="3"]
-transform = Transform( -0.0102019, -0.494585, -0.869069, -0.351257, -0.811955, 0.466205, -0.936224, 0.310022, -0.165443, -0.14, 0.691486, -0.0124578 )
+transform = Transform( -0.00445843, -0.481879, -0.876227, -0.341887, -0.822699, 0.454181, -0.93973, 0.301595, -0.16108, -0.14, 0.691576, -0.00546537 )
 
 [node name="character_barbarianArmRight" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/ArmRight" index="0"]
 transform = Transform( -3.87118e-10, -2.53319e-07, -0.999999, -0.471936, -0.881633, 2.53319e-07, -0.881633, 0.471936, -3.87118e-10, 1.47278e-08, 0.0813965, 0.0290721 )
@@ -471,14 +472,17 @@ material/3 = null
 material/4 = null
 
 [node name="handLeft" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="4"]
-transform = Transform( -0.999069, -0.00147576, -0.0431183, -0.0431379, 0.0179815, 0.998908, -0.000698953, 0.999837, -0.0180284, 0.420701, 0.217521, -0.00351974 )
+transform = Transform( -0.999815, -0.000658152, -0.0192352, -0.0192398, 0.0078964, 0.999784, -0.000506255, 0.999969, -0.00790758, 0.409294, 0.210973, -0.00149316 )
 
 [node name="handRight" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="5"]
-transform = Transform( -0.974726, 0.218205, -0.0479262, 0.0311189, 0.345045, 0.93807, 0.221228, 0.912869, -0.343115, -0.412478, 0.244162, 0.15834 )
+transform = Transform( -0.97515, 0.212539, -0.0625339, 0.0136044, 0.339172, 0.940626, 0.221129, 0.9164, -0.333635, -0.405478, 0.238334, 0.16069 )
 
 [node name="AnimationPlayer" parent="KayKit_AnimatedCharacter_v12" index="1"]
 autoplay = ""
 
 [node name="character_barbarian" type="Spatial" parent="."]
+
+[node name="arrow" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -2.5 )
 
 [editable path="KayKit_AnimatedCharacter_v12"]

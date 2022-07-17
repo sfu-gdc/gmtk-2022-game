@@ -663,8 +663,7 @@ mesh = SubResource( 13 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Level/Floor"]
-transform = Transform( 100, 0, 0, 0, 1, 0, 0, 0, 100, 4, -2, -4 )
-visible = false
+transform = Transform( 16, 0, 0, 0, 1, 0, 0, 0, 8, 12, -2, -3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Floor/StaticBody"]
 shape = SubResource( 5 )
