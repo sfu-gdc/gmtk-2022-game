@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://art/tile_textures/counter-tile.png" type="Texture" id=1]
 [ext_resource path="res://art/trashbin.tscn" type="PackedScene" id=2]
@@ -37,7 +37,8 @@
 [ext_resource path="res://script/PotSum.gd" type="Script" id=35]
 [ext_resource path="res://scenes/MenuFont.tres" type="DynamicFont" id=36]
 [ext_resource path="res://prefabs/character_.tscn" type="PackedScene" id=37]
-[ext_resource path="res://UI/theme/theme.tres" type="Theme" id=38]
+[ext_resource path="res://script/boat_animation.gd" type="Script" id=38]
+[ext_resource path="res://UI/theme/theme.tres" type="Theme" id=39]
 
 [sub_resource type="SpatialMaterial" id=2]
 render_priority = 11
@@ -109,10 +110,27 @@ _data = [ Vector2( 0, 1 ), 0.0, -0.0690722, 0, 0, Vector2( 0.711538, 0.679977 ),
 size = 36
 font_data = ExtResource( 30 )
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=30]
+resource_name = "Idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 90, 0 ), Vector3( 0.5, 90, 0 ), Vector3( 0, 90, 0 ), Vector3( -0.5, 90, 0 ), Vector3( 0, 90, 0 ) ]
+}
+
+[sub_resource type="Animation" id=31]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:translation")
+tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -121,19 +139,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 5.039, -2.5, -13.895 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector3( 0, 101.136, 0 ) ]
+"values": [ Vector3( 0.5, 90, 0 ) ]
 }
 
 [sub_resource type="Animation" id=23]
@@ -146,7 +152,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2, 3 ),
+"times": PoolRealArray( 0, 0.6, 1.2, 3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( -112.675, -2.5, -31.466 ), Vector3( -95.7219, -2.5, -14.5128 ), Vector3( -55.327, -2.5, -13.895 ), Vector3( 3, -2.5, -13.895 ) ]
@@ -158,7 +164,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1, 2, 3 ),
+"times": PoolRealArray( 0, 0.6, 1.2, 3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 0, 45, 0 ), Vector3( 0, 45, 0 ), Vector3( 0, 90, 0 ), Vector3( 0, 90, 0 ) ]
@@ -191,6 +197,39 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector3( 0, 90, 0 ), Vector3( 0, 101.136, 0 ), Vector3( 0, 128.687, 0 ), Vector3( 0, 149.652, 0 ) ]
 }
+
+[sub_resource type="AnimationNodeAnimation" id=32]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=33]
+animation = "go_in"
+
+[sub_resource type="AnimationNodeAnimation" id=34]
+animation = "go_out"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+
+[sub_resource type="AnimationNodeStateMachine" id=39]
+states/Idle/node = SubResource( 32 )
+states/Idle/position = Vector2( 1038, 56 )
+states/go_in/node = SubResource( 33 )
+states/go_in/position = Vector2( 680, 56 )
+states/go_out/node = SubResource( 34 )
+states/go_out/position = Vector2( 680, 161 )
+transitions = [ "go_in", "go_out", SubResource( 35 ), "go_out", "go_in", SubResource( 36 ), "go_in", "Idle", SubResource( 37 ), "Idle", "go_out", SubResource( 38 ) ]
+start_node = "Idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=40]
 
 [sub_resource type="DynamicFont" id=29]
 size = 40
@@ -1129,13 +1168,22 @@ mix_target = 1
 bus = "SFX"
 
 [node name="Boat" parent="." instance=ExtResource( 31 )]
-transform = Transform( -0.193138, 0, 0.98117, 0, 1, 0, -0.98117, 0, -0.193138, 5.039, -2.5, -13.895 )
+transform = Transform( -4.37113e-08, 0.00872654, 0.99996, 0, 0.999962, -0.00872652, -0.999998, -3.81449e-10, -4.37096e-08, 5.039, -2.5, -13.895 )
+script = ExtResource( 38 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Boat"]
+autoplay = "Idle"
 playback_speed = 0.5
-anims/RESET = SubResource( 22 )
+anims/Idle = SubResource( 30 )
+anims/RESET = SubResource( 31 )
 anims/go_in = SubResource( 23 )
 anims/go_out = SubResource( 24 )
+
+[node name="AnimationTree" type="AnimationTree" parent="Boat"]
+tree_root = SubResource( 39 )
+anim_player = NodePath("../AnimationPlayer2")
+active = true
+parameters/playback = SubResource( 40 )
 
 [node name="Backdrop" type="Node2D" parent="."]
 pause_mode = 2
@@ -1152,7 +1200,7 @@ margin_left = 299.0
 margin_top = 124.0
 margin_right = 940.0
 margin_bottom = 544.0
-theme = ExtResource( 38 )
+theme = ExtResource( 39 )
 
 [node name="Tutorial1" type="Sprite" parent="Backdrop/ColorRect/Panel"]
 position = Vector2( 315, 200 )
