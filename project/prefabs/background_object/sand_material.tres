@@ -5,6 +5,6 @@ flags = 6
 load_path = "res://.import/sand_texture.png-17571adea00edf5ae3ba594360d2fe0e.stex"
 
 [resource]
-flags_unshaded = true
 albedo_texture = SubResource( 6 )
+metallic = 0.3
 uv1_scale = Vector3( 1.7, 1.7, 3 )
