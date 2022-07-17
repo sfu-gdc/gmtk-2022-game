@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=10 format=2]
+[gd_resource type="Theme" load_steps=14 format=2]
 
 [ext_resource path="res://scenes/MenuFont.tres" type="DynamicFont" id=1]
 
@@ -47,7 +47,59 @@ corner_radius_bottom_left = 30
 shadow_size = 2
 shadow_offset = Vector2( 5, 5 )
 
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.384314, 0.211765, 0.211765, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.0627451, 0, 0, 1 )
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.235294, 0.129412, 0.129412, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.0627451, 0, 0, 1 )
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.235294, 0.129412, 0.129412, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.0627451, 0, 0, 1 )
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 1
+
 [sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.384314, 0.211765, 0.211765, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.0627451, 0, 0, 1 )
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0.384314, 0.211765, 0.211765, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -108,7 +160,11 @@ corner_radius_bottom_left = 6
 Button/styles/hover = SubResource( 2 )
 Button/styles/normal = SubResource( 1 )
 Button/styles/pressed = SubResource( 3 )
+CheckBox/styles/focus = SubResource( 11 )
+CheckBox/styles/hover = SubResource( 12 )
+CheckBox/styles/hover_pressed = SubResource( 9 )
 CheckBox/styles/normal = SubResource( 5 )
+CheckBox/styles/pressed = SubResource( 10 )
 Label/fonts/font = ExtResource( 1 )
 Panel/styles/panel = SubResource( 4 )
 TabContainer/fonts/font = ExtResource( 1 )

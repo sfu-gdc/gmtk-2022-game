@@ -1223,7 +1223,7 @@ margin_bottom = 78.0
 custom_fonts/normal_font = SubResource( 29 )
 bbcode_enabled = true
 bbcode_text = "[center]tutorial[/center]"
-text = "tutorial"
+text = "[center]tutorial[/center]"
 
 [node name="NextButton" type="Button" parent="Backdrop/ColorRect/Panel"]
 margin_left = 382.0
@@ -1239,7 +1239,7 @@ mouse_filter = 1
 custom_fonts/normal_font = SubResource( 26 )
 bbcode_enabled = true
 bbcode_text = "[center]next[/center]"
-text = "next"
+text = "[center]next[/center]"
 
 [node name="PrevButton" type="Button" parent="Backdrop/ColorRect/Panel"]
 margin_left = 147.0
@@ -1255,7 +1255,7 @@ mouse_filter = 1
 custom_fonts/normal_font = SubResource( 27 )
 bbcode_enabled = true
 bbcode_text = "[center]prev[/center]"
-text = "prev"
+text = "[center]prev[/center]"
 
 [connection signal="timeout" from="GamePanel/TimerPanel/GameTimer" to="GamePanel" method="_on_GameTimer_timeout"]
 [connection signal="timeout" from="GamePanel/TimerPanel/GameTimerText" to="." method="_on_GameTimerText_timeout"]
