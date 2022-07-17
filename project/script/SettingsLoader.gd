@@ -94,7 +94,6 @@ func _ready():
 	
 	# this is for sync key control
 	sync_key_mapping();
-	
 
 func sync_music():
 	# this will control the audio to mute or not
