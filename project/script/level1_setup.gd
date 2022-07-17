@@ -19,6 +19,7 @@ func _on_TutorialNextButton_pressed():
 		get_tree().paused = false;
 		self.find_node("GameTimer").start();
 		self.find_node("GameTimerText").start();
+		return
 	
 	self.find_node("Tutorial"+str(current_slide)).hide();
 	current_slide+=1;

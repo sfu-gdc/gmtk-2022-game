@@ -11,6 +11,9 @@ onready var gravity : float = ProjectSettings.get_setting("physics/2d/default_gr
 onready var walk_sound 
 onready var level := get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1)
 onready var dice_pool = level.find_node("DicePool")
+
+onready var Boat = level.find_node("Boat")
+
 var dice_box_list = [] 
 var serve_area_list = [] 
 export var interaction_range := 3.5
@@ -135,6 +138,10 @@ func _process(_delta):
 				if (serve_area.global_transform.origin - global_transform.origin).length() < interaction_range:
 					game_runner.completed_recipe(held_object.number)
 					place_food(serve_area)
+					if Boat && "going_out" in Boat:
+						Boat.going_out = true
+						#print("boat:", Boat.going_out)
+					
 					#print(game_runner.out_going_recipes_number.size())
 					#print(game_runner.out_going_recipes_number[0])
 					break
