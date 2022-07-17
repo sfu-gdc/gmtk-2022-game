@@ -8,8 +8,8 @@ const BURN_IMG := preload("res://art/dice-fire.png")
 const DIE_COOK_TIME := 8.0
 const BURN_TIME := 10.0
 
-onready var player1 : KinematicBody = $"/root".get_child(0).find_node("Player1")
-onready var level : Spatial = $"/root".get_child(0)
+onready var player1 : KinematicBody = $"/root".get_child(get_tree().get_root().get_child_count() - 1).find_node("Player1")
+onready var level : Spatial = $"/root".get_child(get_tree().get_root().get_child_count() - 1)
 onready var UI : GridContainer = $DiceInPot
 onready var cooking_progress : ProgressBar = $CookProgress
 onready var fire_explosion : CPUParticles2D = $FireExplosion
@@ -29,6 +29,8 @@ var burnt := false
 
 # is this object throwable or not
 var throwable = false
+# can catch a object and attach into it
+var attachable = true
 
 func _ready():
 	var smoke_scene := SMOKE_SCENE.instance()
@@ -83,6 +85,16 @@ func _on_player_interact(player: KinematicBody, held_object: Spatial):
 		cooking_progress.max_value = numbers.size() * DIE_COOK_TIME
 		print(numbers)
 		$PutInPot.play()
+		countdown.stop()
+		
+func _on_throwable_interact(held_object: Spatial):
+		numbers.append(held_object.number)
+		held_object.remove_from_group("pickup")
+		UI.add_die(held_object.number)
+		smoke.emitting = cooking and numbers.size() > 0
+		cooking_progress.max_value = numbers.size() * DIE_COOK_TIME
+		print(numbers)
+    $PutInPot.play()
 		countdown.stop()
 
 func pickup(player: KinematicBody) -> Spatial:

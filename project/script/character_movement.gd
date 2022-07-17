@@ -2,12 +2,16 @@ extends KinematicBody
 
 signal interact
 
+onready var game_runner = get_node("/root/Level1/GameRunner")
+
 onready var dice_tex_1 = load("res://art/white-die.png")
-onready var dice_pool = get_tree().get_root().get_child(0).find_node("DicePool")
-onready var dice_box_list = []
 onready var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 onready var walk_sound = $WalkingSound
+onready var dice_pool = get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1).find_node("DicePool")
+var dice_box_list = [] 
+var serve_area_list = [] 
 
+onready var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 export var interaction_range := 3.5
 export var pickup_position := Vector3(0.0, 3.0, -0.75)
 
@@ -35,12 +39,27 @@ func spawn_die(location: Vector3):
 
 # ------------------------------------
 
+func food_in_hand_matches() -> bool:
+	return true
+	#TODO: implement
+	
+func place_food() -> void:
+	pass
+	#TODO: implement
+	
+
 func _ready():
 	for i in 10:
-		var ref = get_tree().get_root().get_child(0).find_node("DiceBox"+str(i))
+		var ref = get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1).find_node("DiceBox"+str(i))
 		if ref == null:
 			break
 		dice_box_list.append(ref)
+		
+	for i in 10:
+		var ref = get_tree().get_root().get_child(0).find_node("ServeArea"+str(i))
+		if ref == null:
+			break
+		serve_area_list.append(ref)
 
 func _process(_delta):
 	# update timer value
@@ -53,6 +72,12 @@ func _process(_delta):
 			dice_box.player_is_near = true
 		else:
 			dice_box.player_is_near = false
+      
+	for serve_area in serve_area_list:
+		if (serve_area.translation - translation).length() < interaction_range:
+			serve_area.player_is_near = true
+		else:
+			serve_area.player_is_near = false
 
 	if Input.is_action_just_pressed("activate"):
 		emit_signal("interact", self, held_object)
@@ -65,7 +90,18 @@ func _process(_delta):
 					spawn_die(dice_box.translation)
 					die_spawn_timer = 0.4
 					break
-
+          
+		# If near output area & have food in hand place it in.
+		if food_in_hand_matches() && game_runner.out_going_recipes_number.size() != 0:
+			for serve_area in serve_area_list:
+				if (serve_area.translation - translation).length() < interaction_range:
+					place_food()
+					print(game_runner.out_going_recipes_number.size())
+					print(game_runner.out_going_recipes_number[0])
+					game_runner.completed_recipe(game_runner.out_going_recipes_number[0])
+					#game_runner.completed_recipe(game_runner.out_going_recipes_number[0]) # will crash if empty?
+					break
+          
 	# Try to pick up a die
 	if Input.is_action_just_pressed("pick"):
 		# Try to drop held dice
@@ -116,8 +152,10 @@ func throwObject(delta, direction, hor_Force, vect_force):
 
 	if Input.is_action_just_released("throw") && held_object:
 		if held_object.throwable:
+			animationState.travel("Throw")
 			picking_time = -1
 			picking = false
+			held_object.throwing = true
 			held_object.global_transform.origin.y = held_object.global_transform.origin.y - 1.2
 			held_object.add_central_force(Vector3(-direction.x * hor_Force, vect_force , -direction.z * hor_Force))
 

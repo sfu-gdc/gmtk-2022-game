@@ -14,8 +14,8 @@ var text_to_update = null;
 
 var _settings = {
 	"audio": {
-		"background_music": false,
-		"sfx": false
+		"background_music": true,
+		"sfx": true
 	},
 	"controls": {
 		"player1_up": KEY_W,
@@ -37,9 +37,10 @@ var _control_keymapping = {
 	"player1_activate": "activate"
 }
 
-func queue_free():
+func remove_itself():
 	get_parent().settings_spawned = false
-	.queue_free()
+	get_tree().paused = false;
+	queue_free()
 
 func load_settings():
 	var error = settings_file.load(settings_filepath);
@@ -50,18 +51,21 @@ func load_settings():
 	for section in _settings.keys():
 		for key in _settings[section]:
 			_settings[section][key] = settings_file.get_value(section, key, null);
-			
+	
+	$TabContainer/Audio/MusicLabel/CheckBox.pressed = _settings["audio"]["background_music"]
+	$TabContainer/Audio/SFXLabel/CheckBox.pressed = _settings["audio"]["sfx"]
+
 	$TabContainer/Controls/Player1Label/MoveForward/KeyButton/Label.text = OS.get_scancode_string(_settings["controls"]["player1_up"])
 	$TabContainer/Controls/Player1Label/MoveDownward/KeyButton/Label.text = OS.get_scancode_string(_settings["controls"]["player1_down"])
 	$TabContainer/Controls/Player1Label/MoveLeft/KeyButton/Label.text = OS.get_scancode_string(_settings["controls"]["player1_left"])
 	$TabContainer/Controls/Player1Label/MoveRight/KeyButton/Label.text = OS.get_scancode_string(_settings["controls"]["player1_right"])
 	$TabContainer/Controls/Player1Label/Interact/KeyButton/Label.text = OS.get_scancode_string(_settings["controls"]["player1_activate"])
 	$TabContainer/Controls/Player1Label/PickupDrop/KeyButton/Label.text = OS.get_scancode_string(_settings["controls"]["player1_pick"])
-	sync_key_mapping();
 
 func _ready():
-	#pass;
+	get_tree().paused = true;
 	load_settings();
+	#pass;
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if key_listening == null:
@@ -77,23 +81,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_CancelButton_pressed():
-	queue_free();
+	remove_itself();
 	pass # Replace with function body.
-
-func sync_key_mapping():
-	#update the keymapping right here
-	for key in _settings['controls'].keys():
-		#_settings['controls'][key] = settings_file.get_value('controls', key, null);
-		var list = InputMap.get_action_list( _control_keymapping[key] );
-		for i in list:
-			if i is InputEventKey:
-				# remove the previous register physical key mapping
-				if (i.scancode > 0 || i.physical_scancode > 0):
-				#if current_scancode == _settings["controls"][key_listening]:
-					InputMap.action_erase_event( _control_keymapping[key], i )
-		var e = InputEventKey.new();
-		e.set_scancode(_settings['controls'][key])
-		InputMap.action_add_event(_control_keymapping[key], e);
 
 func _on_SaveButton_pressed():
 	for section in _settings.keys():
@@ -101,9 +90,9 @@ func _on_SaveButton_pressed():
 			settings_file.set_value(section, key, _settings[section][key]);
 	settings_file.save(settings_filepath);
 	
-	
-	sync_key_mapping();
-	queue_free();
+	SettingsLoader.sync_music();
+	SettingsLoader.sync_key_mapping();
+	remove_itself();
 	pass # Replace with function body.;
 
 
@@ -113,4 +102,9 @@ func _on_KeyButton_pressed(settingkeyword:String, keymapname:String, origin:Stri
 	var target = "TabContainer/Controls/Player1Label/"+origin+"/KeyButton/Label"
 	text_to_update = get_node(target);
 	backdrop_panel.show();
+	pass # Replace with function body.
+
+
+func _on_CheckBox_toggled(button_pressed, _origin_label, target_settings):
+	_settings["audio"][target_settings] = button_pressed;
 	pass # Replace with function body.

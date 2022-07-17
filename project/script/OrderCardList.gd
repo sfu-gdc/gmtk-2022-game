@@ -42,9 +42,10 @@ func _ready():
 
 # warning-ignore:unused_argument
 func _process(delta):
-	if Input.is_action_just_pressed("down"):
-		var new_number = rng.randi_range(1, 50)
-		add(1, new_number)
+	#if Input.is_action_just_pressed("down"):
+	#	var new_number = rng.randi_range(1, 50)
+	#	add(1, new_number)
+	pass
 
 # called when move_state_changes occur. If it's not moving, add the cards from buffer
 func add_card_child():
@@ -70,9 +71,8 @@ func add(timer_time: float, num: int) -> Control:
 		order_card_buffer.append(order_card_instance)
 		return order_card_instance
 
-
 # create a new order card
-func create_order_card(timer_time: float, num: int):
+func create_order_card(timer_time: float, num: int) -> Control:
 	# creates an order card instance with timer wait time specified
 	var order_card_instance = instance_order_card(timer_time, num)
 
