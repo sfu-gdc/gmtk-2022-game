@@ -62,6 +62,8 @@ func _ready():
 	# move the time bar from green to red
 	tween.interpolate_property(time_bar, "modulate", Color( 0, 1, 0, 1 ), Color( 1, 0, 0, 1 ), full_time, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	_action = tween.start()
+	$Droping.play()
+	
 
 func _process(_delta):
 	# the proportion of the current timer time remains divided by the timer full time
@@ -85,6 +87,8 @@ func delete_card() -> bool:
 	tween.interpolate_property(panel, "rect_position:y", panel.rect_position.y, panel.rect_position.y - panel_vsize, 0.7, Tween.TRANS_QUINT, Tween.EASE_IN)
 	# warning-ignore:return_value_discarded
 	tween.start()
+	
+	$PullingUp.play()
 	# wait for the tween to be finished, and emit signal that card has gone completely up
 	yield(tween, "tween_all_completed")
 

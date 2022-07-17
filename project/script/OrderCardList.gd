@@ -129,7 +129,7 @@ func reorder_order_card_list(order_card_instance):
 					# start the tween for the cards by moving the cards from the back to the front
 # warning-ignore:return_value_discarded
 					tween.interpolate_property(card, "rect_position:x", card.rect_position.x,
-							card.rect_position.x- move_left_amount, 1, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+							card.rect_position.x- move_left_amount, 1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 				# start the tween
 # warning-ignore:return_value_discarded
 				tween.start()

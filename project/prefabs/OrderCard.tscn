@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://art/2d/bar_back.png" type="Texture" id=1]
 [ext_resource path="res://art/2d/bar.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://UI/theme/order_card_theme.tres" type="Theme" id=5]
 [ext_resource path="res://art/2d/Illustration.png" type="Texture" id=6]
 [ext_resource path="res://art/dice-target.png" type="Texture" id=7]
+[ext_resource path="res://audio/sound_effect/pulling_up.wav" type="AudioStream" id=8]
+[ext_resource path="res://audio/sound_effect/dropping.wav" type="AudioStream" id=9]
 
 [node name="OrderCard" type="Control"]
 anchor_right = 1.0
@@ -93,3 +95,9 @@ custom_constants/margin_right = 8
 custom_constants/margin_left = 8
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Droping" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+
+[node name="PullingUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
