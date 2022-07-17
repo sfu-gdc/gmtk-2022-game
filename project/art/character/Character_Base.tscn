@@ -1431,19 +1431,19 @@ bone_name = "Head"
 [node name="Body" type="BoneAttachment" parent="KayKit Animated Character/Skeleton"]
 
 [node name="ArmLeft" type="BoneAttachment" parent="KayKit Animated Character/Skeleton"]
-transform = Transform( -1.19209e-07, 0.471936, -0.881633, 2.23518e-07, -0.881633, -0.471936, -1, -2.27045e-07, -1.05144e-07, 0.14, 0.691598, -1.3027e-15 )
+transform = Transform( -1.19209e-07, 0.471936, -0.881633, 2.5332e-07, -0.881633, -0.471936, -1, -2.5332e-07, -1.19209e-07, 0.14, 0.691598, -1.3027e-15 )
 bone_name = "armLeft"
 
 [node name="ArmRight" type="BoneAttachment" parent="KayKit Animated Character/Skeleton"]
-transform = Transform( -1.19209e-07, -0.471936, -0.881633, -2.5332e-07, -0.881633, 0.471936, -1, 2.49792e-07, -1.33274e-07, -0.14, 0.691598, 8.40813e-15 )
+transform = Transform( -1.19209e-07, -0.471936, -0.881633, -2.23518e-07, -0.881633, 0.471936, -1, 2.23517e-07, -1.19209e-07, -0.14, 0.691598, 8.40813e-15 )
 bone_name = "armRight"
 
 [node name="handLeft" type="BoneAttachment" parent="KayKit Animated Character/Skeleton"]
-transform = Transform( -1, 2.92555e-08, -1.19209e-07, -1.19209e-07, 1.48038e-07, 1, -1.04757e-07, 1, -1.21901e-07, 0.4, 0.205887, -1.25084e-07 )
+transform = Transform( -1, 2.92556e-08, 0, 0, 1.04171e-07, 1, -1.04757e-07, 1, -7.80337e-08, 0.4, 0.205887, -1.3956e-07 )
 bone_name = "handSlotLeft"
 
 [node name="handRight" type="BoneAttachment" parent="KayKit Animated Character/Skeleton"]
-transform = Transform( -1, 1.0808e-07, 2.98023e-08, 2.98023e-08, -1.46365e-07, 1, 3.87168e-10, 1, 1.93716e-07, -0.4, 0.205887, 1.37616e-07 )
+transform = Transform( -1, 1.0808e-07, 0, 0, -1.76167e-07, 1, 3.87132e-10, 1, 2.23518e-07, -0.4, 0.205887, 1.2314e-07 )
 bone_name = "handSlotRight"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

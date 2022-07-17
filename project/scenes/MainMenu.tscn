@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://fonts/CollegiateBlackFLF.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://script/MainMenu.gd" type="Script" id=2]
 [ext_resource path="res://scenes/MenuFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://audio/music/gmtk-2022-song-atmosphere.mp3" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 70
@@ -62,6 +63,11 @@ text = "Settings"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Background" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -10.0
+autoplay = true
 
 [connection signal="pressed" from="Panel/HBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]

@@ -13,6 +13,8 @@ onready var level : Spatial = $"/root".get_child(get_tree().get_root().get_child
 onready var UI : GridContainer = $DiceInPot
 onready var cooking_progress : ProgressBar = $CookProgress
 onready var fire_explosion : CPUParticles2D = $FireExplosion
+onready var simmer : AudioStreamPlayer = $Simmer
+onready var countdown : AudioStreamPlayer = $Countdown
 var smoke : CPUParticles
 
 
@@ -51,6 +53,12 @@ func _process(delta):
 		burn_img.texture = BURN_IMG
 		UI.add_child(burn_img)
 	
+	if not burnt and numbers.size() > 0 and cooking_time >= numbers.size() * DIE_COOK_TIME:
+		if not countdown.playing:
+			countdown.playing = true
+		if cooking:
+			countdown.stream_paused = false
+	
 	if burnt:
 		cooking_progress.value = numbers.size() * DIE_COOK_TIME + BURN_TIME
 	
@@ -77,15 +85,17 @@ func _on_player_interact(player: KinematicBody, held_object: Spatial):
 		cooking_progress.max_value = numbers.size() * DIE_COOK_TIME
 		print(numbers)
 		$PutInPot.play()
+		countdown.stop()
 		
 func _on_throwable_interact(held_object: Spatial):
 		numbers.append(held_object.number)
 		held_object.remove_from_group("pickup")
-	
 		UI.add_die(held_object.number)
 		smoke.emitting = cooking and numbers.size() > 0
 		cooking_progress.max_value = numbers.size() * DIE_COOK_TIME
 		print(numbers)
+		$PutInPot.play()
+		countdown.stop()
 
 func pickup(player: KinematicBody) -> Spatial:
 	# Attach to player and disable collisions
@@ -99,7 +109,9 @@ func pickup(player: KinematicBody) -> Spatial:
 	transform.origin = player.get_node("PotSpot").transform.translated(Vector3(0.0, -0.5, 0.0)).origin
 	held = true
 	cooking = false
+	simmer.stop()
 	smoke.emitting = cooking
+	countdown.stream_paused = true
 	return self
 
 func place(player: KinematicBody):
@@ -124,6 +136,7 @@ func place(player: KinematicBody):
 		return false
 
 func garbage(player: KinematicBody):
+	$Dumping.play()
 	dumping = true
 	var animation := player.get_node("PotDump")
 	player.get_node("PotSpot").rotate_garbage()
@@ -137,15 +150,18 @@ func garbage(player: KinematicBody):
 	print(numbers)
 	yield(animation, "animation_finished")
 	dumping = false
-	$Dumping.play()
 
 func _on_Area_body_entered(body):
 	if body.is_in_group("snap"):
 		print("snapped")
 		mode = RigidBody.MODE_STATIC
-
+		$PutDownPot.play()
 	if body.get_parent().is_in_group("burner"):
 		cooking = true
+		simmer.play()
 		smoke.emitting = cooking and numbers.size() > 0
 		print("cooking: ", cooking)
-		$PutDownPot.play()
+	
+	if body.is_in_group("floor"):
+		$Thump.play()
+	
