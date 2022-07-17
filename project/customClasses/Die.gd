@@ -42,7 +42,6 @@ func _init(arg):
 	
 	#collision checker
 
-
 # this is so we can pass 2 params to the function
 func init(die_type_local: int, start_location_local: Vector3):
 	#collision checker

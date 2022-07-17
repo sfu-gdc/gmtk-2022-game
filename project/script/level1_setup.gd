@@ -9,13 +9,10 @@ func _ready():
 	#spwan_tutorial()
 	pass
 
-
 func spwan_tutorial():
 	get_tree().paused = true;
 	pass	
 	# TODO: attach pots to their burners
-
-
 
 func _on_TutorialNextButton_pressed():
 	if (current_slide >= total_num_slide):
@@ -30,7 +27,6 @@ func _on_TutorialNextButton_pressed():
 	if (current_slide == total_num_slide):
 		self.find_node("NextButton").get_child(0).bbcode_text = "[center]start game[/center]";
 	pass # Replace with function body.
-
 
 func _on_TutorialPrevButton_pressed():
 	if (current_slide == 1):

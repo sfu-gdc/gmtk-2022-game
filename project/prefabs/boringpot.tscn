@@ -110,6 +110,7 @@ bus = "SFX"
 
 [node name="PutDownPot" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+volume_db = -9.286
 bus = "SFX"
 
 [node name="Dumping" type="AudioStreamPlayer" parent="."]

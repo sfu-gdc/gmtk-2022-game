@@ -42,7 +42,7 @@ func _process(delta):
 	if order_card_list == null:
 		post_ready()
 
-# public function
+# public function ###############
 func completed_recipe(number: int):
 	var i: int = out_going_recipes_number.find(number)
 	var oc: Control = out_going_recipes[i]
