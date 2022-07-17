@@ -4,10 +4,10 @@ onready var UI_position = get_parent().get_node("UIPosition")
 onready var styleBox = get("custom_styles/fg")
 onready var pot = get_parent()
 
-onready var BURN_FRACTION : float = pot.BURN_FRACTION
+onready var BURN_TIME : float = pot.BURN_TIME
 
 func _process(_delta):
-	var fraction_to_burn := clamp(range_lerp(pot.cooking_time, max_value, BURN_FRACTION * max_value, 0.0, 1.0), 0.0, 1.0)
+	var fraction_to_burn := clamp(range_lerp(pot.cooking_time, max_value, BURN_TIME + max_value, 0.0, 1.0), 0.0, 1.0)
 	
 	if value == 0.0:
 		visible = false

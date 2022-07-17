@@ -3,8 +3,8 @@ extends RigidBody
 export var interaction_range : float = 20.0
 
 const SMOKE_SCENE := preload("res://prefabs/effects/smoke.tscn")
-const DIE_COOK_TIME := 20
-const BURN_FRACTION := 1.5
+const DIE_COOK_TIME := 8.0
+const BURN_TIME := 10.0
 
 onready var player1 : KinematicBody = $"/root".get_child(0).find_node("Player1")
 onready var level : Spatial = $"/root".get_child(0)
@@ -31,7 +31,10 @@ func _ready():
 	player1.connect("interact", self, "_on_player_interact")
 
 func _process(delta):
-	clamp(range_lerp(cooking_time, cooking_progress.max_value, BURN_FRACTION * cooking_progress.max_value, 0.0, 1.0), 0.0, 1.0)
+	var fraction_to_burn := clamp(range_lerp(cooking_time, cooking_progress.max_value, BURN_TIME + cooking_progress.max_value, 1.0, 0.0), 0.0, 1.0)
+	
+	smoke.color = Color(fraction_to_burn, fraction_to_burn, fraction_to_burn)
+	
 	cooking_progress.value = cooking_time
 	if cooking and numbers.size() > 0:
 		cooking_time += delta
