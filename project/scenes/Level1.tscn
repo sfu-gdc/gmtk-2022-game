@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://art/tile_textures/counter-tile.png" type="Texture" id=1]
 [ext_resource path="res://art/trashbin.tscn" type="PackedScene" id=2]
@@ -68,6 +68,7 @@ script = ExtResource( 23 )
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.507794, 0.861479, 0, -0.861479, 0.507794, 11.7721, 22.6795, 9.64956 )
 environment = ExtResource( 18 )
+current = true
 far = 143.4
 script = ExtResource( 4 )
 

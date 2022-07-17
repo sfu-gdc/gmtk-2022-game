@@ -65,6 +65,11 @@ func _process(_delta):
 
 # when the timer runs out, move the panel up, and deletes the node
 func _on_Timer_timeout():
+	# removes the card when timer reaches 0
+	delete_card()
+
+# delete the current node card
+func delete_card():
 	# moves the card up
 	tween.interpolate_property(panel, "rect_position:y", panel.rect_position.y, panel.rect_position.y - panel_vsize, 0.7, Tween.TRANS_QUINT, Tween.EASE_IN)
 	tween.start()
