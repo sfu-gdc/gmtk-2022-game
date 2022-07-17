@@ -1,4 +1,4 @@
-extends Spatial
+extends RigidBody
 
 export var interaction_range : float = 20.0
 
@@ -6,8 +6,11 @@ onready var player1 : KinematicBody = $"/root".get_child(0).find_node("Player1")
 onready var level : Spatial = $"/root".get_child(0)
 onready var UI : GridContainer = $DiceInPot
 
+const POT_LAYER := 1
+
 var numbers := []
 var held := false
+var dumping := false
 
 func _ready():
 # warning-ignore:return_value_discarded
@@ -22,6 +25,9 @@ func _on_player_interact(player: KinematicBody, held_object: Spatial):
 
 func pickup(player: KinematicBody) -> Spatial:
 	# Attach to player and disable collisions
+	mode = RigidBody.MODE_STATIC
+	collision_layer = 0
+	collision_mask = 0
 	var save_transform := global_transform
 	get_parent().remove_child(self)
 	player.get_node("PotSpot").add_child(self)
@@ -31,17 +37,36 @@ func pickup(player: KinematicBody) -> Spatial:
 	return self
 
 func place():
-	var player = get_parent()
-	var position = get_parent()
-	var save_transform := global_transform
-	position.remove_child(self)
-	level.add_child(self)
-	global_transform = save_transform
-	held = false
+	if not dumping and held:
+		var player = get_parent()
+		var position = get_parent()
+		var save_transform := global_transform
+		position.remove_child(self)
+		level.add_child(self)
+		global_transform = save_transform
+		global_transform.origin = (global_transform.origin - 1.5 * player.global_transform.basis.z).snapped(Vector3(2.0, 2.0, 2.0)) + 1.25 * Vector3.DOWN
+		held = false
+		mode = RigidBody.MODE_CHARACTER
+		collision_layer = POT_LAYER
+		collision_mask = POT_LAYER
+		
+		return true
+	else:
+		return false
 
 func garbage(player: KinematicBody):
-	player.get_node("PotDump").play("Dump")
+	dumping = true
+	var animation := player.get_node("PotDump")
 	player.get_node("PotSpot").rotate_garbage()
+	animation.play("Dump")
 	numbers.clear()
 	UI.clear_dice()
 	print(numbers)
+	yield(animation, "animation_finished")
+	dumping = false
+
+
+func _on_Area_body_entered(body):
+	if body.is_in_group("snap"):
+		print("snapped")
+		mode = RigidBody.MODE_STATIC

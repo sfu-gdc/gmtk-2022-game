@@ -7,6 +7,7 @@ func _ready():
 	# give each cube a separate collider
 	for child in child_list:
 		var sbody = StaticBody.new()
+		sbody.add_to_group("snap")
 		child.add_child(sbody)
 		
 		var shape = CollisionShape.new()
