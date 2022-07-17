@@ -200,7 +200,7 @@ func pot(player: KinematicBody, dump_pot: Spatial):
 	add_child(yeet)
 
 	# warning-ignore:return_value_discarded
-		yeet.interpolate_property(self, "global_transform:origin", null, dump_pot.global_transform.origin, 0.2, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
+	yeet.interpolate_property(self, "global_transform:origin", null, dump_pot.global_transform.origin, 0.2, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
 	# warning-ignore:return_value_discarded
 	
 	yeet.start()
