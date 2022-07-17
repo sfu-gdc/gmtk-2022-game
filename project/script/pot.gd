@@ -95,6 +95,7 @@ func _on_player_interact(player: KinematicBody, held_object: Spatial):
 		elif held_object == null and cooking_time >= numbers.size() * DIE_COOK_TIME:
 			var dish := DISH.instance()
 			player.add_child(dish)
+			dish.play_dish_sfx();
 			dish.global_transform.origin = player.get_node("PotSpot").global_transform.origin
 			cooking_time = 0.0
 			player.held_object = dish

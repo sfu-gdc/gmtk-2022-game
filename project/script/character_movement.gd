@@ -59,6 +59,8 @@ func place_food(serve_area: MeshInstance) -> void:
 	yeet.start()
 	yield(yeet, "tween_completed")
 	held_object.get_node("CPUParticles").emitting = true
+	$SubmitDish.stream.loop = false;
+	$SubmitDish.play();
 	var t = Timer.new()
 	t.set_wait_time(1.5)
 	t.set_one_shot(true)
