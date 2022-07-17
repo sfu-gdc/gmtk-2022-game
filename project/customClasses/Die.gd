@@ -104,7 +104,7 @@ func finalize_number():
 		number = 0 # err
 		print("bad compute, no, stop")
 	
-	# play oneshot particle effect	
+	# play oneshot particle effect
 	var particles = load("res://prefabs/effects/CompletionEventParticles.tscn").instance()
 	particles.name = "ChildParticles"
 	self.add_child(particles)

@@ -6,6 +6,7 @@ onready var UI_position = get_parent().get_node("UIPosition")
 
 var DIE_TEXTURES := {}
 var image_size := 20.0
+var size_multiplier := 1.0
 var num_dice := 0
 
 func _ready():
@@ -15,10 +16,10 @@ func _ready():
 	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 	
 	columns = 1
-	margin_left = -image_size / 2.0
-	margin_right = image_size / 2.0
+	margin_left = -image_size * size_multiplier / 2.0
+	margin_right = image_size * size_multiplier / 2.0
 # warning-ignore:integer_division
-	margin_top = -image_size * float((num_dice + 1) / 2)
+	margin_top = -image_size * size_multiplier * float((num_dice + 1) / 2)
 	margin_bottom = 0.0
 	
 	var texture_path := "res://art/dice/"
@@ -51,10 +52,10 @@ func add_die(number: int):
 	add_child(new_die)
 	num_dice += 1
 	columns = int(min(2, num_dice))
-	margin_left = -image_size * columns / 2.0
-	margin_right = image_size * columns / 2.0
+	margin_left = -image_size * size_multiplier * columns / 2.0
+	margin_right = image_size * size_multiplier * columns / 2.0
 # warning-ignore:integer_division
-	margin_top = -image_size * float((num_dice + 1) / 2)
+	margin_top = -image_size * size_multiplier * float((num_dice + 1) / 2)
 	margin_bottom = 0.0
 
 func clear_dice():
@@ -62,16 +63,16 @@ func clear_dice():
 		child.queue_free()
 	num_dice = 0
 	columns = 1
-	margin_left = -image_size / 2.0
-	margin_right = image_size / 2.0
+	margin_left = -image_size * size_multiplier / 2.0
+	margin_right = image_size * size_multiplier / 2.0
 # warning-ignore:integer_division
-	margin_top = -image_size * float((num_dice + 1) / 2)
+	margin_top = -image_size * size_multiplier * float((num_dice + 1) / 2)
 	margin_bottom = 0.0
 
 func _on_viewport_size_changed():
 	image_size = get_viewport().get_visible_rect().size.y / 30.0
-	margin_left = -image_size * columns / 2.0
-	margin_right = image_size * columns / 2.0
+	margin_left = -image_size * size_multiplier * columns / 2.0
+	margin_right = image_size * size_multiplier * columns / 2.0
 # warning-ignore:integer_division
-	margin_top = -image_size * float((num_dice + 1) / 2)
+	margin_top = -image_size * size_multiplier * float((num_dice + 1) / 2)
 	margin_bottom = 0.0
