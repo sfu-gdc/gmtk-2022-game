@@ -59,11 +59,11 @@ albedo_texture = ExtResource( 17 )
 [sub_resource type="CubeMesh" id=17]
 material = SubResource( 16 )
 
-[sub_resource type="SpatialMaterial" id=7]
+[sub_resource type="SpatialMaterial" id=28]
 albedo_texture = ExtResource( 6 )
 
 [sub_resource type="CubeMesh" id=8]
-material = SubResource( 7 )
+material = SubResource( 28 )
 
 [sub_resource type="SpatialMaterial" id=12]
 albedo_texture = ExtResource( 19 )
@@ -1014,7 +1014,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.05423, 0.4335, -2.44846 )
 collision_mask = 3
 
 [node name="Player2" parent="." instance=ExtResource( 37 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -3 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -2 )
 
 [node name="GamePanel" type="Control" parent="."]
 anchor_right = 1.0

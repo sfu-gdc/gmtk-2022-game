@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="gmtk-2022-game"
-run/main_scene="res://scenes/MainMenu.tscn"
+run/main_scene="res://prefabs/MainestMenu.tscn"
 config/icon="res://art/icon.png"
 
 [autoload]

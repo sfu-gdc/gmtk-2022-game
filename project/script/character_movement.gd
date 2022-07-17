@@ -106,13 +106,13 @@ func _process(_delta):
 
 	# inform dice_box to move up / down
 	for dice_box in dice_box_list:
-		if (dice_box.translation - translation).length() < interaction_range:
+		if (dice_box.global_transform.origin - global_transform.origin).length() < interaction_range:
 			dice_box.player_is_near[player_number-1] = true
 		else:
 			dice_box.player_is_near[player_number-1] = false
 	  
 	for serve_area in serve_area_list:
-		if (serve_area.translation - translation).length() < interaction_range:
+		if (serve_area.global_transform.origin - global_transform.origin).length() < interaction_range:
 			serve_area.player_is_near[player_number-1] = true
 		else:
 			serve_area.player_is_near[player_number-1] = false
@@ -123,7 +123,7 @@ func _process(_delta):
 		# If near dice box, spawn a die
 		if die_spawn_timer == 0:
 			for dice_box in dice_box_list:
-				if (dice_box.translation - translation).length() < interaction_range:
+				if (dice_box.global_transform.origin - global_transform.origin).length() < interaction_range:
 					get_node("/root/Level1/Player"+str(player_number)+"/KinematicBody"+str(player_number)+"/ActivateDieBox").play()
 					spawn_die(dice_box.translation)
 					die_spawn_timer = 0.4
@@ -132,7 +132,7 @@ func _process(_delta):
 		# If near output area & have food in hand place it in.
 		if food_in_hand_matches():
 			for serve_area in serve_area_list:
-				if (serve_area.translation - translation).length() < interaction_range:
+				if (serve_area.global_transform.origin - global_transform.origin).length() < interaction_range:
 					game_runner.completed_recipe(held_object.number)
 					place_food(serve_area)
 					#print(game_runner.out_going_recipes_number.size())
@@ -154,7 +154,7 @@ func _process(_delta):
 		else:
 			var close_objects := {}
 			for object in get_tree().get_nodes_in_group("pickup"):
-				var distance : float = (object.translation - translation).length()
+				var distance : float = (object.global_transform.origin - global_transform.origin).length()
 				if distance < interaction_range+1.0: # +1 for height
 					close_objects[distance] = object
 			# If there is a closest object
@@ -184,10 +184,10 @@ func pickingUpAnimation(object, delta):
 		return
 		
 	# the dice will travel a little bit before picked up
-	var direction = transform.origin - object.transform.origin
-	object.translation.x += direction.x * delta
-	object.translation.y += direction.y * 0.5 + 1
-	object.translation.z += direction.z * delta
+	var direction = global_transform.origin - object.global_transform.origin
+	object.global_transform.origin.x += direction.x * delta
+	object.global_transform.origin.y += direction.y * 0.5 + 1
+	object.global_transform.origin.z += direction.z * delta
 
 func throwObject(delta, direction, hor_Force, vect_force):
 	if ((player_number == 1 && Input.is_action_pressed("throw")) || (player_number == 2 && Input.is_action_pressed("player2_throw"))) && held_object:
@@ -256,6 +256,6 @@ func _physics_process(delta):
 	else:
 		velocity_y -= Vector3(0.0, gravity * delta, 0.0)
 
-	throwObject(delta, transform.basis.z, 1250 , -100)
+	throwObject(delta, global_transform.basis.z, 1250 , -100)
 	# warning-ignore:return_value_discarded
 	move_and_slide(velocity_xz + velocity_y, Vector3.UP, false, 4, 0.785398, false)
