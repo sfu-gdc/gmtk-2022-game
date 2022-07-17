@@ -18,6 +18,8 @@ var cur_speed = 0
 onready var animationTree : AnimationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 
+onready var arrow_effect = $arrow
+
 var die_spawn_timer = 0
 
 var held_object : Spatial = null
@@ -68,7 +70,6 @@ func _process(_delta):
 		if held_object:
 			picking_time = -1
 			picking = false
-			
 			if held_object.place(self):
 				held_object = null
 		# Otherwise, find the closest die
@@ -104,6 +105,22 @@ func pickingUpAnimation(object, delta):
 	object.translation.x += direction.x * delta
 	object.translation.y += direction.y * 0.5 + 1
 	object.translation.z += direction.z * delta
+	
+func throwObject(delta, direction, hor_Force, vect_force):
+	if Input.is_action_pressed("throw") && held_object:
+		arrow_effect.visible = true
+	else:
+		arrow_effect.visible = false
+	
+	if Input.is_action_just_released("throw") && held_object:
+		if held_object.throwable:
+			picking_time = -1
+			picking = false
+			held_object.global_transform.origin.y = held_object.global_transform.origin.y - 1.2
+			held_object.add_central_force(Vector3(-direction.x * hor_Force, vect_force , -direction.z * hor_Force))
+			
+		if held_object.place(self):
+			held_object = null
 
 func _physics_process(delta):
 	if (Input.is_action_pressed("player_up") or Input.is_action_pressed("player_down") or
@@ -116,6 +133,7 @@ func _physics_process(delta):
 								).normalized()
 		
 		rotation.y = lerp_angle(rotation.y, atan2(-velocity_xz.x, -velocity_xz.z), delta * angular_accleration)
+
 	else:
 		animationState.travel("Idle")
 		velocity_xz = Vector3()
@@ -124,6 +142,8 @@ func _physics_process(delta):
 		velocity_y = Vector3()
 	else:
 		velocity_y -= Vector3(0.0, gravity * delta, 0.0)
-	
+		
+	throwObject(delta, transform.basis.z, 1250 , -100)
 	# warning-ignore:return_value_discarded
 	move_and_slide(velocity_xz + velocity_y, Vector3.UP, false, 4, 0.785398, false)
+	

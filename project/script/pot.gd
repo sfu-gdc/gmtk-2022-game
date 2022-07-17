@@ -21,6 +21,9 @@ var held := false
 var dumping := false
 var cooking_time := 0.0
 
+# is this object throwable or not
+var throwable = false
+
 func _ready():
 	var smoke_scene := SMOKE_SCENE.instance()
 	smoke_scene.pot_to_follow = self
