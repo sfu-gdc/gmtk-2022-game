@@ -18,6 +18,8 @@ var throwable = true
 # throwing status will keep releasing signal
 var throwing = false
 
+var collide_count = 0
+
 onready var dice_tex_1 = load("res://art/white-die.png")
 
 # for stopping & starting particles
@@ -140,11 +142,14 @@ func _process(_delta):
 func _on_body_entered(body:Node):
 	#if die collised to "attachable" object
 	if not "attachable" in body:
+		collide_count += 1
+		if collide_count > 5:
+			throwing = false
+			collide_count = 0
 		return
 	if throwing:
 		body._on_throwable_interact(self)
 		queue_free()
-		
 
 	
 func pickup(player: KinematicBody) -> Die:

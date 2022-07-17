@@ -86,7 +86,7 @@ tracks/1/keys = {
 }
 
 [node name="Boat" type="Spatial"]
-transform = Transform( -0.193139, 0, 0.981171, 0, 1, 0, -0.981171, 0, -0.193139, 5.039, -2.5, -13.895 )
+transform = Transform( -0.193138, 0, 0.981171, 0, 1, 0, -0.981171, 0, -0.193138, 5.039, -2.5, -13.895 )
 
 [node name="watercraftPack_004" parent="." instance=ExtResource( 1 )]
 

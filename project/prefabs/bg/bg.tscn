@@ -235,7 +235,6 @@ material/18 = null
 material/19 = null
 
 [node name="small_mountain" parent="ground_top/terrain/terrain_top" instance=ExtResource( 14 )]
-
 transform = Transform( 7, 0, 0, 0, 8, 0, 0, 0, 8, -10, 2.22222, -26.555 )
 
 [node name="small_mountain2" parent="ground_top/terrain/terrain_top" instance=ExtResource( 14 )]
