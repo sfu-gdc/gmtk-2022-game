@@ -63,8 +63,7 @@ func load_settings():
 	$TabContainer/Controls/Player1Label/PickupDrop/KeyButton/Label.text = OS.get_scancode_string(_settings["controls"]["player1_pick"])
 
 func _ready():
-	print("parent: "+str(get_parent()));
-	#get_tree().paused = true;
+	get_tree().paused = true;
 	load_settings();
 	#pass;
 	
