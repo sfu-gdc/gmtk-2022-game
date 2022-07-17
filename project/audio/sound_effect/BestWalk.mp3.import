@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/BestWalk.mp3-0b4d8d83af8aea4f570e077515e482e8.mp3str"
+
+[deps]
+
+source_file="res://audio/sound_effect/BestWalk.mp3"
+dest_files=[ "res://.import/BestWalk.mp3-0b4d8d83af8aea4f570e077515e482e8.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

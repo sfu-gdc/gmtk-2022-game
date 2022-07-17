@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/FastWalk.mp3-56a2acb03fb46ffcc840f568a3cd5857.mp3str"
+
+[deps]
+
+source_file="res://audio/sound_effect/FastWalk.mp3"
+dest_files=[ "res://.import/FastWalk.mp3-56a2acb03fb46ffcc840f568a3cd5857.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

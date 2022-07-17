@@ -1,10 +1,13 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=16 format=2]
 
+[ext_resource path="res://audio/sound_effect/better_pot.wav" type="AudioStream" id=1]
 [ext_resource path="res://script/pot.gd" type="Script" id=2]
+[ext_resource path="res://audio/sound_effect/simmer.wav" type="AudioStream" id=3]
 [ext_resource path="res://art/metal.material" type="Material" id=4]
-[ext_resource path="res://audio/sound_effect/place_in_pot.mp3" type="AudioStream" id=5]
+[ext_resource path="res://audio/sound_effect/beeping.mp3" type="AudioStream" id=5]
 [ext_resource path="res://audio/sound_effect/dumping.wav" type="AudioStream" id=6]
 [ext_resource path="res://audio/sound_effect/putdown_pot.mp3" type="AudioStream" id=7]
+[ext_resource path="res://audio/sound_effect/fall.wav" type="AudioStream" id=8]
 
 [sub_resource type="ArrayMesh" id=2]
 resource_name = "boringpot_Cylinder"
@@ -102,18 +105,33 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.62406, 0 )
 shape = SubResource( 6 )
 
 [node name="PutInPot" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
+stream = ExtResource( 1 )
+bus = "SFX"
 
 [node name="PutDownPot" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+bus = "SFX"
 
 [node name="Dumping" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+bus = "SFX"
+
+[node name="Simmer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "SFX"
+
+[node name="Countdown" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+bus = "SFX"
+
+[node name="Thump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -5.0
+bus = "SFX"
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.687963, 0 )
 mesh = SubResource( 7 )
 material/0 = SubResource( 8 )
-
 
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]

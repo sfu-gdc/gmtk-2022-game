@@ -2,7 +2,7 @@ extends RigidBody
 class_name Die
 
 onready var dice_pool := $"/root/Level1/DicePool"
-onready var trash := $"/root".get_child(-1).find_node("Trash")
+onready var trash := $"/root".get_child($"/root".get_child_count()-1).find_node("Trash")
 
 var start_location : Vector3
 
@@ -17,6 +17,8 @@ var number_group: int = 0
 var throwable = true
 # throwing status will keep releasing signal
 var throwing = false
+
+var collide_count = 0
 
 onready var dice_tex_1 = load("res://art/white-die.png")
 
@@ -86,7 +88,6 @@ func init(die_type_local: int, start_location_local: Vector3):
 	shape.shape.extents = Vector3(0.6,0.6,0.6)
 	self.add_child(shape)
 	
-# TODO: INSTANTLY finalize the moment a die is picked up.
 func finalize_number():
 	var pillar1 = self.transform.xform(Vector3(0,0,1)).normalized()
 	var pillar2 = self.transform.xform(Vector3(1,0,0)).normalized()
@@ -141,9 +142,15 @@ func _process(_delta):
 func _on_body_entered(body:Node):
 	#if die collised to "attachable" object
 	if not "attachable" in body:
+		collide_count += 1
+		if collide_count > 5:
+			throwing = false
+			collide_count = 0
 		return
-	body._on_throwable_interact(self)
-	queue_free()
+	if throwing:
+		body._on_throwable_interact(self)
+		queue_free()
+
 	
 func pickup(player: KinematicBody) -> Die:
 	# Attach to player and disable collisions
@@ -199,9 +206,11 @@ func pot(player: KinematicBody, dump_pot: Spatial):
 	
 	var yeet := Tween.new()
 	add_child(yeet)
-# warning-ignore:return_value_discarded
+
+	# warning-ignore:return_value_discarded
 	yeet.interpolate_property(self, "global_transform:origin", null, dump_pot.global_transform.origin, 0.2, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
+	
 	yeet.start()
 	yield(yeet, "tween_completed")
 	queue_free()
