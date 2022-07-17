@@ -12,6 +12,7 @@ onready var player1 : KinematicBody = $"/root".get_child(0).find_node("Player1")
 onready var level : Spatial = $"/root".get_child(0)
 onready var UI : GridContainer = $DiceInPot
 onready var cooking_progress : ProgressBar = $CookProgress
+onready var fire_explosion : CPUParticles2D = $FireExplosion
 var smoke : CPUParticles
 
 
@@ -34,10 +35,10 @@ func _ready():
 	player1.connect("interact", self, "_on_player_interact")
 
 func _process(delta):
-	if cooking_time >= numbers.size() * DIE_COOK_TIME + BURN_TIME:
+	if cooking_time >= numbers.size() * DIE_COOK_TIME + BURN_TIME and not burnt:
 		burnt = true
 		numbers.clear()
-		
+		fire_explosion.emitting = true
 		UI.size_multiplier = 2.0
 		UI.clear_dice()
 		UI.margin_top = -UI.image_size * UI.size_multiplier
