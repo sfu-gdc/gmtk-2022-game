@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://art/tile_textures/counter-tile.png" type="Texture" id=1]
 [ext_resource path="res://art/trashbin.tscn" type="PackedScene" id=2]
@@ -74,7 +74,7 @@ script = ExtResource( 4 )
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.926089, 0.145049, -0.348311, 0.305704, 0.252614, 0.918004, 0.221144, -0.956633, 0.189601, -3.30546, 8.26858, 0 )
 light_color = Color( 1, 1, 0.988235, 1 )
-light_energy = 0.64
+light_energy = 0.68
 light_indirect_energy = 0.764
 light_size = 0.047
 light_specular = 0.733
