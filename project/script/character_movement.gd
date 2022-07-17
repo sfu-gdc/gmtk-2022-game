@@ -161,7 +161,10 @@ func _process(_delta):
 				picking_time = 20 * _delta
 				$GrabObject.play()
 				animationState.travel("PickUp")
-
+	
+	if !is_instance_valid( held_object ) || held_object == null:
+		return
+		
 	# pickup delay for animation
 	if picking && picking_time > 0:
 		pickingUpAnimation(held_object, _delta)

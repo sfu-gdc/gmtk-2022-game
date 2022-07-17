@@ -5,7 +5,7 @@ const ORDER_COST: int = 20
 var order_card_list: Node = null
 var game_panel: Node = null
 
-const SMALL_ORDER_TIME = 20.0
+const SMALL_ORDER_TIME = 25.0
 var new_order_timer: float = 10.0
 
 # this script manages running the game
