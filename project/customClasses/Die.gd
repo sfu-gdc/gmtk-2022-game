@@ -22,7 +22,7 @@ onready var dice_tex_1 = load("res://art/white-die.png")
 var t1: Timer = Timer.new()
 var t2: Timer = Timer.new()
 
-func _init():
+func _init(arg):
 	add_to_group("pickup")
 	
 	self.add_child(t1)
