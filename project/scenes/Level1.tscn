@@ -545,8 +545,8 @@ skeleton = NodePath("")
 material/0 = null
 script = ExtResource( 21 )
 
-[node name="ServeArea2" type="MeshInstance" parent="Level/OuterWalls" groups=["serve"]]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4, 0, -10 )
+[node name="ServeArea1" type="MeshInstance" parent="Level/OuterWalls" groups=["serve"]]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 6, 0, -10 )
 mesh = SubResource( 17 )
 skeleton = NodePath("")
 material/0 = null
