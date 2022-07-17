@@ -191,6 +191,10 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 90, 0 ), Vector3( 0, 101.136, 0 ), Vector3( 0, 128.687, 0 ), Vector3( 0, 149.652, 0 ) ]
 }
 
+[sub_resource type="DynamicFont" id=28]
+size = 40
+font_data = ExtResource( 30 )
+
 [sub_resource type="DynamicFont" id=26]
 font_data = ExtResource( 30 )
 
@@ -905,9 +909,6 @@ max_value = 20.0
 value = 6.64
 percent_visible = false
 script = ExtResource( 12 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="FireExplosion" type="CPUParticles2D" parent="boringpot"]
 position = Vector2( 557, 180 )
@@ -1166,7 +1167,7 @@ margin_left = 4.0
 margin_top = 13.0
 margin_right = 637.0
 margin_bottom = 78.0
-
+custom_fonts/normal_font = SubResource( 28 )
 bbcode_enabled = true
 bbcode_text = "[center]tutorial[/center]"
 text = "tutorial"
