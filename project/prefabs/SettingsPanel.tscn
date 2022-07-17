@@ -1,9 +1,18 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://fonts/CollegiateBlackFLF.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://script/Settings.gd" type="Script" id=2]
+[ext_resource path="res://UI/theme/theme.tres" type="Theme" id=3]
+[ext_resource path="res://UI/theme/theme2.tres" type="Theme" id=4]
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.337255, 0.337255, 0.337255, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 10
+shadow_offset = Vector2( 3, 3 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 43
@@ -31,7 +40,8 @@ margin_left = -254.5
 margin_top = -247.0
 margin_right = 254.5
 margin_bottom = 247.0
-custom_styles/panel = SubResource( 3 )
+theme = ExtResource( 3 )
+custom_styles/panel = SubResource( 6 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 220.0, 240.0 ]
@@ -86,15 +96,13 @@ margin_left = 70.0
 margin_top = 76.0
 margin_right = 433.0
 margin_bottom = 399.0
+theme = ExtResource( 4 )
 tab_align = 0
 
 [node name="Audio" type="Tabs" parent="TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_top = 30.0
 
 [node name="MusicLabel" type="Label" parent="TabContainer/Audio"]
 margin_left = 24.0
@@ -125,7 +133,6 @@ margin_bottom = 18.0
 pressed = true
 
 [node name="P1 Controls" type="Tabs" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
