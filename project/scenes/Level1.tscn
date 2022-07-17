@@ -32,7 +32,7 @@
 [ext_resource path="res://fonts/CollegiateBlackFLF.ttf" type="DynamicFontData" id=30]
 [ext_resource path="res://prefabs/background_object/Boat.tscn" type="PackedScene" id=31]
 [ext_resource path="res://art/tutorial_1.png" type="Texture" id=32]
-[ext_resource path="res://art/tutorial_2.png" type="Texture" id=33]
+[ext_resource path="res://art/instructions.png" type="Texture" id=33]
 [ext_resource path="res://audio/waves-sound-loop.mp3" type="AudioStream" id=34]
 [ext_resource path="res://script/PotSum.gd" type="Script" id=35]
 [ext_resource path="res://scenes/MenuFont.tres" type="DynamicFont" id=36]
@@ -1153,13 +1153,14 @@ margin_right = 940.0
 margin_bottom = 544.0
 
 [node name="Tutorial1" type="Sprite" parent="Backdrop/ColorRect/Panel"]
-position = Vector2( 319, 211 )
+position = Vector2( 315, 200 )
 scale = Vector2( 0.539735, 0.539735 )
 texture = ExtResource( 32 )
 
 [node name="Tutorial2" type="Sprite" parent="Backdrop/ColorRect/Panel"]
 visible = false
-position = Vector2( 315, 204 )
+position = Vector2( 315, 200 )
+scale = Vector2( 0.340278, 0.340278 )
 texture = ExtResource( 33 )
 
 [node name="Label" type="RichTextLabel" parent="Backdrop/ColorRect/Panel"]
