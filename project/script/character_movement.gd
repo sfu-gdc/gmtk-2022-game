@@ -64,12 +64,13 @@ func _process(_delta):
 	
 	# Try to pick up a die
 	if Input.is_action_just_pressed("pick"):
+		print(held_object)
 		# Try to drop held dice
 		if held_object:
 			picking_time = -1
 			picking = false
 			
-			if held_object.place():
+			if held_object.place(self):
 				held_object = null
 		# Otherwise, find the closest die
 		else:
