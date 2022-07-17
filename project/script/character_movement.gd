@@ -3,7 +3,7 @@ extends KinematicBody
 signal interact
 
 onready var dice_tex_1 = load("res://art/white-die.png")
-onready var dice_pool = get_tree().get_root().get_child(0).find_node("DicePool")
+onready var dice_pool = get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1).find_node("DicePool")
 onready var dice_box_list = []
 onready var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -36,7 +36,7 @@ func spawn_die(location: Vector3):
 
 func _ready():
 	for i in 10:
-		var ref = get_tree().get_root().get_child(0).find_node("DiceBox"+str(i))
+		var ref = get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1).find_node("DiceBox"+str(i))
 		if ref == null:
 			break
 		dice_box_list.append(ref)

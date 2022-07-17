@@ -2,7 +2,7 @@ extends RigidBody
 class_name Die
 
 onready var dice_pool := $"/root/Level1/DicePool"
-onready var trash := $"/root".get_child(0).find_node("Trash")
+onready var trash := $"/root".get_child(-1).find_node("Trash")
 
 var start_location : Vector3
 

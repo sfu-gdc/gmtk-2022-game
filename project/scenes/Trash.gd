@@ -2,7 +2,7 @@ extends StaticBody
 
 export var interaction_range : float = 15.0
 
-onready var player1 : KinematicBody = $"/root".get_child(0).find_node("Player1")
+onready var player1 : KinematicBody = $"/root".get_child(get_tree().get_root().get_child_count() - 1).find_node("Player1")
 
 func _ready():
 # warning-ignore:return_value_discarded
