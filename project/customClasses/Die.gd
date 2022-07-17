@@ -18,6 +18,8 @@ var throwable = true
 # throwing status will keep releasing signal
 var throwing = false
 
+var collide_count = 0
+
 onready var dice_tex_1 = load("res://art/white-die.png")
 
 # for stopping & starting particles
@@ -69,9 +71,9 @@ func init(die_type_local: int, start_location_local: Vector3):
 	mesh.mesh.size = Vector3(1.2,1.2,1.2)
 	mesh.mesh.material = SpatialMaterial.new()
 	if die_type_local == 0:
-		mesh.mesh.material.albedo_texture = load("res://art/fulldie1.png")
+		mesh.mesh.material.albedo_texture = preload("res://art/fulldie1.png")
 	elif die_type_local == 1:
-		var choices = [load("res://art/fulldie2.png"), load("res://art/fulldie3.png"), load("res://art/fulldie4.png")]
+		var choices = [preload("res://art/fulldie2.png"), preload("res://art/fulldie3.png"), preload("res://art/fulldie4.png")]
 		number_group = randi() % choices.size()
 		mesh.mesh.material.albedo_texture = choices[number_group]
 	elif die_type_local == 2:
@@ -139,9 +141,15 @@ func _process(_delta):
 func _on_body_entered(body:Node):
 	#if die collised to "attachable" object
 	if not "attachable" in body:
+		collide_count += 1
+		if collide_count > 5:
+			throwing = false
+			collide_count = 0
 		return
-	body._on_throwable_interact(self)
-	queue_free()
+	if throwing:
+		body._on_throwable_interact(self)
+		queue_free()
+
 	
 func pickup(player: KinematicBody) -> Die:
 	# Attach to player and disable collisions
@@ -160,8 +168,9 @@ func place(player: KinematicBody):
 	if not get_parent():
 		return false
 	var save_transform := global_transform
-	player.remove_child(self)
-	dice_pool.add_child(self)
+	if get_parent() == player:
+		player.remove_child(self)
+		dice_pool.add_child(self)
 	global_transform = save_transform
 	global_transform.origin = (global_transform.origin - 1.0 * player.global_transform.basis.z)
 	mode = RigidBody.MODE_RIGID

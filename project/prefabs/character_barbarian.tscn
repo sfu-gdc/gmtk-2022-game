@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://art/character/Character_Base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://script/character_movement.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://art/character/kaykit/gltf/BrownDark.material" type="Material" id=10]
 [ext_resource path="res://script/PotSpot.gd" type="Script" id=11]
 [ext_resource path="res://audio/sound_effect/FastWalk.mp3" type="AudioStream" id=12]
+[ext_resource path="res://audio/sound_effect/dish_submit.mp3" type="AudioStream" id=13]
 [ext_resource path="res://audio/sound_effect/grab_object.wav" type="AudioStream" id=14]
 [ext_resource path="res://audio/sound_effect/activate_die.wav" type="AudioStream" id=15]
 [ext_resource path="res://prefabs/effects/arrow.tscn" type="PackedScene" id=16]
@@ -433,7 +434,7 @@ shape = SubResource( 21 )
 transform = Transform( -1.5, 0, -2.26494e-07, 0, 1.5, 0, 2.26494e-07, 0, -1.5, 0, -1, -1.49012e-08 )
 
 [node name="Head" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="0"]
-transform = Transform( 1, 1.9747e-17, -1.21929e-18, -1.97703e-17, 0.995038, -0.099493, -7.51447e-19, 0.099493, 0.995038, 0, 0.711399, -0.0168467 )
+transform = Transform( 1, 1.97634e-17, -8.88791e-19, -1.97639e-17, 0.99601, -0.0892397, -8.78435e-19, 0.0892397, 0.99601, 0, 0.711598, -0.000372881 )
 
 [node name="character_barbarianHead" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/Head" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00788689, 0 )
@@ -461,7 +462,8 @@ material/3 = null
 material/4 = null
 
 [node name="ArmLeft" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="2"]
-transform = Transform( 0.00193909, 0.52113, -0.853475, -0.0236193, -0.853215, -0.521025, -0.999719, 0.0211688, 0.0106542, 0.14, 0.691404, -0.0163732 )
+transform = Transform( 4.27227e-05, 0.473042, -0.88104, -0.000523804, -0.88104, -0.473042, -1, 0.000481728, 0.000210036, 0.14, 0.691598, -0.000362401 )
+
 
 [node name="character_barbarianArmLeft" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/ArmLeft" index="0"]
 transform = Transform( -1.44517e-08, 2.79594e-07, -0.999999, 0.471936, -0.881633, -2.79594e-07, -0.881633, -0.471936, -1.44517e-08, -1.71536e-08, 0.0813964, -0.0290722 )
@@ -474,7 +476,7 @@ material/3 = null
 material/4 = null
 
 [node name="ArmRight" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="3"]
-transform = Transform( -0.0132503, -0.501283, -0.865182, -0.356455, -0.806043, 0.472477, -0.934219, 0.314659, -0.168004, -0.14, 0.691404, -0.0163732 )
+transform = Transform( -0.000290439, -0.472586, -0.881284, -0.33497, -0.830326, 0.44537, -0.942229, 0.295333, -0.158061, -0.14, 0.691598, -0.000362401 )
 
 [node name="character_barbarianArmRight" type="MeshInstance" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton/ArmRight" index="0"]
 transform = Transform( -3.87118e-10, -2.53319e-07, -0.999999, -0.471936, -0.881633, 2.53319e-07, -0.881633, 0.471936, -3.87118e-10, 1.47278e-08, 0.0813965, 0.0290721 )
@@ -487,10 +489,10 @@ material/3 = null
 material/4 = null
 
 [node name="handLeft" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="4"]
-transform = Transform( -0.998392, -0.0019392, -0.0566601, -0.0566901, 0.0236197, 0.998113, -0.000597385, 0.999719, -0.0236916, 0.427102, 0.221349, -0.00471084 )
+transform = Transform( -1, -4.28132e-05, -0.00125474, -0.00125477, 0.000524176, 0.999999, -4.22895e-05, 1, -0.000524203, 0.400609, 0.206214, -9.70063e-05 )
 
 [node name="handRight" parent="KayKit_AnimatedCharacter_v12/KayKit Animated Character/Skeleton" index="5"]
-transform = Transform( -0.974403, 0.221191, -0.0401655, 0.0404808, 0.348381, 0.936479, 0.221134, 0.910882, -0.348417, -0.416168, 0.247337, 0.156979 )
+transform = Transform( -0.975308, 0.208396, -0.0731224, 0.000888646, 0.334793, 0.942292, 0.22085, 0.918959, -0.326711, -0.400358, 0.234153, 0.162343 )
 
 [node name="AnimationPlayer" parent="KayKit_AnimatedCharacter_v12" index="1"]
 autoplay = ""
@@ -502,15 +504,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -2.5 )
 
 [node name="ActivateDieBox" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 15 )
-bus = "SFX"
 
 [node name="GrabObject" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
-bus = "SFX"
 
 [node name="WalkingSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
 pitch_scale = 0.71
+
+[node name="SubmitDish" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
 bus = "SFX"
 
 [editable path="KayKit_AnimatedCharacter_v12"]

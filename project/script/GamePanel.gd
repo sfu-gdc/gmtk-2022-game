@@ -34,6 +34,7 @@ func _on_Button_pressed():
 		var panel = SettingsPanel.instance();
 		self.add_child(panel);
 		settings_spawned = true
+		print("setting is comint~~")
 		return; # Replace with function body.
 
 # Called when the node enters the scene tree for the first time.

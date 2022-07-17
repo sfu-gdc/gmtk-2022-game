@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/dish_create.mp3-2833256dc15726a6767ed5da75fa7b1b.mp3str"
+
+[deps]
+
+source_file="res://audio/sound_effect/dish_create.mp3"
+dest_files=[ "res://.import/dish_create.mp3-2833256dc15726a6767ed5da75fa7b1b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

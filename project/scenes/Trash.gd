@@ -25,8 +25,10 @@ func _on_player_interact(player: KinematicBody, held_object: Spatial):
 			if node.global_transform.origin.distance_squared_to(player_position) < global_transform.origin.distance_squared_to(player_position):
 				return
 		
-		assert(held_object.has_method("garbage"), "held object needs a 'garbage' method")
-		held_object.garbage(player)
+		if held_object.has_method("garbage"):
+			held_object.garbage(player)
+		else:
+			print("held object has no 'garbage' method")
 
 func _on_throwable_interact(held_object: Spatial):
 	held_object.remove_from_group("pickup")

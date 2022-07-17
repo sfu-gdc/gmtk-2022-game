@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/dish_stack.mp3-f315d46c612d38e72d9c2406f11a228a.mp3str"
+
+[deps]
+
+source_file="res://audio/sound_effect/dish_stack.mp3"
+dest_files=[ "res://.import/dish_stack.mp3-f315d46c612d38e72d9c2406f11a228a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

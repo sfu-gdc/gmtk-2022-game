@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://art/white-die.png" type="Texture" id=1]
-[ext_resource path="res://art/die-box.png" type="Texture" id=2]
+[ext_resource path="res://art/2d/bar_back.png" type="Texture" id=1]
+[ext_resource path="res://art/2d/bar.png" type="Texture" id=2]
 [ext_resource path="res://art/sax-small.png" type="Texture" id=3]
 [ext_resource path="res://script/OrderCard.gd" type="Script" id=4]
 [ext_resource path="res://UI/theme/order_card_theme.tres" type="Theme" id=5]
+[ext_resource path="res://art/2d/Illustration.png" type="Texture" id=6]
 
 [node name="OrderCard" type="Control"]
 anchor_right = 1.0
@@ -12,46 +13,49 @@ anchor_bottom = 1.0
 theme = ExtResource( 5 )
 script = ExtResource( 4 )
 
-[node name="Panel" type="Panel" parent="."]
-margin_right = 91.0
-margin_bottom = 73.0
+[node name="Panel" type="TextureRect" parent="."]
+margin_right = 220.0
+margin_bottom = 160.0
+texture = ExtResource( 6 )
 
 [node name="Vertical" type="VBoxContainer" parent="Panel"]
-margin_right = 91.0
-margin_bottom = 52.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="Center" type="CenterContainer" parent="Panel/Vertical"]
-margin_right = 91.0
-margin_bottom = 42.0
+margin_right = 220.0
+margin_bottom = 71.0
 
 [node name="Margin" type="MarginContainer" parent="Panel/Vertical/Center"]
-margin_left = 21.0
-margin_right = 69.0
-margin_bottom = 42.0
+margin_left = 18.0
+margin_right = 202.0
+margin_bottom = 71.0
 custom_constants/margin_right = 0
-custom_constants/margin_top = 6
+custom_constants/margin_top = 25
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 4
 
 [node name="TimeBar" type="TextureProgress" parent="Panel/Vertical/Center/Margin"]
-margin_top = 6.0
-margin_right = 48.0
-margin_bottom = 38.0
+modulate = Color( 0, 1, 0, 1 )
+margin_top = 25.0
+margin_right = 184.0
+margin_bottom = 67.0
 value = 50.0
-texture_under = ExtResource( 2 )
-texture_progress = ExtResource( 1 )
+texture_under = ExtResource( 1 )
+texture_progress = ExtResource( 2 )
 
 [node name="Center2" type="CenterContainer" parent="Panel/Vertical"]
-margin_top = 46.0
-margin_right = 91.0
-margin_bottom = 62.0
+margin_top = 75.0
+margin_right = 220.0
+margin_bottom = 160.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Horizontal" type="HBoxContainer" parent="Panel/Vertical/Center2"]
-margin_left = 11.0
-margin_right = 79.0
-margin_bottom = 16.0
+margin_left = 76.0
+margin_top = 34.0
+margin_right = 144.0
+margin_bottom = 50.0
 
 [node name="Margin" type="MarginContainer" parent="Panel/Vertical/Center2/Horizontal"]
 margin_right = 32.0
