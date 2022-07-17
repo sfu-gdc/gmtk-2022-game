@@ -23,5 +23,6 @@
 	- add the numbers automatically
 	- highlight outline of the cube you would pick up
 	- apply fire effect to burners
+	- ui needs to be bigger
 	
 (for gabe) TODO: do the die.new() thing for multiple bins depending on the name of the bin
