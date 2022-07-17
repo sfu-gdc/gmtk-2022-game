@@ -25,5 +25,6 @@
 	- ui needs to be bigger
 	- a little graphic that shows how many points were gained / lost
 	- dark smoke when cooking pot burns
+	- invisible walls
 	
 (for gabe) TODO: do the die.new() thing for multiple bins depending on the name of the bin
