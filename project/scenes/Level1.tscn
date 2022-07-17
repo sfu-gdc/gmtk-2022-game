@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://art/tile_textures/counter-tile.png" type="Texture" id=1]
 [ext_resource path="res://art/trashbin.tscn" type="PackedScene" id=2]
@@ -28,7 +28,8 @@
 [ext_resource path="res://prefabs/effects/fire.tscn" type="PackedScene" id=26]
 [ext_resource path="res://art/particle/flame_02.png" type="Texture" id=27]
 [ext_resource path="res://script/FireExplosion.gd" type="Script" id=28]
-[ext_resource path="res://audio/music/background.mp3" type="AudioStream" id=29]
+[ext_resource path="res://audio/music/gmtk-2022-song-v2.mp3" type="AudioStream" id=29]
+[ext_resource path="res://audio/sound_effect/waves-sound-loop.mp3" type="AudioStream" id=30]
 
 [sub_resource type="SpatialMaterial" id=2]
 render_priority = 11
@@ -699,7 +700,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -2, 0 )
 mesh = SubResource( 13 )
 material/0 = null
 
-[node name="StaticBody" type="StaticBody" parent="Level/Floor"]
+[node name="StaticBody" type="StaticBody" parent="Level/Floor" groups=["floor"]]
 transform = Transform( 16, 0, 0, 0, 1, 0, 0, 0, 8, 12, -2, -3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Floor/StaticBody"]
@@ -714,7 +715,7 @@ collision_mask = 0
 shape = SubResource( 5 )
 
 [node name="Trash" type="StaticBody" parent="Level" groups=["can_take_dice"]]
-transform = Transform( 0.697215, 0, -0.716862, 0, 1, 0, 0.716862, 0, 0.697215, 0.424277, 0, -7.79825 )
+transform = Transform( 0.697215, 0, -0.716862, 0, 1, 0, 0.716862, 0, 0.697215, 7.71525, 0.294239, -7.90975 )
 script = ExtResource( 20 )
 
 [node name="trashbin" parent="Level/Trash" instance=ExtResource( 2 )]
@@ -729,7 +730,7 @@ shape = SubResource( 11 )
 [node name="DicePool" type="Spatial" parent="."]
 
 [node name="boringpot" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.75, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 5.83551, 0 )
 
 [node name="DiceInPot" type="GridContainer" parent="boringpot"]
 anchor_left = 0.5
@@ -851,7 +852,13 @@ script = ExtResource( 24 )
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 29 )
-volume_db = -32.0
+volume_db = -10.0
 autoplay = true
+
+[node name="Waves" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 30 )
+volume_db = -15.0
+autoplay = true
+bus = "SFX"
 
 [connection signal="pressed" from="Button" to="GamePanel" method="_on_Button_pressed"]

@@ -6,6 +6,7 @@ onready var dice_tex_1 = load("res://art/white-die.png")
 onready var dice_pool = get_tree().get_root().get_child(0).find_node("DicePool")
 onready var dice_box_list = []
 onready var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
+onready var walk_sound = $WalkingSound
 
 export var interaction_range := 3.5
 export var pickup_position := Vector3(0.0, 3.0, -0.75)
@@ -58,9 +59,9 @@ func _process(_delta):
 
 		# If near dice box, spawn a die
 		if die_spawn_timer == 0:
-			$ActivateDieBox.play()
 			for dice_box in dice_box_list:
 				if (dice_box.translation - translation).length() < interaction_range:
+					$ActivateDieBox.play()
 					spawn_die(dice_box.translation)
 					die_spawn_timer = 0.4
 					break
@@ -71,7 +72,6 @@ func _process(_delta):
 		if held_object:
 			picking_time = -1
 			picking = false
-			$DropObject.play()
 
 			if held_object.place(self):
 				held_object = null
@@ -87,13 +87,11 @@ func _process(_delta):
 				# Pick up the closest die
 				var minimum_distance : float = close_objects.keys().min()
 				held_object = close_objects[minimum_distance]
-
 				#setup picking animation offset
 				picking = true
 				picking_time = 20 * _delta
-
-				animationState.travel("PickUp")
 				$GrabObject.play()
+				animationState.travel("PickUp")
 
 	# pickup delay for animation
 	if picking && picking_time > 0:
@@ -141,7 +139,8 @@ func _physics_process(delta):
 		rotation.y = lerp_angle(rotation.y, atan2(-velocity_xz.x, -velocity_xz.z), delta * angular_accleration)
 
 		if elapsed > 0.2:
-			$WalkingSound.play()
+			if not walk_sound.playing:
+				walk_sound.play()
 			elapsed = 0
 	else:
 		animationState.travel("Idle")
