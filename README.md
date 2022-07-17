@@ -10,7 +10,7 @@ our game for the gtmk 2022 game jam
 	/ half done
 
 ## TODO:
-  - add sounds to dish creation and dish submission
+  	- add sounds to dish creation and dish submission
 	/ make the levels look nice w/ details outside the world & tables & stuff
 	/ make more dice blocks
 	- add 2+ player support
