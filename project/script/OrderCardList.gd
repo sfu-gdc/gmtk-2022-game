@@ -37,7 +37,7 @@ func _ready():
 		
 func _unhandled_input(event: InputEvent):
 	if event.is_pressed() and event is InputEventKey and event.scancode == KEY_TAB:
-		create_order_card(5)
+		create_order_card(5, 50)
 
 func add_card_child():
 	if (!is_moving):

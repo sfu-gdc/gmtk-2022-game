@@ -40,6 +40,8 @@ func __init(timer_time: float, position_x: int, food_number: int):
 	add_child(kill_timer);
 	# set the order card position x
 	rect_position.x = position_x
+	
+	$Panel/Vertical/Center2/Horizontal/Margin2/Label.text = str(food_number)
 
 func _ready():
 	# the size of the card equals to the size of the panel plus button
