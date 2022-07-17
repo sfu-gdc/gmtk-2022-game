@@ -37,5 +37,5 @@ func _on_RestartButton_pressed():
 
 
 func _on_MainMenuButton_pressed():
-	return get_tree().change_scene("res://scenes/MainMenu.tscn")
+	return get_tree().change_scene("res://prefabs/MainestMenu.tscn")
 	pass # Replace with function body.
