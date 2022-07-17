@@ -23,9 +23,13 @@ func _process(delta):
 		out_going_recipes.append(oc)
 		out_going_recipes_number.append(num)
 		oc.connect("card_complete_up", self, "remove_recipe", [oc, false])
-		
+	
 	if order_card_list == null:
 		post_ready()
+
+func completed_recipe(oc: Control):
+	#oc.delete_card() # TODO: enable this
+	remove_recipe(oc, true)
 
 func remove_recipe(card, was_successful):
 	var i = out_going_recipes.find(card)
