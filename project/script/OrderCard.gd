@@ -6,7 +6,7 @@ var panel_vsize: float = 0.0
 
 # time for the Timer to reach 0
 var full_time: float = 0.0
-var text: String = ""
+var number: int = 50
 # panel's original position
 onready var panel_oposition: int = 0
 
@@ -40,8 +40,8 @@ func _init_set_x(position_x: int) -> void:
 	# set the order card position x
 	rect_position.x = position_x
 
-func _init_set_text(text: String) -> void:
-	self.text = text
+func _init_set_number(number: int) -> void:
+	self.number = number
 
 func _init_set_picture(link: String):
 	picture.set_texture(load(link))
@@ -51,7 +51,7 @@ func _ready():
 	panel_vsize = panel.get_size().y
 	
 	# set the number text
-	label.set_text(text)
+	label.set_text(str(number))
 
 	# set the panel position to be offscreen
 	panel.rect_position.y = -panel_vsize
@@ -74,7 +74,9 @@ func _on_Timer_timeout():
 # delete the current node card
 func delete_card():
 	# moves the card up
+# warning-ignore:return_value_discarded
 	tween.interpolate_property(panel, "rect_position:y", panel.rect_position.y, panel.rect_position.y - panel_vsize, 0.7, Tween.TRANS_QUINT, Tween.EASE_IN)
+# warning-ignore:return_value_discarded
 	tween.start()
 	# wait for the tween to be finished, and emit signal that card has gone completely up
 	yield(tween, "tween_all_completed")

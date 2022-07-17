@@ -23,10 +23,12 @@ func _init(arg):
 	add_to_group("pickup")
 	
 	self.add_child(t1)
+# warning-ignore:return_value_discarded
 	t1.connect("timeout", self, "stop_particles")
 	t1.set_wait_time(0.25)
 	
 	self.add_child(t2)	
+# warning-ignore:return_value_discarded
 	t2.connect("timeout", self, "free_particles")
 	t2.set_wait_time(1.75)
 

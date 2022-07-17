@@ -11,6 +11,7 @@ var num_dice := 0
 func _ready():
 	image_size = get_viewport().get_visible_rect().size.y / 30.0
 	
+# warning-ignore:return_value_discarded
 	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 	
 	columns = 1
@@ -41,8 +42,8 @@ func _process(_delta):
 	
 	anchor_left = pot_screen_fraction.x
 	anchor_right = pot_screen_fraction.x
-	anchor_top = pot_screen_fraction.y - 0.05
-	anchor_bottom = pot_screen_fraction.y - 0.05
+	anchor_top = pot_screen_fraction.y - 0.07
+	anchor_bottom = pot_screen_fraction.y - 0.07
 
 func add_die(number: int):
 	var new_die := DIE_UI.instance()

@@ -4,7 +4,7 @@ signal interact
 
 onready var dice_tex_1 = load("res://art/white-die.png")
 onready var dice_pool = get_tree().get_root().get_child(0).find_node("DicePool")
-onready var dice_box_list = [] 
+onready var dice_box_list = []
 onready var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 export var interaction_range := 3.5
@@ -29,7 +29,7 @@ func spawn_die(location: Vector3):
 	var rbody = Die.new(1) # TODO: get arg based on group that diceblock is in
 	rbody.init(0, location)
 	dice_pool.add_child(rbody)
-	
+
 # ------------------------------------
 
 func _ready():
@@ -43,17 +43,17 @@ func _process(_delta):
 	# update timer value
 	die_spawn_timer -= _delta
 	die_spawn_timer = max(0, die_spawn_timer)
-	
+
 	# inform dice_box to move up / down
 	for dice_box in dice_box_list:
 		if (dice_box.translation - translation).length() < interaction_range:
 			dice_box.player_is_near = true
 		else:
 			dice_box.player_is_near = false
-		
+
 	if Input.is_action_just_pressed("activate"):
 		emit_signal("interact", self, held_object)
-		
+
 		# If near dice box, spawn a die
 		if die_spawn_timer == 0:
 			$ActivateDieBox.play()
@@ -62,7 +62,7 @@ func _process(_delta):
 					spawn_die(dice_box.translation)
 					die_spawn_timer = 0.4
 					break
-	
+
 	# Try to pick up a die
 	if Input.is_action_just_pressed("pick"):
 		# Try to drop held dice
@@ -70,6 +70,7 @@ func _process(_delta):
 			picking_time = -1
 			picking = false
 			$DropObject.play()
+			
 			if held_object.place(self):
 				held_object = null
 		# Otherwise, find the closest die
@@ -84,14 +85,14 @@ func _process(_delta):
 				# Pick up the closest die
 				var minimum_distance : float = close_objects.keys().min()
 				held_object = close_objects[minimum_distance]
-				
+
 				#setup picking animation offset
 				picking = true
 				picking_time = 20 * _delta
-				
+
 				animationState.travel("PickUp")
 				$GrabObject.play()
-	
+
 	# pickup delay for animation
 	if picking && picking_time > 0:
 		pickingUpAnimation(held_object, _delta)
@@ -99,7 +100,7 @@ func _process(_delta):
 		if picking_time <= 0:
 			picking = false
 			held_object = held_object.pickup(self)
-			
+
 func pickingUpAnimation(object, delta):
 	# the dice will travel a little bit before picked up
 	var direction = transform.origin - object.transform.origin
@@ -118,7 +119,7 @@ func _physics_process(delta):
 								 0,
 								(Input.get_action_strength("player_down") - Input.get_action_strength("player_up"))
 								).normalized()
-		
+
 		rotation.y = lerp_angle(rotation.y, atan2(-velocity_xz.x, -velocity_xz.z), delta * angular_accleration)
 		if elapsed > 0.2:
 			$WalkingSound.play()
@@ -126,11 +127,11 @@ func _physics_process(delta):
 	else:
 		animationState.travel("Idle")
 		velocity_xz = Vector3()
-	
+
 	if is_on_floor():
 		velocity_y = Vector3()
 	else:
 		velocity_y -= Vector3(0.0, gravity * delta, 0.0)
-	
+
 	# warning-ignore:return_value_discarded
 	move_and_slide(velocity_xz + velocity_y, Vector3.UP, false, 4, 0.785398, false)
