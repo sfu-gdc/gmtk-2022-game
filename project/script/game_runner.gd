@@ -28,7 +28,5 @@ func remove_recipe(card):
 	out_going_recipes.pop_at(i)
 	out_going_recipes_number.pop_at(i)
 	
-	print("did this")
-	
 func random_small_number():
-	return randi() & 10
+	return randi() & 10 + 3 # ~[3, 12]

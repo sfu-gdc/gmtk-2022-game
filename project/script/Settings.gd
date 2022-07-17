@@ -76,11 +76,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		backdrop_panel.hide();
 
 
-
 func _on_CancelButton_pressed():
 	queue_free();
 	pass # Replace with function body.
-
 
 func sync_key_mapping():
 	#update the keymapping right here
