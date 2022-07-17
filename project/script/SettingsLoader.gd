@@ -23,7 +23,15 @@ var _settings = {
 		"player1_right": KEY_D,
 		"player1_pick": KEY_Q,
 		"player1_activate": KEY_E,
-		"player1_throw": KEY_F
+		"player1_throw": KEY_F,
+		
+		"player2_up": KEY_UP,
+		"player2_down": KEY_DOWN,
+		"player2_left": KEY_LEFT,
+		"player2_right": KEY_RIGHT,
+		"player2_pick": KEY_L,
+		"player2_activate": KEY_K,
+		"player2_throw": KEY_M
 	},
 	"control_type": {
 		"player1_up": 0,
@@ -32,7 +40,15 @@ var _settings = {
 		"player1_right": 0,
 		"player1_pick": 0,
 		"player1_activate": 0,
-		"player1_throw": 0
+		"player1_throw": 0,
+		
+		"player2_up": 0,
+		"player2_down": 0,
+		"player2_left": 0,
+		"player2_right": 0,
+		"player2_pick": 0,
+		"player2_activate": 0,
+		"player2_throw": 0
 	}
 };
 
@@ -44,7 +60,15 @@ var _control_keymapping = {
 	"player1_right": "player_right",
 	"player1_pick": "pick",
 	"player1_activate": "activate",
-	"player1_throw": "throw"
+	"player1_throw": "throw",
+	
+	"player2_up": "player2_up",
+	"player2_down": "player2_down",
+	"player2_left": "player2_left",
+	"player2_right": "player2_right",
+	"player2_pick": "player2_pick",
+	"player2_activate": "player2_activate",
+	"player2_throw": "player2_throw"
 }
 
 func remove_itself():
@@ -83,12 +107,15 @@ func sync_music():
 
 func sync_key_mapping():
 	#update the keymapping right here
+	print(_settings)
+	
 	load_settings()
 	for j in _settings['controls'].keys().size():
 		var key = _settings['controls'].keys()[j]
-		var ty: int = _settings['control_type'].keys()[j] as int
-		#_settings['controls'][key] = settings_file.get_value('controls', key, null);
+		var ty: int = _settings['control_type'].values()[j]
+		#_settings['controls][key] = settings_file.get_value('controls', key, null);
 		var list = InputMap.get_action_list( _control_keymapping[key] );
+		print(list)
 		for i in list:
 			if i is InputEventKey:
 				# remove the previous register physical key mapping

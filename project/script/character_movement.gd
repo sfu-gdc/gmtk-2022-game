@@ -166,6 +166,7 @@ func throwObject(delta, direction, hor_Force, vect_force):
 var elapsed: float
 func _physics_process(delta):
 	elapsed += delta
+	#Input.is_action_pressed("player_up"))
 	if (Input.is_action_pressed("player_up") or Input.is_action_pressed("player_down") or
 			Input.is_action_pressed("player_left") or Input.is_action_pressed("player_right")):
 		animationState.travel("Run")

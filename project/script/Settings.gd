@@ -24,7 +24,15 @@ var _settings = {
 		"player1_right": KEY_D,
 		"player1_pick": KEY_Q,
 		"player1_activate": KEY_E,
-		"player1_throw": KEY_F
+		"player1_throw": KEY_F,
+		
+		"player2_up": KEY_UP,
+		"player2_down": KEY_DOWN,
+		"player2_left": KEY_LEFT,
+		"player2_right": KEY_RIGHT,
+		"player2_pick": KEY_L,
+		"player2_activate": KEY_K,
+		"player2_throw": KEY_M
 	},
 	"control_type": {
 		"player1_up": 0,
@@ -33,7 +41,15 @@ var _settings = {
 		"player1_right": 0,
 		"player1_pick": 0,
 		"player1_activate": 0,
-		"player1_throw": 0
+		"player1_throw": 0,
+		
+		"player2_up": 0,
+		"player2_down": 0,
+		"player2_left": 0,
+		"player2_right": 0,
+		"player2_pick": 0,
+		"player2_activate": 0,
+		"player2_throw": 0
 	}
 };
 
@@ -45,7 +61,15 @@ var _control_keymapping = {
 	"player1_right": "player_right",
 	"player1_pick": "pick",
 	"player1_activate": "activate",
-	"player1_throw": "throw"
+	"player1_throw": "throw",
+	
+	"player2_up": "player2_up",
+	"player2_down": "player2_down",
+	"player2_left": "player2_left",
+	"player2_right": "player2_right",
+	"player2_pick": "player2_pick",
+	"player2_activate": "player2_activate",
+	"player2_throw": "player2_throw"
 }
 
 func remove_itself():
@@ -65,13 +89,43 @@ func load_settings():
 	
 	$TabContainer/Audio/MusicLabel/CheckBox.pressed = _settings["audio"]["background_music"]
 	$TabContainer/Audio/SFXLabel/CheckBox.pressed = _settings["audio"]["sfx"]
+	
+	for p in 2:
+		var i = str(p+1)
+		if _settings["control_type"]["player"+i+"_up"] == 0:
+			get_node("TabContainer/P"+i+" Controls/Player"+i+"Label/MoveForward/KeyButton/Label").text = OS.get_scancode_string(_settings["controls"]["player"+i+"_up"])
+		elif _settings["control_type"]["player"+i+"_up"] == 1:
+			get_node("TabContainer/P"+i+" Controls/Player"+i+"Label/MoveForward/KeyButton/Label").text = Input.get_joy_button_string(_settings["controls"]["player"+i+"_up"])
+		
+		if _settings["control_type"]["player"+i+"_down"] == 0:
+			get_node("TabContainer/P"+i+" Controls/Player"+i+"Label/MoveDownward/KeyButton/Label").text = OS.get_scancode_string(_settings["controls"]["player"+i+"_down"])
+		elif _settings["control_type"]["player"+i+"_down"] == 1:
+			get_node("TabContainer/P"+i+" Controls/Player"+i+"Label/MoveDownward/KeyButton/Label").text = Input.get_joy_button_string(_settings["controls"]["player"+i+"_down"])
 
-	$"TabContainer/P1 Controls/Player1Label/MoveForward/KeyButton/Label".text = OS.get_scancode_string(_settings["controls"]["player1_up"])
-	$"TabContainer/P1 Controls/Player1Label/MoveDownward/KeyButton/Label".text = OS.get_scancode_string(_settings["controls"]["player1_down"])
-	$"TabContainer/P1 Controls/Player1Label/MoveLeft/KeyButton/Label".text = OS.get_scancode_string(_settings["controls"]["player1_left"])
-	$"TabContainer/P1 Controls/Player1Label/MoveRight/KeyButton/Label".text = OS.get_scancode_string(_settings["controls"]["player1_right"])
-	$"TabContainer/P1 Controls/Player1Label/Interact/KeyButton/Label".text = OS.get_scancode_string(_settings["controls"]["player1_activate"])
-	$"TabContainer/P1 Controls/Player1Label/PickupDrop/KeyButton/Label".text = OS.get_scancode_string(_settings["controls"]["player1_pick"])
+		if _settings["control_type"]["player"+i+"_left"] == 0:
+			get_node("TabContainer/P"+i+" Controls/Player"+i+"Label/MoveLeft/KeyButton/Label").text = OS.get_scancode_string(_settings["controls"]["player"+i+"_left"])
+		elif _settings["control_type"]["player"+i+"_left"] == 1:
+			get_node("TabContainer/P"+i+" Controls/Player"+i+"Label/MoveLeft/KeyButton/Label").text = Input.get_joy_button_string(_settings["controls"]["player"+i+"_left"])
+		
+		if _settings["control_type"]["player"+i+"_right"] == 0:
+			get_node("TabContainer/P"+i+" Controls/Player"+i+"Label/MoveRight/KeyButton/Label").text = OS.get_scancode_string(_settings["controls"]["player"+i+"_right"])
+		elif _settings["control_type"]["player"+i+"_right"] == 1:
+			get_node("TabContainer/P"+i+" Controls/Player"+i+"Label/MoveRight/KeyButton/Label").text = Input.get_joy_button_string(_settings["controls"]["player"+i+"_right"])
+		
+		if _settings["control_type"]["player"+i+"_activate"] == 0:
+			get_node("TabContainer/P"+i+" Controls/Player"+i+"Label/Interact/KeyButton/Label").text = OS.get_scancode_string(_settings["controls"]["player"+i+"_activate"])
+		elif _settings["control_type"]["player"+i+"_activate"] == 1:
+			get_node("TabContainer/P"+i+" Controls/Player"+i+"Label/Interact/KeyButton/Label").text = Input.get_joy_button_string(_settings["controls"]["player"+i+"_activate"])
+
+		if _settings["control_type"]["player"+i+"_pick"] == 0:
+			get_node("TabContainer/P"+i+" Controls/Player"+i+"Label/PickupDrop/KeyButton/Label").text = OS.get_scancode_string(_settings["controls"]["player"+i+"_pick"])
+		elif _settings["control_type"]["player"+i+"_pick"] == 1:
+			get_node("TabContainer/P"+i+" Controls/Player"+i+"Label/PickupDrop/KeyButton/Label").text = Input.get_joy_button_string(_settings["controls"]["player"+i+"_pick"])
+
+		if _settings["control_type"]["player"+i+"_throw"] == 0:
+			get_node("TabContainer/P"+i+" Controls/Player"+i+"Label/Throw/KeyButton/Label").text = OS.get_scancode_string(_settings["controls"]["player"+i+"_throw"])
+		elif _settings["control_type"]["player"+i+"_throw"] == 1:
+			get_node("TabContainer/P"+i+" Controls/Player"+i+"Label/Throw/KeyButton/Label").text = Input.get_joy_button_string(_settings["controls"]["player"+i+"_throw"])
 
 func _ready():
 	get_tree().paused = true;
@@ -80,11 +134,6 @@ func _ready():
 	
 # _unhandled_input no work
 func _input(event: InputEvent) -> void:
-	print(event)
-	if(event is InputEventJoypadButton):
-		print(event.button_index)
-		print(event.pressed)
-		
 	if key_listening == null:
 		return;
 	
@@ -98,6 +147,7 @@ func _input(event: InputEvent) -> void:
 		keymap_listening = null;
 		backdrop_panel.hide();
 	elif (event is InputEventKey and event.is_pressed()):
+		print("setting to 0")
 		# check to make sure the key is not being occupied
 		_settings['controls'][key_listening] = event.scancode;
 		_settings['control_type'][key_listening] = 0; # InputEventKey
@@ -114,20 +164,21 @@ func _on_CancelButton_pressed():
 	pass # Replace with function body.
 
 func _on_SaveButton_pressed():
+	print(_settings)
 	for section in _settings.keys():
 		for key in _settings[section]:
 			settings_file.set_value(section, key, _settings[section][key]);
-	settings_file.save(settings_filepath);
+	settings_file.save(settings_filepath)
 	
 	SettingsLoader.sync_music();
 	SettingsLoader.sync_key_mapping();
 	remove_itself();
 
 
-func _on_KeyButton_pressed(settingkeyword:String, keymapname:String, origin:String):
+func _on_KeyButton_pressed(settingkeyword:String, keymapname:String, origin:String, player:int):
 	key_listening = settingkeyword;
 	keymap_listening = keymapname;
-	var target = "TabContainer/P1 Controls/Player1Label/"+origin+"/KeyButton/Label"
+	var target = "TabContainer/P"+str(player)+" Controls/Player"+str(player)+"Label/"+origin+"/KeyButton/Label"
 	text_to_update = get_node(target);
 	backdrop_panel.show();
 

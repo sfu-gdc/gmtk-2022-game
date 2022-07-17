@@ -6,4 +6,3 @@ func _ready():
 	pass
 	
 	# TODO: attach pots to their burners
-
