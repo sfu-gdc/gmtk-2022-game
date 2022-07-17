@@ -75,9 +75,6 @@ text = "num"
 align = 1
 valign = 1
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PutDownDish" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
