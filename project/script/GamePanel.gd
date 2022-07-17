@@ -39,6 +39,7 @@ func _on_Button_pressed():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var order_card_list = OrderCardList.instance();
+	order_card_list.name = "OrderCardList"
 	self.add_child(order_card_list);
 	return; # Replace with function body.
 

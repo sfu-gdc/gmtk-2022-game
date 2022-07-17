@@ -6,7 +6,7 @@ var panel_vsize: float = 0.0
 
 # time for the Timer to reach 0
 var full_time: float = 0.0
-var text: String = ""
+var number: int = 50
 # panel's original position
 onready var panel_oposition: int = 0
 
@@ -40,15 +40,15 @@ func _init_set_x(position_x: int) -> void:
 	# set the order card position x
 	rect_position.x = position_x
 
-func _init_set_text(text: String) -> void:
-	self.text = text
+func _init_set_number(number: int) -> void:
+	self.number = number
 
 func _ready():
 	# the size of the card equals to the size of the panel plus button
 	panel_vsize = panel.get_size().y
 	
 	# set the number text
-	label.set_text(text)
+	label.set_text(str(number))
 
 	# set the panel position to be offscreen
 	panel.rect_position.y = -panel_vsize
