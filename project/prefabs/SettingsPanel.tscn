@@ -304,6 +304,8 @@ valign = 1
 
 [connection signal="pressed" from="SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="pressed" from="CancelButton" to="." method="_on_CancelButton_pressed"]
+[connection signal="toggled" from="TabContainer/Audio/MusicLabel/CheckBox" to="." method="_on_CheckBox_toggled" binds= [ "Music", "background_music" ]]
+[connection signal="toggled" from="TabContainer/Audio/SFXLabel/CheckBox" to="." method="_on_CheckBox_toggled" binds= [ "SFX", "sfx" ]]
 [connection signal="pressed" from="TabContainer/Controls/Player1Label/MoveForward/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_up", "player_up", "MoveForward" ]]
 [connection signal="pressed" from="TabContainer/Controls/Player1Label/MoveLeft/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_left", "player_left", "MoveLeft" ]]
 [connection signal="pressed" from="TabContainer/Controls/Player1Label/MoveDownward/KeyButton" to="." method="_on_KeyButton_pressed" binds= [ "player1_down", "player_down", "MoveDownward" ]]
