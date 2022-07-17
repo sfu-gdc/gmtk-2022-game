@@ -23,6 +23,10 @@ func _init():
 	add_child(mesh)
 	mesh.translation += 0.75 * Vector3.UP
 
+func play_dish_sfx():
+	$DishCreated.stream.loop = false;
+	$DishCreated.play()
+
 func pickup(player: KinematicBody) -> RigidBody:
 	# Attach to player and disable collisions
 	var save_transform := global_transform
@@ -33,7 +37,7 @@ func pickup(player: KinematicBody) -> RigidBody:
 	player.add_child(self)
 	global_transform = save_transform
 	transform.origin = player.pickup_position
-	
+	play_dish_sfx();
 	return self
 
 func place(player: KinematicBody) -> bool:
@@ -52,3 +56,15 @@ func place(player: KinematicBody) -> bool:
 	collision_mask = DISH_LAYER
 
 	return true
+
+
+func _on_Area_body_entered(body):
+	
+	if body.is_in_group("snap"):
+		print("snaped for dish");
+		$PutDownDish.stream.loop = false;
+		$PutDownDish.play()
+	
+	#if body.is_in_group("floor"):
+	#	$PutDownDish.play()
+	pass # Replace with function body.
