@@ -37,9 +37,10 @@ var _control_keymapping = {
 	"player1_activate": "activate"
 }
 
-func queue_free():
+func remove_itself():
 	get_parent().settings_spawned = false
-	.queue_free()
+	get_tree().paused = false;
+	queue_free()
 
 func load_settings():
 	var error = settings_file.load(settings_filepath);
@@ -60,6 +61,7 @@ func load_settings():
 	sync_key_mapping();
 
 func _ready():
+	get_tree().paused = true;
 	#pass;
 	load_settings();
 	
@@ -77,7 +79,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_CancelButton_pressed():
-	queue_free();
+	remove_itself();
 	pass # Replace with function body.
 
 func sync_key_mapping():
@@ -103,7 +105,7 @@ func _on_SaveButton_pressed():
 	
 	
 	sync_key_mapping();
-	queue_free();
+	remove_itself();
 	pass # Replace with function body.;
 
 
