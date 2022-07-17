@@ -28,7 +28,7 @@
 [ext_resource path="res://prefabs/effects/fire.tscn" type="PackedScene" id=26]
 [ext_resource path="res://art/particle/flame_02.png" type="Texture" id=27]
 [ext_resource path="res://script/FireExplosion.gd" type="Script" id=28]
-[ext_resource path="res://audio/music/background.mp3" type="AudioStream" id=26]
+[ext_resource path="res://audio/music/background.mp3" type="AudioStream" id=29]
 
 [sub_resource type="SpatialMaterial" id=2]
 render_priority = 11
@@ -850,7 +850,7 @@ script = ExtResource( 24 )
 [node name="Spatial-bg" parent="." instance=ExtResource( 11 )]
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 26 )
+stream = ExtResource( 29 )
 volume_db = -32.0
 autoplay = true
 
