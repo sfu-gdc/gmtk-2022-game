@@ -79,19 +79,22 @@ func _on_Timer_timeout():
 # NOTE: don't call this function until the card is removed from it's buffer
 # delete the current node card
 func delete_card() -> bool:
+	print("delete card triggered")
 	if panel == null:
+		print("panel is null")
 		return false
 		
 	# moves the card up
 	# warning-ignore:return_value_discarded
-	tween.interpolate_property(panel, "rect_position:y", panel.rect_position.y, panel.rect_position.y - panel_vsize, 0.7, Tween.TRANS_QUINT, Tween.EASE_IN)
+	var pull_up = tween.interpolate_property(panel, "rect_position:y", panel.rect_position.y, panel.rect_position.y - panel_vsize, 0.7, Tween.TRANS_QUINT, Tween.EASE_IN)
 	# warning-ignore:return_value_discarded
 	tween.start()
 	
 	$PullingUp.play()
 	# wait for the tween to be finished, and emit signal that card has gone completely up
-	yield(tween, "tween_all_completed")
-
+	while !(yield(tween, "tween_completed")[0] == $Panel):
+		print("tween_completed signal fired, but not card pulling up")
+	
 	emit_signal("card_complete_up")
 	
 	# wait for 3 seconds before deleting the current node

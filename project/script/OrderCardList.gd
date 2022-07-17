@@ -114,6 +114,7 @@ func instance_order_card(timer_time: float, number: int) -> Control:
 
 # reorder the order of the cards from the list by shifting to the left
 func reorder_order_card_list(order_card_instance):
+	print("reorder_order_card_list triggered")
 	# amount of pixel each card needs to move left for after reordering the list
 	var move_left_amount = hmargin + card_size
 	# go through the order card list, find the card that equals to the order_card_instance
@@ -129,10 +130,11 @@ func reorder_order_card_list(order_card_instance):
 					# start the tween for the cards by moving the cards from the back to the front
 # warning-ignore:return_value_discarded
 					tween.interpolate_property(card, "rect_position:x", card.rect_position.x,
-							card.rect_position.x- move_left_amount, 1, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+							card.rect_position.x- move_left_amount, 1, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 				# start the tween
 # warning-ignore:return_value_discarded
 				tween.start()
+				$DropLeft.play()
 				# set the is_moving to true, since cards are moving to the left
 				self.is_moving = true
 				# wait for the tween to get all completed
