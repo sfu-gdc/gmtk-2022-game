@@ -31,13 +31,13 @@ script = ExtResource( 2 )
 [node name="smoke" type="CPUParticles" parent="."]
 lod_max_distance = 2.0
 emitting = false
-amount = 20
-lifetime = 0.39
+amount = 50
+lifetime = 2.0
 speed_scale = 0.31
 randomness = 0.4
 mesh = SubResource( 2 )
 emission_shape = 1
-emission_sphere_radius = 0.5
+emission_sphere_radius = 0.4
 direction = Vector3( 0, 1, 0 )
 spread = 25.0
 gravity = Vector3( 0, 0, 0 )

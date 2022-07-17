@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://script/pot.gd" type="Script" id=2]
 [ext_resource path="res://art/metal.material" type="Material" id=4]
@@ -56,6 +56,14 @@ height = 2.77512
 radius = 0.230803
 height = 0.808175
 
+[sub_resource type="CylinderMesh" id=7]
+top_radius = 0.95
+bottom_radius = 0.552
+height = 1.103
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_color = Color( 0.717647, 0.521569, 0.34902, 1 )
+
 [node name="boringpot" type="RigidBody" groups=["can_take_dice", "pickup"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80639, 0 )
 mode = 2
@@ -89,5 +97,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.62406, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 shape = SubResource( 6 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.687963, 0 )
+mesh = SubResource( 7 )
+material/0 = SubResource( 8 )
 
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]

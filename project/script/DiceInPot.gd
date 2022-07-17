@@ -42,8 +42,8 @@ func _process(_delta):
 	
 	anchor_left = pot_screen_fraction.x
 	anchor_right = pot_screen_fraction.x
-	anchor_top = pot_screen_fraction.y - 0.05
-	anchor_bottom = pot_screen_fraction.y - 0.05
+	anchor_top = pot_screen_fraction.y - 0.07
+	anchor_bottom = pot_screen_fraction.y - 0.07
 
 func add_die(number: int):
 	var new_die := DIE_UI.instance()
