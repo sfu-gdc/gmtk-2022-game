@@ -1,10 +1,14 @@
 extends Control
 var SettingsPanel = preload("res://prefabs/SettingsPanel.tscn")
 var OrderCardList = preload("res://prefabs/OrderCardList.tscn")
-
+var SummaryPanel = preload("res://prefabs/SummaryPanel.tscn")
 var settings_spawned := false
 
 var gold = 1100;
+var order_completed = 0;
+var order_failed = 0;
+var coin_earned = 0;
+var coin_lost = 0;
 
 func _unhandled_input(event: InputEvent) -> void:
 	if (event is InputEventKey and event.is_pressed() && event.scancode in [KEY_BRACKETLEFT, 125] ):
@@ -13,9 +17,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		gold_decrease(100);
 
 func gold_increase(amount):
+	order_completed+=1;
+	coin_earned+=amount;
 	gold_change(gold+amount);
 	
 func gold_decrease(amount):
+	order_failed+=1;
+	coin_lost+=amount;
+	if (gold-amount < 0):
+		coin_lost-=gold-amount;
 	gold_change(max(gold-amount, 0));
 
 func gold_change(new_gold):
@@ -43,6 +53,16 @@ func _ready():
 	order_card_list.name = "OrderCardList"
 	self.add_child(order_card_list);
 	return; # Replace with function body.
+
+
+func _on_GameTimer_timeout():
+	self.find_node("GameTimerText").stop();
+	get_tree().paused = true;
+	var panel = SummaryPanel.instance();
+	panel._setup(order_completed, order_failed, coin_earned, coin_lost);
+	add_child(panel);
+	pass # Replace with function body.
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

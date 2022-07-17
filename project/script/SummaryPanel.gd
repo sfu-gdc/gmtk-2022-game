@@ -1,4 +1,4 @@
-extends Panel
+extends CanvasLayer
 
 onready var backdrop_panel = $Backdrop;
 
@@ -12,21 +12,21 @@ func remove_itself():
 	get_tree().paused = false;
 	queue_free()
 	
-func _init(order_finished = 123, orderfailed = 10, coin_earned = 100, coin_lost = 20):
+	
+func _setup(order_finished = 123, orderfailed = 10, coin_earned = 100, coin_lost = 20):
 	self.order_finished = order_finished;
 	self.orderfailed = orderfailed;
 	self.coin_earned = coin_earned;
 	self.coin_lost = coin_lost;
-	pass;
 
 func _ready():
 	$Clap.stream.loop = false;
 	$Clap.play();
 	#get_tree().paused = true;
-	$OrderFinishedText.bbcode_text = "[right]"+str(order_finished)+"[/right]";
-	$OrderFailedText.bbcode_text = "[right]"+str(orderfailed)+"[/right]";
-	$CoinEarnedText.bbcode_text = "[right]"+str(coin_earned)+"[/right]";
-	$CoinLostText.bbcode_text = "[right]"+str(coin_lost)+"[/right]";
+	$Panel/OrderFinishedText.bbcode_text = "[right]"+str(order_finished)+"[/right]";
+	$Panel/OrderFailedText.bbcode_text = "[right]"+str(orderfailed)+"[/right]";
+	$Panel/CoinEarnedText.bbcode_text = "[right]"+str(coin_earned)+"[/right]";
+	$Panel/CoinLostText.bbcode_text = "[right]"+str(coin_lost)+"[/right]";
 	#pass;
 	
 

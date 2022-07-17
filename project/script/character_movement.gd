@@ -133,8 +133,8 @@ func _process(_delta):
 				if (serve_area.translation - translation).length() < interaction_range:
 					game_runner.completed_recipe(held_object.number)
 					place_food(serve_area)
-					print(game_runner.out_going_recipes_number.size())
-					print(game_runner.out_going_recipes_number[0])
+					#print(game_runner.out_going_recipes_number.size())
+					#print(game_runner.out_going_recipes_number[0])
 					break
 		  
 	# Try to pick up a die
