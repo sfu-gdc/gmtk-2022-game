@@ -141,8 +141,11 @@ func _on_body_entered(body:Node):
 	#if die collised to "attachable" object
 	if not "attachable" in body:
 		return
-	body._on_throwable_interact(self)
-	queue_free()
+	if throwing:
+		body._on_throwable_interact(self)
+		queue_free()
+		
+
 	
 func pickup(player: KinematicBody) -> Die:
 	# Attach to player and disable collisions
