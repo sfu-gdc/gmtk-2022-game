@@ -1049,8 +1049,8 @@ margin_right = 247.0
 margin_bottom = 81.16
 custom_fonts/normal_font = SubResource( 21 )
 bbcode_enabled = true
-bbcode_text = "[center]1100[/center]"
-text = "1100"
+bbcode_text = "[center]0[/center]"
+text = "0"
 
 [node name="TimerPanel" type="Panel" parent="GamePanel"]
 anchor_top = 0.632

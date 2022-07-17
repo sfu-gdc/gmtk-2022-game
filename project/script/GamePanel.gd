@@ -4,7 +4,7 @@ var OrderCardList = preload("res://prefabs/OrderCardList.tscn")
 var SummaryPanel = preload("res://prefabs/SummaryPanel.tscn")
 var settings_spawned := false
 
-var gold = 1100;
+var gold = 0;
 var order_completed = 0;
 var order_failed = 0;
 var coin_earned = 0;
