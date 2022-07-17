@@ -22,6 +22,7 @@ func _on_player_interact(player: KinematicBody, held_object: Spatial):
 		held_object.pot(player, self)
 		UI.add_die(held_object.number)
 		print(numbers)
+		$PutInPot.play()
 
 func pickup(player: KinematicBody) -> Spatial:
 	# Attach to player and disable collisions
@@ -64,9 +65,11 @@ func garbage(player: KinematicBody):
 	print(numbers)
 	yield(animation, "animation_finished")
 	dumping = false
+	$Dumping.play()
 
 
 func _on_Area_body_entered(body):
 	if body.is_in_group("snap"):
 		print("snapped")
 		mode = RigidBody.MODE_STATIC
+		$PutDownPot.play()

@@ -19,7 +19,7 @@ onready var dice_tex_1 = load("res://art/white-die.png")
 var t1: Timer = Timer.new()
 var t2: Timer = Timer.new()
 
-func _init():
+func _init(arg):
 	add_to_group("pickup")
 	
 	self.add_child(t1)
@@ -134,10 +134,9 @@ func pickup(player: KinematicBody) -> Die:
 	
 	return self
 
-func place():
+func place(player: KinematicBody):
 	if not get_parent():
 		return false
-	var player = get_parent()
 	var save_transform := global_transform
 	player.remove_child(self)
 	dice_pool.add_child(self)

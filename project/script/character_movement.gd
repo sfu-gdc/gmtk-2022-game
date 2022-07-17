@@ -26,7 +26,7 @@ var picking = false
 var picking_time = 0
 
 func spawn_die(location: Vector3):
-	var rbody = Die.new() # TODO: get arg based on group that diceblock is in
+	var rbody = Die.new(1) # TODO: get arg based on group that diceblock is in
 	rbody.init(0, location)
 	dice_pool.add_child(rbody)
 	
@@ -56,6 +56,7 @@ func _process(_delta):
 		
 		# If near dice box, spawn a die
 		if die_spawn_timer == 0:
+			$ActivateDieBox.play()
 			for dice_box in dice_box_list:
 				if (dice_box.translation - translation).length() < interaction_range:
 					spawn_die(dice_box.translation)
@@ -68,8 +69,8 @@ func _process(_delta):
 		if held_object:
 			picking_time = -1
 			picking = false
-			
-			if held_object.place():
+			$DropObject.play()
+			if held_object.place(self):
 				held_object = null
 		# Otherwise, find the closest die
 		else:
@@ -89,6 +90,7 @@ func _process(_delta):
 				picking_time = 20 * _delta
 				
 				animationState.travel("PickUp")
+				$GrabObject.play()
 	
 	# pickup delay for animation
 	if picking && picking_time > 0:
@@ -105,7 +107,9 @@ func pickingUpAnimation(object, delta):
 	object.translation.y += direction.y * 0.5 + 1
 	object.translation.z += direction.z * delta
 
+var elapsed: float
 func _physics_process(delta):
+	elapsed += delta
 	if (Input.is_action_pressed("player_up") or Input.is_action_pressed("player_down") or
 			Input.is_action_pressed("player_left") or Input.is_action_pressed("player_right")):
 		animationState.travel("Run")
@@ -116,6 +120,9 @@ func _physics_process(delta):
 								).normalized()
 		
 		rotation.y = lerp_angle(rotation.y, atan2(-velocity_xz.x, -velocity_xz.z), delta * angular_accleration)
+		if elapsed > 0.2:
+			$WalkingSound.play()
+			elapsed = 0
 	else:
 		animationState.travel("Idle")
 		velocity_xz = Vector3()
