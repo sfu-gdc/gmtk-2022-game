@@ -5,6 +5,7 @@ export var interaction_range : float = 20.0
 const SMOKE_SCENE := preload("res://prefabs/effects/smoke.tscn")
 const DIE_UI := preload("res://prefabs/DieUI.tscn")
 const BURN_IMG := preload("res://art/dice-fire.png")
+const DISH := preload("res://prefabs/Dish.tscn")
 const DIE_COOK_TIME := 8.0
 const BURN_TIME := 10.0
 
@@ -71,31 +72,51 @@ func _process(delta):
 		cooking_time += delta
 
 func _on_player_interact(player: KinematicBody, held_object: Spatial):
-	if not held and not burnt and held_object is Die and to_local(player.global_transform.origin).length_squared() < interaction_range:
-		# Make sure I'm the closest that can eat a die
-		var player_position := player.global_transform.origin
-		for node in get_tree().get_nodes_in_group("can_take_dice"):
-			if node.global_transform.origin.distance_squared_to(player_position) < global_transform.origin.distance_squared_to(player_position):
-				return
+	if not held and not burnt and to_local(player.global_transform.origin).length_squared() < interaction_range:
+		if held_object is Die:
+			# Make sure I'm the closest that can eat a die
+			var player_position := player.global_transform.origin
+			for node in get_tree().get_nodes_in_group("can_take_dice"):
+				if node.global_transform.origin.distance_squared_to(player_position) < global_transform.origin.distance_squared_to(player_position):
+					return
 
-		numbers.append(held_object.number)
-		held_object.pot(player, self)
-		UI.add_die(held_object.number)
-		smoke.emitting = cooking and numbers.size() > 0
-		cooking_progress.max_value = numbers.size() * DIE_COOK_TIME
-		print(numbers)
-		$PutInPot.play()
-		countdown.stop()
+			numbers.append(held_object.number)
+			held_object.pot(player, self)
+			UI.add_die(held_object.number)
+			smoke.emitting = cooking and numbers.size() > 0
+			cooking_progress.max_value = numbers.size() * DIE_COOK_TIME
+			print(numbers)
+			$PutInPot.play()
+			countdown.stop()
+		
+		elif held_object == null and cooking_time >= numbers.size() * DIE_COOK_TIME:
+			var dish := DISH.instance()
+			player.add_child(dish)
+			dish.global_transform.origin = player.get_node("PotSpot").global_transform.origin
+			cooking_time = 0.0
+			player.held_object = dish
+			var total := 0
+			for number in numbers:
+				total += number
+			dish.number = total
+			numbers.clear()
+			UI.clear_dice()
+			smoke.emitting = cooking and numbers.size() > 0
+			cooking_progress.max_value = numbers.size() * DIE_COOK_TIME
+			# TODO: Make a sound to extract plate
+			countdown.stop()
 		
 func _on_throwable_interact(held_object: Spatial):
-		numbers.append(held_object.number)
-		held_object.remove_from_group("pickup")
-		UI.add_die(held_object.number)
-		smoke.emitting = cooking and numbers.size() > 0
-		cooking_progress.max_value = numbers.size() * DIE_COOK_TIME
-		print(numbers)
-		$PutInPot.play()
-		countdown.stop()
+	if held_object.number == -1:
+		held_object.finalize_number()
+	numbers.append(held_object.number)
+	held_object.remove_from_group("pickup")
+	UI.add_die(held_object.number)
+	smoke.emitting = cooking and numbers.size() > 0
+	cooking_progress.max_value = numbers.size() * DIE_COOK_TIME
+	print(numbers)
+	$PutInPot.play()
+	countdown.stop()
 
 func pickup(player: KinematicBody) -> Spatial:
 	# Attach to player and disable collisions
