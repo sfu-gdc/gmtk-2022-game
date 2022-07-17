@@ -5,7 +5,7 @@ const DISH_LAYER := 1
 onready var level := $"/root".get_child($"/root".get_child_count() - 1)
 
 var number : int setget set_number
-
+var dumping := false
 func set_number(value: int):
 	number = value
 	$DishLabel.text = str(number)
@@ -57,6 +57,22 @@ func place(player: KinematicBody) -> bool:
 
 	return true
 
+func garbage(player: KinematicBody):
+	$Dumping.play()
+	dumping = true
+	
+	#numbers.clear()
+	#sum = 0
+	#UI.clear_dice()
+	#cooking_time = 0.0
+	#burnt = false
+	#UI.size_multiplier = 1.0
+	#UI.clear_dice()
+	#print(numbers)
+	#yield(animation, "animation_finished")
+	dumping = false
+	player.held_object = null
+	queue_free();
 
 func _on_Area_body_entered(body):
 	
