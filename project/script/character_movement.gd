@@ -69,8 +69,10 @@ func place_food(serve_area: MeshInstance) -> void:
 	held_object.add_child(t)
 	t.start()
 	yield(t, "timeout")
-	held_object.queue_free()
-	held_object = null
+	
+	if (held_object != null):
+		held_object.queue_free()
+		held_object = null
 	
 func _ready():
 	if self.name == "KinematicBody1":

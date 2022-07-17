@@ -4,6 +4,9 @@ const DISH_LAYER := 1
 
 onready var level := $"/root".get_child($"/root".get_child_count() - 1)
 
+var throwable = true
+var throwing = false # ???
+
 var number : int setget set_number
 var dumping := false
 func set_number(value: int):

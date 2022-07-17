@@ -8,11 +8,9 @@ var time_left = 150;
 
 func _ready():
 	spwan_tutorial()
-	pass
 
 func spwan_tutorial():
 	get_tree().paused = true;
-	pass	
 	# TODO: attach pots to their burners
 
 func _on_TutorialNextButton_pressed():
@@ -29,7 +27,6 @@ func _on_TutorialNextButton_pressed():
 	
 	if (current_slide == total_num_slide):
 		self.find_node("NextButton").get_child(0).bbcode_text = "[center]start game[/center]";
-	pass # Replace with function body.
 
 func _on_TutorialPrevButton_pressed():
 	if (current_slide == 1):
@@ -55,7 +52,6 @@ func _on_GameTimerText_timeout():
 	if (int(minute_left) > 0):
 		time_left_text = minute_left+":"+time_left_text
 	self.find_node("timer_text").bbcode_text = "[center]"+time_left_text+"[/center]";
-	pass # Replace with function body.
 
 
 func _on_GameTimer_timeout():
