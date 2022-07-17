@@ -36,6 +36,7 @@ custom_constants/margin_left = 0
 custom_constants/margin_bottom = 4
 
 [node name="TimeBar" type="TextureProgress" parent="Panel/Vertical/Center/Margin"]
+modulate = Color( 0, 1, 0, 1 )
 margin_top = 25.0
 margin_right = 184.0
 margin_bottom = 67.0

@@ -33,6 +33,7 @@ func _init_set_timer(timer_time: float) -> void:
 	timer.autostart = true  # auto starts when timer entering the scene tree
 	# connect timeout signal to _on_Timer_timeout
 	var _never_use_this_var = timer.connect("timeout", self, "_on_Timer_timeout")
+	
 	# timer enter the scene tree as the child of the node
 	add_child(timer)
 
@@ -58,6 +59,8 @@ func _ready():
 	
 	# move the panel position from offscreen to onscreen
 	var _action = tween.interpolate_property(panel, "rect_position:y", panel.rect_position.y, panel.rect_position.y + panel_vsize, 1, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+	# move the time bar from green to red
+	tween.interpolate_property(time_bar, "modulate", Color( 0, 1, 0, 1 ), Color( 1, 0, 0, 1 ), full_time, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	_action = tween.start()
 
 func _process(_delta):
