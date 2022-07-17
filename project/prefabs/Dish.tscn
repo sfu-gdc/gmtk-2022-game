@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://script/Dish.gd" type="Script" id=1]
 [ext_resource path="res://art/3d_object/plate.glb" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://script/DishLabel.gd" type="Script" id=4]
 [ext_resource path="res://audio/sound_effect/dish_stack.mp3" type="AudioStream" id=5]
 [ext_resource path="res://audio/sound_effect/dish_create.mp3" type="AudioStream" id=6]
+[ext_resource path="res://audio/sound_effect/dumping.wav" type="AudioStream" id=7]
 
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.6, 0.6, 0.6 )
@@ -90,6 +91,10 @@ shape = SubResource( 1 )
 
 [node name="DishCreated" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+bus = "SFX"
+
+[node name="Dumping" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
 bus = "SFX"
 
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
