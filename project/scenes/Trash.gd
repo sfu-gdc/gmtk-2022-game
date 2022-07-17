@@ -13,7 +13,7 @@ var attachable = true
 func _ready():
 # warning-ignore:return_value_discarded
 	player1.connect("interact", self, "_on_player_interact")
-	self.connect("body_entered", self, "_on_body_entered")
+#	self.connect("body_entered", self, "_on_body_entered")
 
 func _on_player_interact(player: KinematicBody, held_object: Spatial):
 	if held_object and to_local(player.global_transform.origin).length_squared() < interaction_range:

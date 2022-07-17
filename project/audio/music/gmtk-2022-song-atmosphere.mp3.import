@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/gmtk-2022-song-atmosphere.mp3-5c86780152ad9361f9a7c7ec0789a8ec.mp3str"
+
+[deps]
+
+source_file="res://audio/music/gmtk-2022-song-atmosphere.mp3"
+dest_files=[ "res://.import/gmtk-2022-song-atmosphere.mp3-5c86780152ad9361f9a7c7ec0789a8ec.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
