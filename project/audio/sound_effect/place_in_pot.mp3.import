@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/place_in_pot.mp3-75bca48d0f88592cb4b30e617e02b795.mp3str"
+
+[deps]
+
+source_file="res://audio/sound_effect/place_in_pot.mp3"
+dest_files=[ "res://.import/place_in_pot.mp3-75bca48d0f88592cb4b30e617e02b795.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -13,6 +13,7 @@ var out_going_recipes_number = []
 var out_going_recipes = []
 
 func _ready():
+	#get_tree().paused = true;
 	randomize() # seed rng just in case
 
 func post_ready():
