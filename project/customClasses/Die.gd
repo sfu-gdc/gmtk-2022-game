@@ -86,7 +86,6 @@ func init(die_type_local: int, start_location_local: Vector3):
 	shape.shape.extents = Vector3(0.6,0.6,0.6)
 	self.add_child(shape)
 	
-# TODO: INSTANTLY finalize the moment a die is picked up.
 func finalize_number():
 	var pillar1 = self.transform.xform(Vector3(0,0,1)).normalized()
 	var pillar2 = self.transform.xform(Vector3(1,0,0)).normalized()
@@ -199,9 +198,11 @@ func pot(player: KinematicBody, dump_pot: Spatial):
 	
 	var yeet := Tween.new()
 	add_child(yeet)
-# warning-ignore:return_value_discarded
-	yeet.interpolate_property(self, "global_transform:origin", null, dump_pot.global_transform.origin, 0.2, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
-# warning-ignore:return_value_discarded
+
+	# warning-ignore:return_value_discarded
+		yeet.interpolate_property(self, "global_transform:origin", null, dump_pot.global_transform.origin, 0.2, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
+	# warning-ignore:return_value_discarded
+	
 	yeet.start()
 	yield(yeet, "tween_completed")
 	queue_free()

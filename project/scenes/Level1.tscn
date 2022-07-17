@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://art/tile_textures/counter-tile.png" type="Texture" id=1]
 [ext_resource path="res://art/trashbin.tscn" type="PackedScene" id=2]
@@ -28,8 +28,9 @@
 [ext_resource path="res://prefabs/effects/fire.tscn" type="PackedScene" id=26]
 [ext_resource path="res://art/particle/flame_02.png" type="Texture" id=27]
 [ext_resource path="res://script/FireExplosion.gd" type="Script" id=28]
-[ext_resource path="res://audio/music/background.mp3" type="AudioStream" id=29]
-[ext_resource path="res://fonts/CollegiateBlackFLF.ttf" type="DynamicFontData" id=30]
+[ext_resource path="res://audio/music/gmtk-2022-song-v2.mp3" type="AudioStream" id=29]
+[ext_resource path="res://audio/sound_effect/waves-sound-loop.mp3" type="AudioStream" id=30]
+[ext_resource path="res://fonts/CollegiateBlackFLF.ttf" type="DynamicFontData" id=31]
 
 [sub_resource type="SpatialMaterial" id=2]
 render_priority = 11
@@ -96,8 +97,8 @@ expand_margin_bottom = 3.0
 _data = [ Vector2( 0, 1 ), 0.0, -0.0690722, 0, 0, Vector2( 0.711538, 0.679977 ), -1.17117, -1.17117, 0, 0, Vector2( 1, 0 ), -3.30518, 0.0, 0, 0 ]
 
 [sub_resource type="DynamicFont" id=21]
-size = 37
-font_data = ExtResource( 30 )
+size = 36
+font_data = ExtResource( 31 )
 
 [node name="Level1" type="Spatial"]
 script = ExtResource( 23 )
@@ -544,8 +545,8 @@ skeleton = NodePath("")
 material/0 = null
 script = ExtResource( 21 )
 
-[node name="ServeArea1" type="MeshInstance" parent="Level/OuterWalls" groups=["serve"]]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 6, 0, -10 )
+[node name="ServeArea2" type="MeshInstance" parent="Level/OuterWalls" groups=["serve"]]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4, 0, -10 )
 mesh = SubResource( 17 )
 skeleton = NodePath("")
 material/0 = null
@@ -705,7 +706,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -2, 0 )
 mesh = SubResource( 13 )
 material/0 = null
 
-[node name="StaticBody" type="StaticBody" parent="Level/Floor"]
+[node name="StaticBody" type="StaticBody" parent="Level/Floor" groups=["floor"]]
 transform = Transform( 16, 0, 0, 0, 1, 0, 0, 0, 8, 12, -2, -3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/Floor/StaticBody"]
@@ -720,7 +721,7 @@ collision_mask = 0
 shape = SubResource( 5 )
 
 [node name="Trash" type="StaticBody" parent="Level" groups=["can_take_dice"]]
-transform = Transform( 0.697215, 0, -0.716862, 0, 1, 0, 0.716862, 0, 0.697215, 0.424277, 0, -7.79825 )
+transform = Transform( 0.697215, 0, -0.716862, 0, 1, 0, 0.716862, 0, 0.697215, 7.71525, 0.294239, -7.90975 )
 script = ExtResource( 20 )
 
 [node name="trashbin" parent="Level/Trash" instance=ExtResource( 2 )]
@@ -735,7 +736,7 @@ shape = SubResource( 11 )
 [node name="DicePool" type="Spatial" parent="."]
 
 [node name="boringpot" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.75, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 5.83551, 0 )
 
 [node name="DiceInPot" type="GridContainer" parent="boringpot"]
 anchor_left = 0.5
@@ -833,6 +834,9 @@ margin_right = 36.0
 margin_bottom = 112.0
 rect_scale = Vector2( 0.5, 0.5 )
 texture_normal = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="."]
 anchor_left = 0.823
@@ -847,6 +851,9 @@ text = "Press [Tab] to spawn order
 Press \"[\" to increase gold
 Press \"]\" to decrease gold"
 align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="GameRunner" type="Node" parent="."]
 script = ExtResource( 24 )
@@ -856,7 +863,13 @@ script = ExtResource( 24 )
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 29 )
-volume_db = -32.0
+volume_db = -10.0
 autoplay = true
+
+[node name="Waves" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 30 )
+volume_db = -15.0
+autoplay = true
+bus = "SFX"
 
 [connection signal="pressed" from="Button" to="GamePanel" method="_on_Button_pressed"]

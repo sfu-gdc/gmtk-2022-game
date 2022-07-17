@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/gmtk-2022-song-v2.mp3-0c2d2b9b8072a34af088bf2c80b25278.mp3str"
+
+[deps]
+
+source_file="res://audio/music/gmtk-2022-song-v2.mp3"
+dest_files=[ "res://.import/gmtk-2022-song-v2.mp3-0c2d2b9b8072a34af088bf2c80b25278.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
