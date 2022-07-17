@@ -1,7 +1,7 @@
 extends Node
 
 # this script is for initializing relationships in the scene graph
-var SummaryPanel = preload("res://prefabs/SummaryPanel.tscn")
+
 var current_slide = 1;
 var total_num_slide = 2;
 var time_left = 150;
@@ -53,10 +53,3 @@ func _on_GameTimerText_timeout():
 		time_left_text = minute_left+":"+time_left_text
 	self.find_node("timer_text").bbcode_text = "[center]"+time_left_text+"[/center]";
 
-
-func _on_GameTimer_timeout():
-	self.find_node("GameTimerText").stop();
-	get_tree().paused = true;
-	var panel = SummaryPanel.instance();
-	add_child(panel);
-	pass # Replace with function body.
