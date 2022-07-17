@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/clap.mp3-d50a926cdad377eae84eacfb614732ed.mp3str"
+
+[deps]
+
+source_file="res://audio/sound_effect/clap.mp3"
+dest_files=[ "res://.import/clap.mp3-d50a926cdad377eae84eacfb614732ed.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
