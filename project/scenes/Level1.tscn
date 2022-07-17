@@ -1167,7 +1167,7 @@ mix_target = 1
 bus = "SFX"
 
 [node name="Boat" parent="." instance=ExtResource( 31 )]
-transform = Transform( -4.37113e-08, 0.00872654, 0.99996, 0, 0.999962, -0.00872652, -0.999998, -3.81449e-10, -4.37097e-08, 5.039, -2.5, -13.895 )
+transform = Transform( -4.37113e-08, 0.00872654, 0.99996, 0, 0.999962, -0.00872652, -0.999998, -3.81449e-10, -4.37096e-08, 5.039, -2.5, -13.895 )
 script = ExtResource( 38 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Boat"]

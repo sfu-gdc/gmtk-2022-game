@@ -32,10 +32,12 @@ func _ready():
 
 
 func _on_RestartButton_pressed():
+	get_tree().paused = false;
 	return get_tree().change_scene("res://scenes/Level1.tscn")
 	pass # Replace with function body.
 
 
 func _on_MainMenuButton_pressed():
+	get_tree().paused = false;
 	return get_tree().change_scene("res://prefabs/MainestMenu.tscn")
 	pass # Replace with function body.
