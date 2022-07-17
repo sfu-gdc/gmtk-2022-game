@@ -57,7 +57,9 @@ func _process(_delta):
 # when the timer runs out, move the panel up, and deletes the node
 func _on_Timer_timeout():
 	# moves the card up
+# warning-ignore:return_value_discarded
 	tween.interpolate_property(panel, "rect_position:y", panel.rect_position.y, panel.rect_position.y - panel_vsize, 0.7, Tween.TRANS_QUINT, Tween.EASE_IN)
+# warning-ignore:return_value_discarded
 	tween.start()
 	# wait for the tween to be finished, and emit signal that card has gone completely up
 	yield(tween, "tween_all_completed")

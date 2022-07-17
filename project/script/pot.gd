@@ -2,10 +2,12 @@ extends RigidBody
 
 export var interaction_range : float = 20.0
 
+const SMOKE_SCENE := preload("res://prefabs/effects/smoke.tscn")
+
 onready var player1 : KinematicBody = $"/root".get_child(0).find_node("Player1")
 onready var level : Spatial = $"/root".get_child(0)
 onready var UI : GridContainer = $DiceInPot
-onready var smoke : CPUParticles = $"Spatial/smoke"
+var smoke : CPUParticles
 
 const POT_LAYER := 1
 
@@ -15,6 +17,11 @@ var held := false
 var dumping := false
 
 func _ready():
+	var smoke_scene := SMOKE_SCENE.instance()
+	smoke_scene.pot_to_follow = self
+	level.call_deferred("add_child", smoke_scene)
+	smoke = smoke_scene.get_node("smoke")
+	
 # warning-ignore:return_value_discarded
 	player1.connect("interact", self, "_on_player_interact")
 
@@ -23,6 +30,7 @@ func _on_player_interact(player: KinematicBody, held_object: Spatial):
 		numbers.append(held_object.number)
 		held_object.pot(player, self)
 		UI.add_die(held_object.number)
+		smoke.emitting = cooking and numbers.size() > 0
 		print(numbers)
 
 func pickup(player: KinematicBody) -> Spatial:
@@ -72,12 +80,11 @@ func garbage(player: KinematicBody):
 	yield(animation, "animation_finished")
 	dumping = false
 
-
 func _on_Area_body_entered(body):
 	if body.is_in_group("snap"):
 		print("snapped")
 		mode = RigidBody.MODE_STATIC
-#	if body.get_parent().is_in_group("burner"):
-#		cooking = true
-#		smoke.emitting = cooking
-#		print("cooking: ", cooking)
+	if body.get_parent().is_in_group("burner"):
+		cooking = true
+		smoke.emitting = cooking and numbers.size() > 0
+		print("cooking: ", cooking)

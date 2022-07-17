@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 var SettingsPanel = preload("res://prefabs/SettingsPanel.tscn")
 
 var settings_spawned := false

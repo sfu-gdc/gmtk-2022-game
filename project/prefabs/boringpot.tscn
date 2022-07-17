@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://script/pot.gd" type="Script" id=2]
-[ext_resource path="res://prefabs/effects/smoke.tscn" type="PackedScene" id=3]
 [ext_resource path="res://art/metal.material" type="Material" id=4]
 
 [sub_resource type="ArrayMesh" id=2]
@@ -77,9 +76,6 @@ material/0 = null
 transform = Transform( 0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0, 0, 1, 1.01, 0.6, 0 )
 mesh = SubResource( 4 )
 material/0 = null
-
-[node name="Spatial" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.126423, 0 )
 
 [node name="UIPosition" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.903216, 0 )

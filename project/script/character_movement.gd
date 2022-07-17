@@ -64,7 +64,6 @@ func _process(_delta):
 	
 	# Try to pick up a die
 	if Input.is_action_just_pressed("pick"):
-		print(held_object)
 		# Try to drop held dice
 		if held_object:
 			picking_time = -1
