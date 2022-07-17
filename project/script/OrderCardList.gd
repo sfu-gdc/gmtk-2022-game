@@ -22,6 +22,8 @@ onready var tween : Tween = $Tween
 # emitted when the cards starts moving or stops moving
 signal move_state_changes
 
+
+var rng
 # setter for is_moving, emit the signal "move_state_changes" whenever is_moving value changes
 func change_in_movement(moves: bool):
 	is_moving = moves
@@ -35,41 +37,43 @@ func _ready():
 
 	# create a connection that when move_state_changes is emitted, call add card method
 	var _v1 = connect("move_state_changes", self, "add_card_child")
+	
+	rng = RandomNumberGenerator.new()
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("down"):
-		add(1)
+		var new_number = rng.randi_range(1, 50)
+		print(new_number)
+		add(1, new_number)
 
 # called when move_state_changes occur. If it's not moving, add the cards from buffer
 func add_card_child():
-
 	# if cards are not moving to the left
 	if (!is_moving):
 		# while there exists a card in the buffer; while loop stops when there isn't a card in buffer
 		while order_card_buffer:
 			# pop the the most front card
 			var card = order_card_buffer.pop_front()
-
 			# set the position x of the card
 			set_card_x(card)
 			# add the card to the list, set its connection, and add it to the tree
 			add_card(card)
 
 # check whether it's a good time to create and add the order card
-func add(timer_time):
+func add(timer_time: float, num: int):
 	# if the cards are not shifting to the left, start creating order card, as the animation shoulnd't be interrupted
 	if !is_moving:
-		create_order_card(timer_time)
+		create_order_card(timer_time, num)
 	# if the cards are shifting to the left, add a card to the buffer with its parameter already specified
 	else:
-		var order_card_instance : Control = instance_order_card(timer_time)
+		var order_card_instance : Control = instance_order_card(timer_time, num)
 		order_card_buffer.append(order_card_instance)
 
 
 # create a new order card
-func create_order_card(timer_time: int) -> void:
+func create_order_card(timer_time: float, num: int) -> void:
 	# creates an order card instance with timer wait time specified
-	var order_card_instance = instance_order_card(timer_time)
+	var order_card_instance = instance_order_card(timer_time, num)
 
 	# set the card's x position
 	set_card_x(order_card_instance)
@@ -96,13 +100,13 @@ func set_card_x(order_card_instance: Control) -> void:
 	# initailize the x position of the order card
 	order_card_instance._init_set_x(x)
 
-# instance an order card, with its timer wait time defined
-func instance_order_card(timer_time: int) -> Control:
+# instance an order card, with its timer wait time, number defined
+func instance_order_card(timer_time: float, number: int) -> Control:
 	# create a new order card, and add it to the current node
 	var order_card_instance : Control = OrderCard.instance()
-	# initialize the order card with the timer wait time, and position x
+	# initialize the order card with the timer wait time
 	order_card_instance._init_set_timer(timer_time)
-
+	order_card_instance._init_set_text(str(number))
 	return order_card_instance  # return the card as the instance
 
 # reorder the order of the cards from the list by shifting to the left

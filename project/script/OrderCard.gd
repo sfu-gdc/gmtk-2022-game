@@ -6,7 +6,7 @@ var panel_vsize: float = 0.0
 
 # time for the Timer to reach 0
 var full_time: float = 0.0
-
+var text: String = ""
 # panel's original position
 onready var panel_oposition: int = 0
 
@@ -15,6 +15,8 @@ onready var panel: Panel = $Panel
 onready var tween: Tween = $Tween
 onready var time_bar: TextureProgress = $Panel/Vertical/Center/Margin/TimeBar
 onready var timer: Timer
+onready var label: Label = $Panel/Vertical/Center2/Horizontal/Margin2/Label
+
 
 # emitted when the card is completely gone up
 signal card_complete_up
@@ -38,12 +40,19 @@ func _init_set_x(position_x: int) -> void:
 	# set the order card position x
 	rect_position.x = position_x
 
+func _init_set_text(text: String) -> void:
+	self.text = text
+
 func _ready():
 	# the size of the card equals to the size of the panel plus button
 	panel_vsize = panel.get_size().y
+	
+	# set the number text
+	label.set_text(text)
 
 	# set the panel position to be offscreen
 	panel.rect_position.y = -panel_vsize
+	
 	# move the panel position from offscreen to onscreen
 	var _action = tween.interpolate_property(panel, "rect_position:y", panel.rect_position.y, panel.rect_position.y + panel_vsize, 1, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 	_action = tween.start()
