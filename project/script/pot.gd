@@ -3,11 +3,15 @@ extends RigidBody
 export var interaction_range : float = 20.0
 
 const SMOKE_SCENE := preload("res://prefabs/effects/smoke.tscn")
+const DIE_COOK_TIME := 20
+const BURN_FRACTION := 1.5
 
 onready var player1 : KinematicBody = $"/root".get_child(0).find_node("Player1")
 onready var level : Spatial = $"/root".get_child(0)
 onready var UI : GridContainer = $DiceInPot
+onready var cooking_progress : ProgressBar = $CookProgress
 var smoke : CPUParticles
+
 
 const POT_LAYER := 1
 
@@ -15,6 +19,7 @@ var numbers := []
 var cooking := false
 var held := false
 var dumping := false
+var cooking_time := 0.0
 
 func _ready():
 	var smoke_scene := SMOKE_SCENE.instance()
@@ -24,6 +29,12 @@ func _ready():
 	
 # warning-ignore:return_value_discarded
 	player1.connect("interact", self, "_on_player_interact")
+
+func _process(delta):
+	clamp(range_lerp(cooking_time, cooking_progress.max_value, BURN_FRACTION * cooking_progress.max_value, 0.0, 1.0), 0.0, 1.0)
+	cooking_progress.value = cooking_time
+	if cooking and numbers.size() > 0:
+		cooking_time += delta
 
 func _on_player_interact(player: KinematicBody, held_object: Spatial):
 	if not held and held_object is Die and to_local(player.global_transform.origin).length_squared() < interaction_range:
@@ -38,6 +49,7 @@ func _on_player_interact(player: KinematicBody, held_object: Spatial):
 		held_object.pot(player, self)
 		UI.add_die(held_object.number)
 		smoke.emitting = cooking and numbers.size() > 0
+		cooking_progress.max_value = numbers.size() * DIE_COOK_TIME
 		print(numbers)
 
 func pickup(player: KinematicBody) -> Spatial:
@@ -83,6 +95,7 @@ func garbage(player: KinematicBody):
 	animation.play("Dump")
 	numbers.clear()
 	UI.clear_dice()
+	cooking_time = 0.0
 	print(numbers)
 	yield(animation, "animation_finished")
 	dumping = false
