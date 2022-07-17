@@ -89,3 +89,7 @@ material/0 = null
 
 [node name="Fire" parent="campfire" instance=ExtResource( 4 )]
 transform = Transform( 0.15, 0, 0, 0, 0.2, 0, 0, 0, 0.15, -0.0129124, 0.0695873, -0.00400652 )
+
+[node name="OmniLight" type="OmniLight" parent="campfire"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.1, 0 )
+light_color = Color( 0.992157, 0.831373, 0.52549, 1 )

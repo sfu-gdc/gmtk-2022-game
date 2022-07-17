@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://art/tile_textures/counter-tile.png" type="Texture" id=1]
 [ext_resource path="res://art/trashbin.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://prefabs/boringpot.tscn" type="PackedScene" id=8]
 [ext_resource path="res://prefabs/character_barbarian.tscn" type="PackedScene" id=9]
 [ext_resource path="res://art/trashlid.glb" type="PackedScene" id=10]
+[ext_resource path="res://prefabs/bg/bg.tscn" type="PackedScene" id=11]
 [ext_resource path="res://art/icon_settings.png" type="Texture" id=13]
 [ext_resource path="res://art/tile_textures/burner-tile.png" type="Texture" id=14]
 [ext_resource path="res://script/GamePanel.gd" type="Script" id=15]
@@ -75,8 +76,8 @@ script = ExtResource( 4 )
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.926089, 0.145049, -0.348311, 0.305704, 0.252614, 0.918004, 0.221144, -0.956633, 0.189601, -3.30546, 8.26858, 0 )
 light_color = Color( 1, 1, 0.988235, 1 )
-light_energy = 0.68
-light_indirect_energy = 0.764
+light_energy = 0.73
+light_indirect_energy = 0.57
 light_size = 0.047
 light_specular = 0.733
 shadow_enabled = true
@@ -780,5 +781,7 @@ __meta__ = {
 
 [node name="GameRunner" type="Node" parent="."]
 script = ExtResource( 24 )
+
+[node name="Spatial-bg" parent="." instance=ExtResource( 11 )]
 
 [connection signal="pressed" from="Button" to="GamePanel" method="_on_Button_pressed"]
