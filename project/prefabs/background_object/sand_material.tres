@@ -1,0 +1,11 @@
+[gd_resource type="SpatialMaterial" load_steps=2 format=2]
+
+[sub_resource type="StreamTexture" id=6]
+flags = 6
+load_path = "res://.import/sand_texture.png-17571adea00edf5ae3ba594360d2fe0e.stex"
+
+[resource]
+params_line_width = 0.1
+albedo_texture = SubResource( 6 )
+metallic_specular = 0.07
+uv1_scale = Vector3( 1.7, 1.7, 3 )

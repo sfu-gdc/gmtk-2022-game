@@ -23,10 +23,12 @@ func _init():
 	add_to_group("pickup")
 	
 	self.add_child(t1)
+# warning-ignore:return_value_discarded
 	t1.connect("timeout", self, "stop_particles")
 	t1.set_wait_time(0.25)
 	
 	self.add_child(t2)	
+# warning-ignore:return_value_discarded
 	t2.connect("timeout", self, "free_particles")
 	t2.set_wait_time(1.75)
 
@@ -134,10 +136,9 @@ func pickup(player: KinematicBody) -> Die:
 	
 	return self
 
-func place():
+func place(player: KinematicBody):
 	if not get_parent():
 		return false
-	var player = get_parent()
 	var save_transform := global_transform
 	player.remove_child(self)
 	dice_pool.add_child(self)

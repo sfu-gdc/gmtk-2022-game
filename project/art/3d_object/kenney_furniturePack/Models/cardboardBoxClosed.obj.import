@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/cardboardBoxClosed.obj-4d3636549d727bde0a7d58b1b8c2817e.mesh"
+
+[deps]
+
+files=[ "res://.import/cardboardBoxClosed.obj-4d3636549d727bde0a7d58b1b8c2817e.mesh" ]
+
+source_file="res://art/3d_object/kenney_furniturePack/Models/cardboardBoxClosed.obj"
+dest_files=[ "res://.import/cardboardBoxClosed.obj-4d3636549d727bde0a7d58b1b8c2817e.mesh", "res://.import/cardboardBoxClosed.obj-4d3636549d727bde0a7d58b1b8c2817e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

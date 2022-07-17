@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/cabinetTelevisionDoors.obj-2ed048c61a136089859779cba51aa92b.mesh"
+
+[deps]
+
+files=[ "res://.import/cabinetTelevisionDoors.obj-2ed048c61a136089859779cba51aa92b.mesh" ]
+
+source_file="res://art/3d_object/kenney_furniturePack/Models/cabinetTelevisionDoors.obj"
+dest_files=[ "res://.import/cabinetTelevisionDoors.obj-2ed048c61a136089859779cba51aa92b.mesh", "res://.import/cabinetTelevisionDoors.obj-2ed048c61a136089859779cba51aa92b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

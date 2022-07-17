@@ -40,6 +40,7 @@ func _ready():
 	
 	rng = RandomNumberGenerator.new()
 
+# warning-ignore:unused_argument
 func _process(delta):
 	if Input.is_action_just_pressed("down"):
 		var new_number = rng.randi_range(1, 50)
@@ -88,6 +89,7 @@ func add_card(order_card_instance: Control) -> void:
 	order_card_list.append(order_card_instance)
 
 	# if card is exiting from tree, reorder the card list
+# warning-ignore:return_value_discarded
 	order_card_instance.connect("card_complete_up", self, "reorder_order_card_list", [order_card_instance])
 
 	# add the order card into the scene tree as a child
@@ -125,9 +127,11 @@ func reorder_order_card_list(order_card_instance):
 				# for each of the card in the back, move them to front for one
 				for card in order_card_list.slice(index, -1):
 					# start the tween for the cards by moving the cards from the back to the front
+# warning-ignore:return_value_discarded
 					tween.interpolate_property(card, "rect_position:x", card.rect_position.x,
 							card.rect_position.x- move_left_amount, 1, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 				# start the tween
+# warning-ignore:return_value_discarded
 				tween.start()
 				# set the is_moving to true, since cards are moving to the left
 				self.is_moving = true

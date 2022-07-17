@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Prop_Branch_1.obj-71dab43ff9e8ff1b3cefc3e6f5a97adc.mesh"
+
+[deps]
+
+files=[ "res://.import/Prop_Branch_1.obj-71dab43ff9e8ff1b3cefc3e6f5a97adc.mesh" ]
+
+source_file="res://art/3d_object/Modular Terrain Hilly/Prop_Branch_1.obj"
+dest_files=[ "res://.import/Prop_Branch_1.obj-71dab43ff9e8ff1b3cefc3e6f5a97adc.mesh", "res://.import/Prop_Branch_1.obj-71dab43ff9e8ff1b3cefc3e6f5a97adc.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

@@ -69,7 +69,7 @@ func _process(_delta):
 			picking_time = -1
 			picking = false
 			
-			if held_object.place():
+			if held_object.place(self):
 				held_object = null
 		# Otherwise, find the closest die
 		else:

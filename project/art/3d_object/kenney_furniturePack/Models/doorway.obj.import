@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/doorway.obj-56948a3755c025f35dd67bbf071399ea.mesh"
+
+[deps]
+
+files=[ "res://.import/doorway.obj-56948a3755c025f35dd67bbf071399ea.mesh" ]
+
+source_file="res://art/3d_object/kenney_furniturePack/Models/doorway.obj"
+dest_files=[ "res://.import/doorway.obj-56948a3755c025f35dd67bbf071399ea.mesh", "res://.import/doorway.obj-56948a3755c025f35dd67bbf071399ea.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

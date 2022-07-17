@@ -11,6 +11,7 @@ var num_dice := 0
 func _ready():
 	image_size = get_viewport().get_visible_rect().size.y / 30.0
 	
+# warning-ignore:return_value_discarded
 	get_tree().root.connect("size_changed", self, "_on_viewport_size_changed")
 	
 	columns = 1

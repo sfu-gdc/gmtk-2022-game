@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Prop_Fence_Gate_2.obj-06320122609861026bdd5b0f3374a807.mesh"
+
+[deps]
+
+files=[ "res://.import/Prop_Fence_Gate_2.obj-06320122609861026bdd5b0f3374a807.mesh" ]
+
+source_file="res://art/3d_object/Modular Terrain Hilly/Prop_Fence_Gate_2.obj"
+dest_files=[ "res://.import/Prop_Fence_Gate_2.obj-06320122609861026bdd5b0f3374a807.mesh", "res://.import/Prop_Fence_Gate_2.obj-06320122609861026bdd5b0f3374a807.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

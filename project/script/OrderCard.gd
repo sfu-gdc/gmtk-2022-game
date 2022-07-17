@@ -16,7 +16,7 @@ onready var tween: Tween = $Tween
 onready var time_bar: TextureProgress = $Panel/Vertical/Center/Margin/TimeBar
 onready var timer: Timer
 onready var label: Label = $Panel/Vertical/Center2/Horizontal/Margin2/Label
-
+onready var picture: TextureRect = $Panel/Vertical/Center2/Horizontal/Margin/Picture
 
 # emitted when the card is completely gone up
 signal card_complete_up
@@ -43,6 +43,9 @@ func _init_set_x(position_x: int) -> void:
 func _init_set_number(number: int) -> void:
 	self.number = number
 
+func _init_set_picture(link: String):
+	picture.set_texture(load(link))
+
 func _ready():
 	# the size of the card equals to the size of the panel plus button
 	panel_vsize = panel.get_size().y
@@ -65,8 +68,15 @@ func _process(_delta):
 
 # when the timer runs out, move the panel up, and deletes the node
 func _on_Timer_timeout():
+	# removes the card when timer reaches 0
+	delete_card()
+
+# delete the current node card
+func delete_card():
 	# moves the card up
+# warning-ignore:return_value_discarded
 	tween.interpolate_property(panel, "rect_position:y", panel.rect_position.y, panel.rect_position.y - panel_vsize, 0.7, Tween.TRANS_QUINT, Tween.EASE_IN)
+# warning-ignore:return_value_discarded
 	tween.start()
 	# wait for the tween to be finished, and emit signal that card has gone completely up
 	yield(tween, "tween_all_completed")

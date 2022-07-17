@@ -1,0 +1,661 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://art/texture/water_normal_1.png" type="Texture" id=2]
+[ext_resource path="res://art/texture/water_normal_2.png" type="Texture" id=3]
+[ext_resource path="res://art/3d_object/Modular Terrain Beach/Prop_Tree_Palm_1.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://prefabs/background_object/bridge_end_module.tscn" type="PackedScene" id=5]
+[ext_resource path="res://prefabs/background_object/bridge_center_module.tscn" type="PackedScene" id=6]
+[ext_resource path="res://prefabs/background_object/Sand_Flat.tscn" type="PackedScene" id=7]
+[ext_resource path="res://art/texture/sand_texture.png" type="Texture" id=8]
+[ext_resource path="res://prefabs/background_object/Prop_Treasure_Chest.tscn" type="PackedScene" id=9]
+[ext_resource path="res://prefabs/background_object/grassLarge.tscn" type="PackedScene" id=10]
+[ext_resource path="res://art/3d_object/Modular Terrain Beach/Prop_Tree_Palm_2.obj" type="ArrayMesh" id=11]
+[ext_resource path="res://prefabs/background_object/signpostSingle.tscn" type="PackedScene" id=12]
+[ext_resource path="res://art/3d_object/Modular Terrain Beach/Prop_Tree_Palm_3.obj" type="ArrayMesh" id=13]
+[ext_resource path="res://prefabs/background_object/rockA.tscn" type="PackedScene" id=14]
+[ext_resource path="res://prefabs/background_object/rockB.tscn" type="PackedScene" id=15]
+[ext_resource path="res://prefabs/background_object/tentClosed.tscn" type="PackedScene" id=16]
+[ext_resource path="res://prefabs/background_object/rockC.tscn" type="PackedScene" id=17]
+[ext_resource path="res://prefabs/background_object/toolShovel.tscn" type="PackedScene" id=18]
+[ext_resource path="res://prefabs/background_object/campfire.tscn" type="PackedScene" id=19]
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_color = Color( 0.839216, 0.807843, 0.701961, 1 )
+albedo_texture = ExtResource( 8 )
+uv1_scale = Vector3( 100, 100, 1 )
+
+[sub_resource type="PlaneMesh" id=7]
+material = SubResource( 8 )
+size = Vector2( 300, 300 )
+subdivide_width = 10
+subdivide_depth = 10
+
+[sub_resource type="PlaneMesh" id=2]
+size = Vector2( 20, 20 )
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_transparent = true
+params_cull_mode = 2
+albedo_color = Color( 0.0313726, 0.4, 0.419608, 0.501961 )
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource( 3 )
+refraction_enabled = true
+refraction_scale = -0.05
+refraction_texture = ExtResource( 2 )
+refraction_texture_channel = 0
+uv1_scale = Vector3( 10, 10, 1 )
+uv1_offset = Vector3( 1, 0, 0 )
+uv1_triplanar_sharpness = 1.8025
+distance_fade_mode = 2
+distance_fade_min_distance = 0.0
+distance_fade_max_distance = 5.0
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("MeshInstance:material/0:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MeshInstance:material/0:refraction_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -0.05 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "fade"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("MeshInstance:material/0:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 1, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MeshInstance:material/0:refraction_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -0.05, -0.03, -0.05 ]
+}
+
+[node name="Spatial" type="Spatial"]
+
+[node name="ground_top" type="Spatial" parent="."]
+transform = Transform( 0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, -5, 0 )
+
+[node name="Prop_Treasure_Chest" parent="ground_top" instance=ExtResource( 9 )]
+transform = Transform( -1.73205, 0, 1, 0, 2, 0, -1, 0, -1.73205, -6.667, 4.5, 4.444 )
+
+[node name="Prop_Treasure_Chest2" parent="ground_top" instance=ExtResource( 9 )]
+transform = Transform( -1.93185, 0, -0.517638, 0, 2, 0, 0.517638, 0, -1.93185, -11.7382, 4.5, 4.98941 )
+
+[node name="Prop_Treasure_Chest3" parent="ground_top" instance=ExtResource( 9 )]
+transform = Transform( -1.93185, 0, -0.517638, 0, 2, 0, 0.517638, 0, -1.93185, -8.99823, 4.5, 1.81508 )
+
+[node name="signpostSingle" parent="ground_top" instance=ExtResource( 12 )]
+transform = Transform( 8.66025, 0, 5, 0, 10, 0, -5, 0, 8.66025, 10, 5.71111, 20 )
+
+[node name="signpostSingle2" parent="ground_top" instance=ExtResource( 12 )]
+transform = Transform( -7.07107, 0, -7.07107, 0, 10, 0, 7.07107, 0, -7.07107, 19.0798, 4.6, -27.2699 )
+
+[node name="terrain" type="Spatial" parent="ground_top"]
+
+[node name="terrain_top" type="Spatial" parent="ground_top/terrain"]
+
+[node name="grassLarge" parent="ground_top/terrain/terrain_top" instance=ExtResource( 10 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -5.55578, 4.6, 13.3333 )
+
+[node name="grassLarge2" parent="ground_top/terrain/terrain_top" instance=ExtResource( 10 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -13.3336, 4.6, 18.8889 )
+
+[node name="grassLarge3" parent="ground_top/terrain/terrain_top" instance=ExtResource( 10 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 2.222, 4.6, 21.1111 )
+
+[node name="grassLarge4" parent="ground_top/terrain/terrain_top" instance=ExtResource( 10 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 11.1109, 4.6, 24.4445 )
+
+[node name="grassLarge5" parent="ground_top/terrain/terrain_top" instance=ExtResource( 10 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 22.222, 4.6, 18.8889 )
+
+[node name="grassLarge6" parent="ground_top/terrain/terrain_top" instance=ExtResource( 10 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 27.7776, 4.6, 23.3333 )
+
+[node name="grassLarge7" parent="ground_top/terrain/terrain_top" instance=ExtResource( 10 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 26.6665, 5.71111, -33.3333 )
+
+[node name="grassLarge8" parent="ground_top/terrain/terrain_top" instance=ExtResource( 10 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 1.1109, 5.71111, -27.7778 )
+
+[node name="Prop_Tree_Palm_1" type="MeshInstance" parent="ground_top/terrain/terrain_top"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -7.77774, 4.44444, 0 )
+mesh = ExtResource( 4 )
+skeleton = NodePath("../../..")
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+material/7 = null
+material/8 = null
+material/9 = null
+material/10 = null
+material/11 = null
+material/12 = null
+material/13 = null
+material/14 = null
+material/15 = null
+material/16 = null
+material/17 = null
+material/18 = null
+
+[node name="Prop_Tree_Palm_2" type="MeshInstance" parent="ground_top/terrain/terrain_top"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -10, 4.6, 18.889 )
+mesh = ExtResource( 11 )
+skeleton = NodePath("../../..")
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+material/7 = null
+material/8 = null
+material/9 = null
+material/10 = null
+material/11 = null
+material/12 = null
+material/13 = null
+material/14 = null
+material/15 = null
+material/16 = null
+material/17 = null
+material/18 = null
+material/19 = null
+material/20 = null
+material/21 = null
+
+[node name="Prop_Tree_Palm_3" type="MeshInstance" parent="ground_top/terrain/terrain_top"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 23.3333, 4.6, 23.3333 )
+mesh = ExtResource( 13 )
+skeleton = NodePath("../..")
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+material/7 = null
+material/8 = null
+material/9 = null
+material/10 = null
+material/11 = null
+material/12 = null
+material/13 = null
+material/14 = null
+material/15 = null
+material/16 = null
+material/17 = null
+material/18 = null
+material/19 = null
+
+[node name="small_mountain" parent="ground_top/terrain/terrain_top" instance=ExtResource( 14 )]
+transform = Transform( 7, 0, 0, 0, 8, 0, 0, 0, 8, -10, 2.22222, -16.6667 )
+
+[node name="small_mountain2" parent="ground_top/terrain/terrain_top" instance=ExtResource( 14 )]
+transform = Transform( 3.5, 0, -6.9282, 0, 8, 0, 6.06218, 0, 4, 42.2913, 3.33333, -4.10684 )
+
+[node name="rockB" parent="ground_top/terrain/terrain_top" instance=ExtResource( 15 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -7.77778, 4.44444, 23.3333 )
+
+[node name="rockB2" parent="ground_top/terrain/terrain_top" instance=ExtResource( 15 )]
+transform = Transform( 2.5, 0, 4.33013, 0, 5, 0, -4.33013, 0, 2.5, 17.7778, 4.44444, 21.1111 )
+
+[node name="rockC" parent="ground_top/terrain/terrain_top" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.4444, 5.55556, -28.8889 )
+
+[node name="sand_1" type="Spatial" parent="ground_top/terrain"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8888, 2.38889, 18.889 )
+
+[node name="Sand_Flat" parent="ground_top/terrain/sand_1" instance=ExtResource( 7 )]
+
+[node name="Sand_Flat2" parent="ground_top/terrain/sand_1" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33333, 0, 0 )
+
+[node name="Sand_Flat3" parent="ground_top/terrain/sand_1" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.33333, 0, 0 )
+
+[node name="Sand_Flat4" parent="ground_top/terrain/sand_1" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.66667, 0, 0 )
+
+[node name="Sand_Flat5" parent="ground_top/terrain/sand_1" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 0 )
+
+[node name="Sand_Flat8" parent="ground_top/terrain/sand_1" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 3.33333 )
+
+[node name="Sand_Flat9" parent="ground_top/terrain/sand_1" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.66667, 0, 3.33333 )
+
+[node name="Sand_Flat10" parent="ground_top/terrain/sand_1" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.33333, 0, 3.33333 )
+
+[node name="Sand_Flat11" parent="ground_top/terrain/sand_1" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 9.53674e-07, 0, 3.33333 )
+
+[node name="Sand_Flat12" parent="ground_top/terrain/sand_1" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33333, 0, 3.33333 )
+
+[node name="Sand_Flat13" parent="ground_top/terrain/sand_1" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33333, 0, 6.66667 )
+
+[node name="Sand_Flat14" parent="ground_top/terrain/sand_1" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 9.53674e-07, 0, 6.66667 )
+
+[node name="Sand_Flat15" parent="ground_top/terrain/sand_1" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.33333, 0, 6.66667 )
+
+[node name="Sand_Flat16" parent="ground_top/terrain/sand_1" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.66667, 0, 6.66667 )
+
+[node name="Sand_Flat17" parent="ground_top/terrain/sand_1" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 6.66667 )
+
+[node name="sand_4" type="Spatial" parent="ground_top/terrain"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.22211, 2.38889, 18.889 )
+
+[node name="Sand_Flat" parent="ground_top/terrain/sand_4" instance=ExtResource( 7 )]
+
+[node name="Sand_Flat2" parent="ground_top/terrain/sand_4" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33333, 0, 0 )
+
+[node name="Sand_Flat3" parent="ground_top/terrain/sand_4" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.33333, 0, 0 )
+
+[node name="Sand_Flat4" parent="ground_top/terrain/sand_4" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.66667, 0, 0 )
+
+[node name="Sand_Flat5" parent="ground_top/terrain/sand_4" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 0 )
+
+[node name="Sand_Flat8" parent="ground_top/terrain/sand_4" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 3.33333 )
+
+[node name="Sand_Flat9" parent="ground_top/terrain/sand_4" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.66667, 0, 3.33333 )
+
+[node name="Sand_Flat10" parent="ground_top/terrain/sand_4" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.33333, 0, 3.33333 )
+
+[node name="Sand_Flat11" parent="ground_top/terrain/sand_4" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 9.53674e-07, 0, 3.33333 )
+
+[node name="Sand_Flat12" parent="ground_top/terrain/sand_4" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33333, 0, 3.33333 )
+
+[node name="Sand_Flat13" parent="ground_top/terrain/sand_4" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33333, 0, 6.66667 )
+
+[node name="Sand_Flat14" parent="ground_top/terrain/sand_4" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 9.53674e-07, 0, 6.66667 )
+
+[node name="Sand_Flat15" parent="ground_top/terrain/sand_4" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.33333, 0, 6.66667 )
+
+[node name="Sand_Flat16" parent="ground_top/terrain/sand_4" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.66667, 0, 6.66667 )
+
+[node name="Sand_Flat17" parent="ground_top/terrain/sand_4" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 6.66667 )
+
+[node name="sand_5" type="Spatial" parent="ground_top/terrain"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6666, 3.5, -33.3332 )
+
+[node name="Sand_Flat" parent="ground_top/terrain/sand_5" instance=ExtResource( 7 )]
+
+[node name="Sand_Flat2" parent="ground_top/terrain/sand_5" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33333, 0, 0 )
+
+[node name="Sand_Flat3" parent="ground_top/terrain/sand_5" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.33333, 0, 0 )
+
+[node name="Sand_Flat4" parent="ground_top/terrain/sand_5" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.66667, 0, 0 )
+
+[node name="Sand_Flat5" parent="ground_top/terrain/sand_5" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 0 )
+
+[node name="Sand_Flat8" parent="ground_top/terrain/sand_5" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 3.33333 )
+
+[node name="Sand_Flat9" parent="ground_top/terrain/sand_5" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.66667, 0, 3.33333 )
+
+[node name="Sand_Flat10" parent="ground_top/terrain/sand_5" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.33333, 0, 3.33333 )
+
+[node name="Sand_Flat11" parent="ground_top/terrain/sand_5" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 9.53674e-07, 0, 3.33333 )
+
+[node name="Sand_Flat12" parent="ground_top/terrain/sand_5" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33333, 0, 3.33333 )
+
+[node name="Sand_Flat13" parent="ground_top/terrain/sand_5" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33333, 0, 6.66667 )
+
+[node name="Sand_Flat14" parent="ground_top/terrain/sand_5" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 9.53674e-07, 0, 6.66667 )
+
+[node name="Sand_Flat15" parent="ground_top/terrain/sand_5" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.33333, 0, 6.66667 )
+
+[node name="Sand_Flat16" parent="ground_top/terrain/sand_5" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.66667, 0, 6.66667 )
+
+[node name="Sand_Flat17" parent="ground_top/terrain/sand_5" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 6.66667 )
+
+[node name="sand_6" type="Spatial" parent="ground_top/terrain"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000111262, 3.5, -33.3332 )
+
+[node name="Sand_Flat" parent="ground_top/terrain/sand_6" instance=ExtResource( 7 )]
+
+[node name="Sand_Flat2" parent="ground_top/terrain/sand_6" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33333, 0, 0 )
+
+[node name="Sand_Flat3" parent="ground_top/terrain/sand_6" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.33333, 0, 0 )
+
+[node name="Sand_Flat4" parent="ground_top/terrain/sand_6" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.66667, 0, 0 )
+
+[node name="Sand_Flat5" parent="ground_top/terrain/sand_6" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 0 )
+
+[node name="Sand_Flat8" parent="ground_top/terrain/sand_6" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 3.33333 )
+
+[node name="Sand_Flat9" parent="ground_top/terrain/sand_6" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.66667, 0, 3.33333 )
+
+[node name="Sand_Flat10" parent="ground_top/terrain/sand_6" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.33333, 0, 3.33333 )
+
+[node name="Sand_Flat11" parent="ground_top/terrain/sand_6" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 9.53674e-07, 0, 3.33333 )
+
+[node name="Sand_Flat12" parent="ground_top/terrain/sand_6" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33333, 0, 3.33333 )
+
+[node name="Sand_Flat13" parent="ground_top/terrain/sand_6" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33333, 0, 6.66667 )
+
+[node name="Sand_Flat14" parent="ground_top/terrain/sand_6" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 9.53674e-07, 0, 6.66667 )
+
+[node name="Sand_Flat15" parent="ground_top/terrain/sand_6" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.33333, 0, 6.66667 )
+
+[node name="Sand_Flat16" parent="ground_top/terrain/sand_6" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.66667, 0, 6.66667 )
+
+[node name="Sand_Flat17" parent="ground_top/terrain/sand_6" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 6.66667 )
+
+[node name="sand_2" type="Spatial" parent="ground_top/terrain"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7.77789, 2.38889, -7.77767 )
+
+[node name="Sand_Flat" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+
+[node name="Sand_Flat6" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -1.43051e-06, 0, -3.33333 )
+
+[node name="Sand_Flat7" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.33333, 0, -3.33333 )
+
+[node name="Sand_Flat18" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.66667, 0, -3.33333 )
+
+[node name="Sand_Flat19" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, -3.33333 )
+
+[node name="Sand_Flat20" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33334, 0, -3.33334 )
+
+[node name="Sand_Flat21" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33334, 0, -3.33334 )
+
+[node name="Sand_Flat2" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33333, 0, 0 )
+
+[node name="Sand_Flat3" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.33333, 0, -4.76837e-07 )
+
+[node name="Sand_Flat4" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.66667, 0, 0 )
+
+[node name="Sand_Flat5" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 0 )
+
+[node name="Sand_Flat8" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 3.33333 )
+
+[node name="Sand_Flat9" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.66667, 0, 3.33333 )
+
+[node name="Sand_Flat10" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.33333, 0, 3.33333 )
+
+[node name="Sand_Flat11" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 9.53674e-07, 0, 3.33333 )
+
+[node name="Sand_Flat12" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33333, 0, 3.33333 )
+
+[node name="Sand_Flat13" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33333, 0, 6.66667 )
+
+[node name="Sand_Flat14" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 9.53674e-07, 0, 6.66667 )
+
+[node name="Sand_Flat15" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.33333, 0, 6.66667 )
+
+[node name="Sand_Flat16" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.66667, 0, 6.66667 )
+
+[node name="Sand_Flat17" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 6.66667 )
+
+[node name="Sand_Flat22" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 13.3333, 0, 6.66667 )
+
+[node name="Sand_Flat23" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 13.3333, 0, 3.33334 )
+
+[node name="Sand_Flat24" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 13.3333, 0, 3.33786e-06 )
+
+[node name="Sand_Flat25" parent="ground_top/terrain/sand_2" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 13.3333, 0, -3.33333 )
+
+[node name="sand_3" type="Spatial" parent="ground_top/terrain"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7.77789, 2.38889, 12.2223 )
+
+[node name="Sand_Flat" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+
+[node name="Sand_Flat6" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -1.43051e-06, 0, -3.33333 )
+
+[node name="Sand_Flat7" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.33333, 0, -3.33333 )
+
+[node name="Sand_Flat18" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.66667, 0, -3.33333 )
+
+[node name="Sand_Flat19" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, -3.33333 )
+
+[node name="Sand_Flat20" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33334, 0, -3.33334 )
+
+[node name="Sand_Flat21" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33334, 0, -3.33334 )
+
+[node name="Sand_Flat2" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33333, 0, 0 )
+
+[node name="Sand_Flat3" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.33333, 0, 0 )
+
+[node name="Sand_Flat4" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.66667, 0, 0 )
+
+[node name="Sand_Flat5" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 0 )
+
+[node name="Sand_Flat8" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 3.33333 )
+
+[node name="Sand_Flat9" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.66667, 0, 3.33333 )
+
+[node name="Sand_Flat10" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.33333, 0, 3.33333 )
+
+[node name="Sand_Flat11" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 9.53674e-07, 0, 3.33333 )
+
+[node name="Sand_Flat12" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33333, 0, 3.33333 )
+
+[node name="Sand_Flat13" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3.33333, 0, 6.66667 )
+
+[node name="Sand_Flat14" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 9.53674e-07, 0, 6.66667 )
+
+[node name="Sand_Flat15" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 3.33333, 0, 6.66667 )
+
+[node name="Sand_Flat16" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 6.66667, 0, 6.66667 )
+
+[node name="Sand_Flat17" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 0, 6.66667 )
+
+[node name="Sand_Flat22" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 13.3333, 0, 6.66667 )
+
+[node name="Sand_Flat23" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 13.3333, 0, 3.33334 )
+
+[node name="Sand_Flat24" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 13.3333, 0, 3.33786e-06 )
+
+[node name="Sand_Flat25" parent="ground_top/terrain/sand_3" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 13.3333, 0, -3.33333 )
+
+[node name="tentClosed" parent="ground_top" instance=ExtResource( 16 )]
+transform = Transform( 0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 11.1111, 5.55556, -31.1111 )
+
+[node name="tentClosed2" parent="ground_top" instance=ExtResource( 16 )]
+transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 4.44444, 5.55556, -31.1111 )
+
+[node name="toolShovel" parent="ground_top" instance=ExtResource( 18 )]
+transform = Transform( -6.69213, -4, -1.79315, 3.86371, -6.9282, 1.03528, -2.07055, 0, 7.72741, -5.55556, 6.36895, 7.77778 )
+
+[node name="campfire" parent="ground_top" instance=ExtResource( 19 )]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 7.77778, 5.55556, -27.7778 )
+
+[node name="ground" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="ground"]
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="water" type="Spatial" parent="."]
+transform = Transform( 5.4, 0, 0, 0, 1, 0, 0, 0, 10.2, -27, -1.5, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="water"]
+transform = Transform( 2.78256, 0, 0, 0, 0.999999, 0, 0, 0, 1.056, 0, 0, 0 )
+layers = 16
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="water"]
+autoplay = "fade"
+playback_speed = 0.5
+anims/RESET = SubResource( 4 )
+anims/fade = SubResource( 5 )
+
+[node name="bridge2" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -1, 16 )
+
+[node name="bridge_center_module2" parent="bridge2" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2 )
+
+[node name="bridge_center_module5" parent="bridge2" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -8 )
+
+[node name="bridge_center_module3" parent="bridge2" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -4 )
+
+[node name="bridge_center_module4" parent="bridge2" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -6 )
+
+[node name="bridge_end_module" parent="bridge2" instance=ExtResource( 5 )]
+
+[node name="bridge_center_module" parent="bridge2" instance=ExtResource( 6 )]
+
+[node name="bridge3" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -12 )
+
+[node name="bridge_center_module2" parent="bridge3" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2 )
+
+[node name="bridge_center_module3" parent="bridge3" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -4 )
+
+[node name="bridge_center_module4" parent="bridge3" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -6 )
+
+[node name="bridge_end_module2" parent="bridge3" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.90735e-06, 0, -10 )
+
+[node name="bridge_end_module" parent="bridge3" instance=ExtResource( 5 )]
+
+[node name="bridge_center_module" parent="bridge3" instance=ExtResource( 6 )]
