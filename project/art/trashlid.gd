@@ -1,7 +1,7 @@
 extends Spatial
 
-onready var player1 : KinematicBody = get_tree().get_root().get_child(get_tree().get_root().get_child_count()- 1).find_node("Player1")
-onready var player2 : KinematicBody = get_tree().get_root().get_child(get_tree().get_root().get_child_count()- 1).find_node("Player2")
+onready var player1 : KinematicBody = get_tree().get_root().get_child(get_tree().get_root().get_child_count()- 1).find_node("Player1").find_node("KinematicBody1")
+onready var player2 : KinematicBody = get_tree().get_root().get_child(get_tree().get_root().get_child_count()- 1).find_node("Player2").find_node("KinematicBody2")
 onready var trash : StaticBody = get_parent()
 
 func _process(_delta):
