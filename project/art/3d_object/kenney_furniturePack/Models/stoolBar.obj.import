@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/stoolBar.obj-06a282d4bb12606715eaecc1eab32d4f.mesh"
+
+[deps]
+
+files=[ "res://.import/stoolBar.obj-06a282d4bb12606715eaecc1eab32d4f.mesh" ]
+
+source_file="res://art/3d_object/kenney_furniturePack/Models/stoolBar.obj"
+dest_files=[ "res://.import/stoolBar.obj-06a282d4bb12606715eaecc1eab32d4f.mesh", "res://.import/stoolBar.obj-06a282d4bb12606715eaecc1eab32d4f.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

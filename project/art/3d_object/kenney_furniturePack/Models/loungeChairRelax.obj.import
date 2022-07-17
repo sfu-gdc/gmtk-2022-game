@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/loungeChairRelax.obj-24358fde6398565b0047f7fde024ffbe.mesh"
+
+[deps]
+
+files=[ "res://.import/loungeChairRelax.obj-24358fde6398565b0047f7fde024ffbe.mesh" ]
+
+source_file="res://art/3d_object/kenney_furniturePack/Models/loungeChairRelax.obj"
+dest_files=[ "res://.import/loungeChairRelax.obj-24358fde6398565b0047f7fde024ffbe.mesh", "res://.import/loungeChairRelax.obj-24358fde6398565b0047f7fde024ffbe.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

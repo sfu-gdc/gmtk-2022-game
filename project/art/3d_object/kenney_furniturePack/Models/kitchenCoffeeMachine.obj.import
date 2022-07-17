@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/kitchenCoffeeMachine.obj-9d0296e24101a6747c858255787cc47f.mesh"
+
+[deps]
+
+files=[ "res://.import/kitchenCoffeeMachine.obj-9d0296e24101a6747c858255787cc47f.mesh" ]
+
+source_file="res://art/3d_object/kenney_furniturePack/Models/kitchenCoffeeMachine.obj"
+dest_files=[ "res://.import/kitchenCoffeeMachine.obj-9d0296e24101a6747c858255787cc47f.mesh", "res://.import/kitchenCoffeeMachine.obj-9d0296e24101a6747c858255787cc47f.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

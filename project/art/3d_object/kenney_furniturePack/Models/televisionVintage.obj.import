@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/televisionVintage.obj-00a2ed53010c5c52fb737a9b1f1be7fb.mesh"
+
+[deps]
+
+files=[ "res://.import/televisionVintage.obj-00a2ed53010c5c52fb737a9b1f1be7fb.mesh" ]
+
+source_file="res://art/3d_object/kenney_furniturePack/Models/televisionVintage.obj"
+dest_files=[ "res://.import/televisionVintage.obj-00a2ed53010c5c52fb737a9b1f1be7fb.mesh", "res://.import/televisionVintage.obj-00a2ed53010c5c52fb737a9b1f1be7fb.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

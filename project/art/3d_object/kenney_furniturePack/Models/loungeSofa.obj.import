@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/loungeSofa.obj-6fd8243cc5bb33e138fe1a890caeae43.mesh"
+
+[deps]
+
+files=[ "res://.import/loungeSofa.obj-6fd8243cc5bb33e138fe1a890caeae43.mesh" ]
+
+source_file="res://art/3d_object/kenney_furniturePack/Models/loungeSofa.obj"
+dest_files=[ "res://.import/loungeSofa.obj-6fd8243cc5bb33e138fe1a890caeae43.mesh", "res://.import/loungeSofa.obj-6fd8243cc5bb33e138fe1a890caeae43.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

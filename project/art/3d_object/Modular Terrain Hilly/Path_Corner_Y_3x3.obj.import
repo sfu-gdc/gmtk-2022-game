@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Path_Corner_Y_3x3.obj-abf40fb47465f975a7b0bd3b1c43fd2b.mesh"
+
+[deps]
+
+files=[ "res://.import/Path_Corner_Y_3x3.obj-abf40fb47465f975a7b0bd3b1c43fd2b.mesh" ]
+
+source_file="res://art/3d_object/Modular Terrain Hilly/Path_Corner_Y_3x3.obj"
+dest_files=[ "res://.import/Path_Corner_Y_3x3.obj-abf40fb47465f975a7b0bd3b1c43fd2b.mesh", "res://.import/Path_Corner_Y_3x3.obj-abf40fb47465f975a7b0bd3b1c43fd2b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

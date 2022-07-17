@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/wallCornerRond.obj-e695f0b78e713238a598e8f480694672.mesh"
+
+[deps]
+
+files=[ "res://.import/wallCornerRond.obj-e695f0b78e713238a598e8f480694672.mesh" ]
+
+source_file="res://art/3d_object/kenney_furniturePack/Models/wallCornerRond.obj"
+dest_files=[ "res://.import/wallCornerRond.obj-e695f0b78e713238a598e8f480694672.mesh", "res://.import/wallCornerRond.obj-e695f0b78e713238a598e8f480694672.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

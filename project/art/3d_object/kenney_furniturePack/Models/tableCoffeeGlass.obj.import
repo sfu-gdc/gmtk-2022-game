@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/tableCoffeeGlass.obj-57bc681e408587855da92593acac971b.mesh"
+
+[deps]
+
+files=[ "res://.import/tableCoffeeGlass.obj-57bc681e408587855da92593acac971b.mesh" ]
+
+source_file="res://art/3d_object/kenney_furniturePack/Models/tableCoffeeGlass.obj"
+dest_files=[ "res://.import/tableCoffeeGlass.obj-57bc681e408587855da92593acac971b.mesh", "res://.import/tableCoffeeGlass.obj-57bc681e408587855da92593acac971b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
