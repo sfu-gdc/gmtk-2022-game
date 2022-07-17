@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://art/3d_object/Modular Terrain Beach/Iron_Grey.material" type="Material" id=1]
 [ext_resource path="res://art/3d_object/Modular Terrain Beach/Wood_Dark.material" type="Material" id=2]
@@ -205,6 +205,9 @@ surfaces/0 = {
 "vertex_count": 276
 }
 
+[sub_resource type="BoxShape" id=12]
+extents = Vector3( 0.532263, 0.448328, 0.393159 )
+
 [node name="Prop_Treasure_Chest" type="Spatial"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
 
@@ -250,3 +253,9 @@ material/0 = null
 [node name="object9" type="MeshInstance" parent="."]
 mesh = SubResource( 11 )
 material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.335304, 0 )
+shape = SubResource( 12 )

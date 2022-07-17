@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/putdown_pot.mp3-d2e590c1ab8888b427ba579b1aced197.mp3str"
+
+[deps]
+
+source_file="res://audio/sound_effect/putdown_pot.mp3"
+dest_files=[ "res://.import/putdown_pot.mp3-d2e590c1ab8888b427ba579b1aced197.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
