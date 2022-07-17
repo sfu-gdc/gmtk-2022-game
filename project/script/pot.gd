@@ -22,6 +22,7 @@ var smoke : CPUParticles
 const POT_LAYER := 1
 
 var numbers := []
+var sum := 0
 var cooking := false
 var held := false
 var dumping := false
@@ -46,6 +47,7 @@ func _process(delta):
 	if cooking_time >= numbers.size() * DIE_COOK_TIME + BURN_TIME and not burnt:
 		burnt = true
 		numbers.clear()
+		sum = 0
 		fire_explosion.emitting = true
 		UI.size_multiplier = 2.0
 		UI.clear_dice()
@@ -81,6 +83,7 @@ func _on_player_interact(player: KinematicBody, held_object: Spatial):
 					return
 
 			numbers.append(held_object.number)
+			sum += held_object.number
 			held_object.pot(player, self)
 			UI.add_die(held_object.number)
 			smoke.emitting = cooking and numbers.size() > 0
@@ -100,6 +103,7 @@ func _on_player_interact(player: KinematicBody, held_object: Spatial):
 				total += number
 			dish.number = total
 			numbers.clear()
+			sum = 0
 			UI.clear_dice()
 			smoke.emitting = cooking and numbers.size() > 0
 			cooking_progress.max_value = numbers.size() * DIE_COOK_TIME
@@ -110,6 +114,7 @@ func _on_throwable_interact(held_object: Spatial):
 	if held_object.number == -1:
 		held_object.finalize_number()
 	numbers.append(held_object.number)
+	sum += held_object.number
 	held_object.remove_from_group("pickup")
 	UI.add_die(held_object.number)
 	smoke.emitting = cooking and numbers.size() > 0
@@ -163,6 +168,7 @@ func garbage(player: KinematicBody):
 	player.get_node("PotSpot").rotate_garbage()
 	animation.play("Dump")
 	numbers.clear()
+	sum = 0
 	UI.clear_dice()
 	cooking_time = 0.0
 	burnt = false
