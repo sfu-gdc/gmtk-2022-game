@@ -45,7 +45,6 @@ func place_food() -> void:
 	pass
 	#TODO: implement
 	
-
 func _ready():
 	for i in 10:
 		var ref = get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1).find_node("DiceBox"+str(i))

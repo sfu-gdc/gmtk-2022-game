@@ -24,6 +24,15 @@ var _settings = {
 		"player1_pick": KEY_Q,
 		"player1_activate": KEY_E,
 		"player1_throw": KEY_F
+	},
+	"control_type": {
+		"player1_up": 0,
+		"player1_down": 0,
+		"player1_left": 0,
+		"player1_right": 0,
+		"player1_pick": 0,
+		"player1_activate": 0,
+		"player1_throw": 0
 	}
 };
 
@@ -74,9 +83,10 @@ func sync_music():
 
 func sync_key_mapping():
 	#update the keymapping right here
-	load_settings();
-	print(_settings)
-	for key in _settings['controls'].keys():
+	load_settings()
+	for j in _settings['controls'].keys().size():
+		var key = _settings['controls'].keys()[j]
+		var ty: int = _settings['control_type'].keys()[j] as int
 		#_settings['controls'][key] = settings_file.get_value('controls', key, null);
 		var list = InputMap.get_action_list( _control_keymapping[key] );
 		for i in list:
@@ -85,9 +95,18 @@ func sync_key_mapping():
 				if (i.scancode > 0 || i.physical_scancode > 0):
 				#if current_scancode == _settings["controls"][key_listening]:
 					InputMap.action_erase_event( _control_keymapping[key], i )
-		var e = InputEventKey.new();
-		e.set_scancode(_settings['controls'][key])
-		InputMap.action_add_event(_control_keymapping[key], e);
+			elif i is InputEventJoypadButton:
+				if (i.button_index > 0):
+					InputMap.action_erase_event( _control_keymapping[key], i )
+					
+		if ty == 0:
+			var e = InputEventKey.new();
+			e.set_scancode(_settings['controls'][key])
+			InputMap.action_add_event(_control_keymapping[key], e);
+		elif ty == 1:
+			var e = InputEventJoypadButton.new();
+			e.set_button_index(_settings['controls'][key])
+			InputMap.action_add_event(_control_keymapping[key], e);
 
 func _on_SaveButton_pressed():
 	for section in _settings.keys():

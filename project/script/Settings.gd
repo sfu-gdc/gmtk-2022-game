@@ -25,6 +25,15 @@ var _settings = {
 		"player1_pick": KEY_Q,
 		"player1_activate": KEY_E,
 		"player1_throw": KEY_F
+	},
+	"control_type": {
+		"player1_up": 0,
+		"player1_down": 0,
+		"player1_left": 0,
+		"player1_right": 0,
+		"player1_pick": 0,
+		"player1_activate": 0,
+		"player1_throw": 0
 	}
 };
 
@@ -69,18 +78,36 @@ func _ready():
 	load_settings();
 	#pass;
 	
-func _unhandled_input(event: InputEvent) -> void:
+# _unhandled_input no work
+func _input(event: InputEvent) -> void:
+	print(event)
+	if(event is InputEventJoypadButton):
+		print(event.button_index)
+		print(event.pressed)
+		
 	if key_listening == null:
 		return;
-	if (event is InputEventKey and event.is_pressed()):
+	
+	if(event is InputEventJoypadButton and event.is_pressed()):
+		# check to make sure the key is not being occupied
+		_settings['controls'][key_listening] = event.button_index;
+		_settings['control_type'][key_listening] = 1; # InputEventJoypadButton
+		text_to_update.text = Input.get_joy_button_string(event.button_index);
+		text_to_update = null;
+		key_listening = null;
+		keymap_listening = null;
+		backdrop_panel.hide();
+	elif (event is InputEventKey and event.is_pressed()):
 		# check to make sure the key is not being occupied
 		_settings['controls'][key_listening] = event.scancode;
+		_settings['control_type'][key_listening] = 0; # InputEventKey
 		text_to_update.text = OS.get_scancode_string(event.scancode);
 		text_to_update = null;
 		key_listening = null;
 		keymap_listening = null;
 		backdrop_panel.hide();
-
+	
+	get_tree().set_input_as_handled()
 
 func _on_CancelButton_pressed():
 	remove_itself();
